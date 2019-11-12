@@ -7,7 +7,7 @@ import com.cy.cyshopspringboot.domain.OrderItem;
 
 import java.util.List;
 
-public interface CheckoutService {
+public interface ICheckoutService {
     List<MemberAddress> findAderessByMemberId(String id);
     int addAddress(MemberAddress memberAddress);
     int updateAddress(MemberAddress memberAddress);
