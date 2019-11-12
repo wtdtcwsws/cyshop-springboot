@@ -53,10 +53,15 @@
     <link th:href="@{/css/header1.css}" rel="stylesheet">
 
 </head>
+<!-- 头部容器 -->
+<th:block th:include="include :: header" />
+
 <body class="res layout-subpage">
+
+
+
 <div id="wrapper" class="wrapper-full ">
 
-    <!-- 头部容器 -->
 
 
     <!-- 主要内容容器 -->
@@ -350,6 +355,8 @@
     </div>
 
     <!-- 脚部容器 -->
+    <th:block th:include="include :: footer" />
+
 
 </div>
 

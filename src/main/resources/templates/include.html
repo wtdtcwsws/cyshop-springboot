@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wrapper" class="wrapper-full " th:fragment="header">
+
+    <header id="header" class=" variantleft type_1">
+        <!-- Header Top -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="header-top-left form-inline col-sm-6 col-xs-6 compact-hidden">
+                        <div class="form-group currencies-block">
+                            <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
+                                <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <span class="icon icon-credit "></span> USD <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu btn-xs">
+                                    <li> <a href="#">(€)&nbsp;Euro</a></li>
+                                    <li> <a href="#">(£)&nbsp;Pounds</a></li>
+                                    <li> <a href="#">($)&nbsp;USD</a></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="form-group languages-block ">
+                            <form action="index.html" method="post" enctype="multipart/form-data" id="bt-language">
+                                <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <img src="img/demo/flags/gb.png" alt="English" title="English">
+                                    <span class="hidden-xs">中文</span>
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu" >
+                                    <li><a href="index.php"><img class="image_flag" src="img/demo/flags/gb.png" alt="English" title="English"> English </a></li>
+                                    <li> <a href="html_width_RTL/index.php"> <img class="image_flag" src="img/demo/flags/lb.png" alt="Arabic" title="Arabic"> Arabic </a> </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
+                        <div class="tabBlock1" id="TabBlock-1">
+                            <ul class="top-link list-inline">
+                                <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!"><span>欢迎用户</span></a></li>
+                                <li class="signin"><a th:href="@{/login}" class="top-link-checkout" title="Sign In"><span>登录</span></a></li>
+                                <li class="register"><a th:href="@{/register}" title="Register"><span>注册</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //Header Top -->
+
+        <!-- Header center -->
+        <div class="header-center left">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
+                        <a href="index.php"><img src="img/demo/logo/logo.png" title="Your Store" alt="Your Store"></a>
+                    </div>
+                    <!-- //end Logo -->
+
+                    <!-- Search -->
+                    <div id="sosearchpro" class="col-xs-12 col-sm-8 col-md-5 search-pro">
+
+                        <form method="GET" action="index.html">
+                            <div id="search0" class="search input-group">
+                                <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="搜索商品" name="search">
+                                <span class="input-group-btn">
+										<button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+									</span>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- //end Search -->
+
+                    <!-- Secondary menu -->
+                    <div class="col-md-4 col-sm-4 col-xs-5 shopping_cart pull-right">
+                        <div class="header-text hidden-xs">
+                            <p><i class="fa fa-phone" aria-hidden="true"></i>	   Call Us: (888) 123456789</p>
+                        </div>
+                        <!--cart-->
+                        <div id="cart" class=" btn-group btn-shopping-cart">
+                            <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
+                                <div class="shopcart">
+                                    <span class="handle pull-left"></span>
+                                    <span class="number-shopping-cart">2</span>
+                                    <span class="title">购物车</span>
+                                    <p class="text-shopping-cart cart-total-full"> $0.00 </p>
+                                </div>
+                            </a>
+
+                            <ul class="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu">
+
+                                <li>
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width:70px">
+                                                <a href="goods.html"> <img src="img/demo/shop/product/35.jpg" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview"> </a>
+                                            </td>
+                                            <td class="text-left"> <a class="cart_product_name" href="goods.html">吸尘器</a> </td>
+                                            <td class="text-center"> x1 </td>
+                                            <td class="text-center"> 1,202.00 </td>
+                                            <td class="text-right">
+                                                <a href="goods.html" class="fa fa-edit"></a>
+                                            </td>
+                                            <td class="text-right">
+                                                <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width:70px">
+                                                <a href="goods.html"> <img src="img/demo/shop/product/141.jpg" style="width:70px" alt="Canon EOS 5D" title="Canon EOS 5D" class="preview"> </a>
+                                            </td>
+                                            <td class="text-left"> <a class="cart_product_name" href="goods.html">佳能 EOS 5D</a> </td>
+                                            <td class="text-center"> x1 </td>
+                                            <td class="text-center"> 3660.00 </td>
+                                            <td class="text-right">
+                                                <a href="goods.html" class="fa fa-edit"></a>
+                                            </td>
+                                            <td class="text-right">
+                                                <a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <div>
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-left"><strong>原总价</strong>
+                                                </td>
+                                                <td class="text-right">4,060.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left"><strong>折扣 (20%)</strong>
+                                                </td>
+                                                <td class="text-right">200.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><strong>总计</strong>
+                                                </td>
+                                                <td class="text-right">3806.00</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-right"> <a class="btn view-cart" th:href="@{/cart}"><i class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="checkout.html"><i class="fa fa-share"></i>结算</a> </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--//cart-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- //Header center -->
+
+        <!-- Header Bottom -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row">
+
+
+                    <!-- Main menu -->
+                    <div class="megamenu-hori header-bottom-right  col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="responsive so-megamenu ">
+                            <nav class="navbar-default">
+                                <div class=" container-megamenu  horizontal">
+
+                                    <div class="navbar-header">
+                                        <button   id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="megamenu-wrapper">
+                                        <span id="remove-megamenu" class="fa fa-times"></span>
+
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //end Main menu -->
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navbar switcher -->
+        <!-- //end Navbar switcher -->
+
+    </header>
+
+</div>
+
+<div th:fragment="footer">
+    <!-- Footer Container -->
+    <footer class="footer-container type_footer1">
+        <!-- Footer Top Container -->
+        <section class="footer-top">
+            <div class="container content">
+                <div class="">
+                    <div class=" collapsed-block ">
+                        <div class="module clearfix">
+                            <h3 class="modtitle">联系方式</h3>
+                            <div class="modcontent">
+                                <ul class="contact-address">
+                                    <li><p><span class="fa fa-map-marker"></span><span>联系地址 : </span> 四川省成都市朝阳区西部金融中心22L</p></li>
+                                    <li><span class="fa fa-envelope-o"></span><span>Email : </span> <a href="#">
+                                        sales@yourcompany.com</a></li>
+                                    <li><p><span class="fa fa-phone"> </span><span>联系电话 :</span> 0123456789</p></li>
+                                </ul>
+                            </div>
+                            <div class="share-icon">
+                                <ul>
+                                    <li class="facebook"><a href=""><i class="fa fa-facebook"
+                                                                       aria-hidden="true"></i></a></li>
+                                    <li class="twitter"><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="google"><a href=""><i class="fa fa-google-plus"
+                                                                     aria-hidden="true"></i></a></li>
+                                    <li class="skype"><a href=""><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" box-information">
+                        <div class="module clearfix">
+                            <h3 class="modtitle">信息</h3>
+                            <div class="modcontent">
+                                <ul class="menu">
+                                    <li><a href="about-us.html">关于我们</a></li>
+                                    <li><a href="faq.html">常见问题</a></li>
+                                    <li><a href="order-history.html">订单记录</a></li>
+                                    <li><a href="order-information.html">下单须知</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" box-extras">
+                        <div class="module clearfix">
+                            <h3 class="modtitle">额外部分</h3>
+                            <div class="modcontent">
+                                <ul class="menu">
+                                    <li><a href="contact.html">联系我们</a></li>
+                                    <li><a href="return.html">退/换货</a></li>
+                                    <li><a href="sitemap.html">网站导航</a></li>
+                                    <li><a href="my-account.html">我的帐户</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-account">
+                        <div class="module clearfix">
+                            <h3 class="modtitle">我的帐户</h3>
+                            <div class="modcontent">
+                                <ul class="menu">
+                                    <li><a href="#">旗下品牌</a></li>
+                                    <li><a href="gift-voucher.html">购物劵</a></li>
+                                    <li><a href="#">附属公司</a></li>
+                                    <li><a href="#">特价专区</a></li>
+                                    <li><a href="#" target="_blank">我们的博客</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <!-- /Footer Top Container -->
+        <div class="footer-mid">
+            <div class=" help">
+                <div class=" container">
+                    <div class=" row">
+                        <div class="footer-mid-left col-sm-6 col-xs-12">
+                            <h3>需要帮助？ </h3>
+                            <p>支持团队 24/7 AT (844) 555-8386</p>
+                        </div>
+                        <div class="footer-mid-right col-sm-6 col-xs-12">
+                            <div class="btn-sub">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <input class="autosearch-input form-control" type="text" value="" size="50"
+                                       autocomplete="off" placeholder="Your Email Address..." name="subscribe">
+                                <button type="submit" class="button-search btn btn-primary" name="submit_subscribe">
+                                    Subscribe
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //end Footer Container -->
+
+</div>
+<!--网页底部-->
+<div class="footer-bottom-block ">
+    <div class=" container">
+        <div class="row">
+            <div class="footer-bottom-header">
+                <div class="col-xs-12 col-sm-12 col-md-5 download">
+                    <h3>商城下载</h3>
+                    <a href=""><img src="img/demo/download/app.jpg" alt=""></a>
+                    <a href=""><img src="img/demo/download/ggplay.jpg" alt=""></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 pay">
+                    <ul>
+                        <li><img src="img/demo/payment/visa.jpg" alt=""></li>
+                        <li><img src="img/demo/payment/meastro.jpg" alt=""></li>
+                        <li><img src="img/demo/payment/paypal.jpg" alt=""></li>
+                        <li><img src="img/demo/payment/union.jpg" alt=""></li>
+                        <li><img src="img/demo/payment/cirrus.jpg" alt=""></li>
+                        <li><img src="img/demo/payment/ebay.jpg" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-footer-bot">
+                <p>Destino - Premium Multipurpose HTML5/CSS3 Theme - Designed by <a href="#">SmartAddons.Com</a></p>
+            </div>
+            <div class="back-to-top"><i class="fa fa-angle-up"></i><span> 顶部 </span></div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
