@@ -1,0 +1,943 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic page needs
+    ============================================ -->
+    <title>商品列表</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+
+	<!-- Mobile specific metas
+	============================================ -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+	<!-- Favicon
+	============================================ -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"  th:href="@{ico/apple-touch-icon-144-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{ico/apple-touch-icon-114-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{ico/apple-touch-icon-72-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="ico/favicon.png">
+	
+
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/font-awesome/css/font-awesome.css}" href="/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="css/themecss/lib.css" rel="stylesheet">
+    <link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
+	<!-- Theme CSS
+	============================================ -->
+	<link href="css/themecss/so_megamenu.css" rel="stylesheet">
+	<link href="css/themecss/so-categories.css" rel="stylesheet">
+	<link href="css/themecss/so-listing-tabs.css" rel="stylesheet">
+	<link href="css/footer1.css" rel="stylesheet">
+	<link href="css/header1.css" rel="stylesheet">
+	<link id="color_scheme" href="css/theme.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/category.css">
+
+	<!-- <link href="css/responsive.css" rel="stylesheet"> -->
+	
+
+	
+</head>
+
+<body class="res layout-subpage banners-effect-1">
+	<div id="wrapper" class="wrapper-full ">
+		<!-- Header Container  -->
+		<header id="header" class=" variantleft type_1">
+			<!-- Header Top -->
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="header-top-left form-inline col-sm-6 col-xs-6 compact-hidden">
+							<div class="form-group currencies-block">
+								<form action="index.html" method="post" enctype="multipart/form-data" id="currency">
+									<a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+										<span class="icon icon-credit "></span> USD <span class="fa fa-angle-down"></span>
+									</a>
+									<ul class="dropdown-menu btn-xs">
+										<li> <a href="#">(€)&nbsp;Euro</a></li>
+										<li> <a href="#">(£)&nbsp;Pounds</a></li>
+										<li> <a href="#">($)&nbsp;USD</a></li>
+									</ul>
+								</form>
+							</div>
+							<div class="form-group languages-block ">
+								<form action="index.html" method="post" enctype="multipart/form-data" id="bt-language">
+									<a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+										<img src="img/demo/flags/gb.png" alt="English" title="English">
+										<span class="hidden-xs">English</span>
+										<span class="fa fa-angle-down"></span>
+									</a>
+									<ul class="dropdown-menu" >
+										<li><a href="index.php"><img class="image_flag" src="img/demo/flags/gb.png" alt="English" title="English"> English </a></li>
+										<li> <a href="html_width_RTL/index.php"> <img class="image_flag" src="img/demo/flags/lb.png" alt="Arabic" title="Arabic"> Arabic </a> </li>
+									</ul>
+								</form>
+							</div>
+						</div>
+						<div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
+							<div class="tabBlock1" id="TabBlock-1">
+								<ul class="top-link list-inline">
+									<li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!"><span>欢迎用户</span></a></li>
+									<li class="signin"><a th:href="@{/login}" class="top-link-checkout" title="Sign In"><span>登录</span></a></li>
+									<li class="register"><a th:href="@{/register}" title="Register"><span>注册</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //Header Top -->
+
+			<!-- Header center -->
+			<div class="header-center left">
+				<div class="container">
+					<div class="row">
+						<!-- Logo -->
+						<div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
+							<a href="index.php"><img src="img/demo/logo/logo.png" title="Your Store" alt="Your Store"></a>
+						</div>
+						<!-- //end Logo -->
+
+						<!-- Search -->
+						<div id="sosearchpro" class="col-xs-12 col-sm-8 col-md-5 search-pro">
+							
+							<form method="GET" action="index.html">
+								<div id="search0" class="search input-group">
+									<input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="搜索商品" name="search">
+									<span class="input-group-btn">
+										<button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+									</span>
+								</div>
+								
+							</form>
+
+						</div>
+						<!-- //end Search -->
+
+						<!-- Secondary menu -->
+						<div class="col-md-4 col-sm-4 col-xs-5 shopping_cart pull-right">
+							<div class="header-text hidden-xs">
+								<p><i class="fa fa-phone" aria-hidden="true"></i>	   Call Us: (888) 123456789</p>
+							</div>
+							<!--cart-->
+							<div id="cart" class=" btn-group btn-shopping-cart">
+								<a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
+									<div class="shopcart">
+										<span class="handle pull-left"></span>
+										<span class="number-shopping-cart">2</span>
+										<span class="title">购物车</span>
+										<p class="text-shopping-cart cart-total-full"> $0.00 </p>
+									</div>
+								</a>
+
+								<ul class="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu">
+
+									<li>
+										<table class="table table-striped">
+											<tbody>
+												<tr>
+													<td class="text-center" style="width:70px">
+														<a href="goods.html"> <img src="img/demo/shop/product/35.jpg" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview"> </a>
+													</td>
+													<td class="text-left"> <a class="cart_product_name" href="goods.html">吸尘器</a> </td>
+													<td class="text-center"> x1 </td>
+													<td class="text-center"> 1,202.00 </td>
+													<td class="text-right">
+														<a href="goods.html" class="fa fa-edit"></a>
+													</td>
+													<td class="text-right">
+														<a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
+													</td>
+												</tr>
+												<tr>
+													<td class="text-center" style="width:70px">
+														<a href="goods.html"> <img src="img/demo/shop/product/141.jpg" style="width:70px" alt="Canon EOS 5D" title="Canon EOS 5D" class="preview"> </a>
+													</td>
+													<td class="text-left"> <a class="cart_product_name" href="goods.html">佳能 EOS 5D</a> </td>
+													<td class="text-center"> x1 </td>
+													<td class="text-center"> 3660.00 </td>
+													<td class="text-right">
+														<a href="goods.html" class="fa fa-edit"></a>
+													</td>
+													<td class="text-right">
+														<a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</li>
+									<li>
+										<div>
+											<table class="table table-bordered">
+												<tbody>
+													<tr>
+														<td class="text-left"><strong>原总价</strong>
+														</td>
+														<td class="text-right">4,060.00</td>
+													</tr>
+
+													<tr>
+														<td class="text-left"><strong>折扣 (20%)</strong>
+														</td>
+														<td class="text-right">200.00</td>
+													</tr>
+													<tr>
+														<td class="text-left"><strong>总计</strong>
+														</td>
+														<td class="text-right">3806.00</td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="text-right"> <a class="btn view-cart" href="cart.html"><i class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="checkout.html"><i class="fa fa-share"></i>结算</a> </p>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<!--//cart-->
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- //Header center -->
+
+			<!-- Header Bottom -->
+			<div class="header-bottom">
+				<div class="container">
+					<div class="row">
+
+
+						<!-- Main menu -->
+						<div class="megamenu-hori header-bottom-right  col-md-12 col-sm-12 col-xs-12 ">
+							<div class="responsive so-megamenu ">
+								<nav class="navbar-default">
+									<div class=" container-megamenu  horizontal">
+
+										<div class="navbar-header">
+											<button   id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
+
+										<div class="megamenu-wrapper">
+											<span id="remove-megamenu" class="fa fa-times"></span>
+
+										</div>
+									</div>
+								</nav>
+							</div>
+						</div>
+						<!-- //end Main menu -->
+
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Navbar switcher -->
+			<!-- //end Navbar switcher -->
+
+		</header>
+		<!-- //Header Container  -->
+		<!-- Main Container  -->
+		<div class="main-container container">
+			<ul class="header-main ">
+				<li class="home"><a href="#">主页   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+				<li> 手机 &amp; 笔记本</li>
+			</ul>
+
+			<div class="row">
+				<!--Left Part Start -->
+				<aside class="col-sm-4 col-md-3 type-2" id="column-left">
+
+					<div class="module latest-product titleLine">
+						<h3 class="modtitle">筛选 </h3>
+						<div class="modcontent ">
+							<form class="type_2">
+
+								<div class="table_layout filter-shopby">
+									<div class="table_row">
+										<!-- - - - - - - - - - - - - - Category filter - - - - - - - - - - - - - - - - -->
+										<div class="table_cell" style="z-index: 103;">
+											<legend>搜索</legend>
+											<input class="form-control" type="text" value="" size="50" autocomplete="off" placeholder="搜索" name="search">
+										</div><!--/ .table_cell -->
+										<!-- - - - - - - - - - - - - - End of category filter - - - - - - - - - - - - - - - - -->
+										<!-- - - - - - - - - - - - - - SUB CATEGORY - - - - - - - - - - - - - - - - -->
+										<div class="table_cell">
+											<fieldset>
+												<legend>三级分类</legend>
+												<ul class="checkboxes_list">
+													<li>
+														<input type="checkbox" checked="" name="category" id="category_1">
+														<label for="category_1">手机 &amp; 平板电脑</label>
+													</li>
+													<li>
+														<input type="checkbox" name="category" id="category_2">
+														<label for="category_2">数码产品</label>
+													</li>
+													<li>
+														<input type="checkbox" name="category" id="category_3">
+														<label for="category_3">鞋子</label>
+													</li>
+													<li>
+														<input type="checkbox" name="category" id="category_4">
+														<label for="category_4">手表</label>
+													</li>
+
+												</ul>
+
+											</fieldset>
+
+										</div><!--/ .table_cell -->
+										<!-- - - - - - - - - - - - - - End SUB CATEGORY - - - - - - - - - - - - - - - - -->
+										<!-- - - - - - - - - - - - - - Manufacturer - - - - - - - - - - - - - - - - -->
+
+										<!-- - - - - - - - - - - - - - End manufacturer - - - - - - - - - - - - - - - - -->
+
+										<!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
+										<div class="table_cell">
+											<fieldset>
+												<legend>价格</legend>
+												<div class="range">
+													范围 :
+													<span class="min_val">￥28.00</span> -
+													<span class="max_val">￥562.00</span>
+													<input type="hidden" name="" class="min_value" value="28.00">
+													<input type="hidden" name="" class="max_value" value="562.00">
+												</div>
+												<div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+													<div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+													<span class="ui-slider-handle ui-state-default ui-corner-all" style="left: 3.15795%;"></span>
+													<span class="ui-slider-handle ui-state-default ui-corner-all" style="left: 96.8438%;"></span>
+													<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 3.15795%; width: 93.6859%;"></div></div>
+												</fieldset>
+											</div><!--/ .table_cell -->
+
+											<!-- - - - - - - - - - - - - - End price - - - - - - - - - - - - - - - - -->
+
+											<!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
+
+											<div class="table_cell">
+
+												<fieldset>
+
+													<legend>颜色</legend>
+
+													<div class="row">
+
+														<div class="col-sm-6">
+
+															<ul class="simple_vertical_list">
+
+																<li>
+
+																	<input type="checkbox" name="" id="color_btn_1">
+																	<label for="color_btn_1" class="color_btn green">绿</label>
+
+																</li>
+
+																<li>
+
+																	<input type="checkbox" name="" id="color_btn_2">
+																	<label for="color_btn_2" class="color_btn yellow">黄</label>
+
+																</li>
+
+																<li>
+																	<input type="checkbox" name="" id="color_btn_3">
+																	<label for="color_btn_3" class="color_btn red">红</label>
+
+																</li>
+
+															</ul>
+
+														</div>
+
+														<div class="col-sm-6">
+
+															<ul class="simple_vertical_list">
+
+																<li>
+																	<input type="checkbox" name="" id="color_btn_4">
+																	<label for="color_btn_4" class="color_btn blue">蓝</label>
+																</li>
+
+																<li>
+																	<input type="checkbox" name="" id="color_btn_5">
+																	<label for="color_btn_5" class="color_btn grey">灰</label>
+																</li>
+
+																<li>
+																	<input type="checkbox" name="" id="color_btn_6">
+																	<label for="color_btn_6" class="color_btn orange">橙</label>
+																</li>
+
+															</ul>
+
+														</div>
+
+													</div>
+
+												</fieldset>
+
+											</div><!--/ .table_cell -->
+
+											<!-- - - - - - - - - - - - - - End price - - - - - - - - - - - - - - - - -->
+
+										</div><!--/ .table_row -->
+										<footer class="bottom_box">
+											<div class="buttons_row">
+												<button type="submit" class="button_grey button_submit">搜素</button>
+												<button type="reset" class="button_grey filter_reset">重置</button>
+											</div>
+										</footer>
+									</div><!--/ .table_layout -->
+
+
+
+								</form>
+							</div>
+
+						</div>
+
+						<div class="module latest-product titleLine">
+							<h3 class="modtitle">新品上市</h3>
+							<div class="modcontent ">
+								<div class="product-latest-item">
+									<div class="media">
+										<div class="media-left">
+											<a href="goods.html"><img src="img/demo/shop/product/m1.jpg" alt="Cisi Chicken" title="Cisi Chicken" class="img-responsive" style="width: 100px; height: 82px;"></a>
+										</div>
+										<div class="media-body">
+											<div class="caption">
+												<h4><a href="goods.html">Sunt Molup</a></h4>
+
+												<div class="price">
+													<span class="price-new">$100.00</span>
+												</div>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="product-latest-item">
+									<div class="media">
+										<div class="media-left">
+											<a href="goods.html"><img src="img/demo/shop/product/m2.jpg" alt="Cisi Chicken" title="Cisi Chicken" class="img-responsive" style="width: 100px; height: 82px;"></a>
+										</div>
+										<div class="media-body">
+											<div class="caption">
+												<h4><a href="goods.html">Et Spare</a></h4>
+
+												<div class="price">
+													<span class="price-new">$99.00</span>
+												</div>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="product-latest-item">
+									<div class="media">
+										<div class="media-left">
+											<a href="goods.html"><img src="img/demo/shop/product/18.jpg" alt="Cisi Chicken" title="Cisi Chicken" class="img-responsive" style="width: 100px; height: 82px;"></a>
+										</div>
+										<div class="media-body">
+											<div class="caption">
+												<h4><a href="goods.html">Cisi Chicken</a></h4>
+
+												<div class="price">
+													<span class="price-new">$59.00</span>
+												</div>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="product-latest-item transition">
+									<div class="media">
+										<div class="media-left">
+											<a href="goods.html"><img src="img/demo/shop/product/9.jpg" alt="Cisi Chicken" title="Cisi Chicken" class="img-responsive" style="width: 100px; height:82px;"></a>
+										</div>
+										<div class="media-body">
+											<div class="caption">
+												<h4><a href="goods.html">Kevin Labor</a></h4>
+												<div class="price">
+													<span class="price-new">$245.00</span>
+												</div>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+														<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+						<div class="module tags-product titleLine">
+							<h3 class="modtitle">Tags</h3>
+							<div class="modcontent ">
+								<ul class="tags_cloud">
+									<li><a href="#" class="button_grey">allergy</a></li>
+									<li><a href="#" class="button_grey">baby</a></li>
+									<li><a href="#" class="button_grey">beauty</a></li>
+									<li><a href="#" class="button_grey">ear care</a></li>
+									<li><a href="#" class="button_grey">for her</a></li>
+									<li><a href="#" class="button_grey">for him</a></li>
+									<li><a href="#" class="button_grey">first aid</a></li>
+									<li><a href="#" class="button_grey">gift sets</a></li>
+									<li><a href="#" class="button_grey">spa</a></li>
+									<li><a href="#" class="button_grey">hair care</a></li>
+									<li><a href="#" class="button_grey">herbs</a></li>
+									<li><a href="#" class="button_grey">medicine</a></li>
+									<li><a href="#" class="button_grey">natural</a></li>
+									<li><a href="#" class="button_grey">oral care</a></li>
+									<li><a href="#" class="button_grey">pain</a></li>
+									<li><a href="#" class="button_grey">pedicure</a></li>
+									<li><a href="#" class="button_grey">personal care</a></li>
+									<li><a href="#" class="button_grey">probiotics</a></li>
+
+								</ul>
+
+							</div>
+
+						</div>
+					</aside>
+					<!--Left Part End -->
+
+					<!--Middle Part Start-->
+					<div id="content" class="col-md-9 col-sm-8 type-2">
+						<div class="products-category">
+							<!-- Filters -->
+							<div class="product-filter filters-panel">
+								<div class="row">
+									<div class="col-md-5 visible-lg">
+										<div class="view-mode">
+											<div class="list-view">
+												<button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip" data-original-title="Grid"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+												<button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="short-by-show form-inline text-right col-lg-7 col-sm-12 col-xs-12">
+										<div class="text">
+											<p>显示商品 01 - 16 总商品 47 </p>
+										</div>
+										<div class="form-group short-by">
+											<label class="control-label" for="input-sort">排序:</label>
+											<select id="input-sort" class="form-control" onchange="location = this.value;">
+
+												<option value="" selected="selected">默认 </option>
+
+												<option value="">名称</option>
+												<option value="">价格</option>
+
+											</select>
+										</div>
+										<div class="form-group">
+											<select id="input-limit" class="form-control" onchange="location = this.value;">
+												<option value="" selected="selected">16</option>
+												<option value="">25</option>
+												<option value="">50</option>
+												<option value="">75</option>
+												<option value="">100</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- //end Filters -->
+							<!--changed listings-->
+							<div class="products-list grid">
+								<div class="product-layout">
+									<div class="product-item-container">
+										<div class="left-block">
+											<div class="product-image-container  second_img ">
+												<a href="/goods" class="product-img"><img src="img/demo/shop/product/product-1.jpg" alt=""></a>
+												<!--Sale Label-->
+												<span class="new">New</span>
+
+												<div class="hover">
+													<ul>
+														<li class="icon-heart"><a class="wishlist" type="button" data-toggle="tooltip" title="" onclick="wishlist.add('42');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i></a></li>
+														<li class="icon-exchange"><a class="compare" type="button" data-toggle="tooltip" title="" onclick="compare.add('42');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i></a></li>
+														<li class="icon-search"><a class="quickview iframe-link " data-fancybox-type="iframe" href="quickview.html">  <i class="fa fa-search" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="right-block">
+											<div class="caption">
+												<h4><a href="/goods">三星note7</a></h4>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class="gray"><i class="fa fa-star "></i></span>
+													</div>
+												</div>
+
+												<div class="price">
+													<span class="price-new">1174.00</span>
+
+												</div>
+												<div class="description item-desc hidden">
+													<p>炸就完事了</p>
+												</div>
+											</div>
+
+											<div class="button-group">
+												<button class="addToCart btn btn-default " type="button" data-toggle="tooltip" title="" onclick="cart.add('42', '1');" data-original-title="加入购物车"> <span class="">加入购物车</span></button>
+											</div>
+										</div><!-- right block -->
+									</div>
+								</div>
+								
+
+
+								<div class="product-layout">
+									<div class="product-item-container">
+										<div class="left-block">
+											<div class="product-image-container  second_img ">
+												<a href="/goods" class="product-img"><img src="img/demo/shop/product/product-2.jpg" alt=""></a>
+												<!--Sale Label-->
+												<span class="new">New</span>
+
+												<div class="hover">
+													<ul>
+														<li class="icon-heart"><a class="wishlist" type="button" data-toggle="tooltip" title="" onclick="wishlist.add('42');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i></a></li>
+														<li class="icon-exchange"><a class="compare" type="button" data-toggle="tooltip" title="" onclick="compare.add('42');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i></a></li>
+														<li class="icon-search"><a class="quickview iframe-link " data-fancybox-type="iframe" href="quickview.html">  <i class="fa fa-search" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="right-block">
+											<div class="caption">
+												<h4><a href="/goods">索尼单反</a></h4>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class="gray"><i class="fa fa-star "></i></span>
+													</div>
+												</div>
+
+												<div class="price">
+													<span class="price-new">3445.00</span>
+
+												</div>
+												<div class="description item-desc hidden">
+													<p>撩妹神器</p>
+												</div>
+											</div>
+
+											<div class="button-group">
+												<button class="addToCart btn btn-default " type="button" data-toggle="tooltip" title="" onclick="cart.add('42', '1');" data-original-title="加入购物车"> <span class="">加入购物车</span></button>
+											</div>
+										</div><!-- right block -->
+									</div>
+								</div>
+								
+
+								<div class="product-layout">
+									<div class="product-item-container">
+										<div class="left-block">
+											<div class="product-image-container  second_img ">
+												<a href="/goods" class="product-img"><img src="img/demo/shop/product/product-3.jpg" alt=""></a>
+												<!--Sale Label-->
+
+												<span class="sale">-25%</span>
+												<div class="hover">
+													<ul>
+														<li class="icon-heart"><a class="wishlist" type="button" data-toggle="tooltip" title="" onclick="wishlist.add('42');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i></a></li>
+														<li class="icon-exchange"><a class="compare" type="button" data-toggle="tooltip" title="" onclick="compare.add('42');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i></a></li>
+														<li class="icon-search"><a class="quickview iframe-link " data-fancybox-type="iframe" href="quickview.html">  <i class="fa fa-search" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="right-block">
+											<div class="caption">
+												<h4><a href="/goods">小米MAX</a></h4>
+												<div class="ratings">
+													<div class="rating-box">
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class=""><i class="fa fa-star "></i></span>
+														<span class="gray"><i class="fa fa-star "></i></span>
+													</div>
+												</div>
+
+												<div class="price">
+													<span class="price-new">1189.00</span>
+													<span class="price-old">832.00</span>
+												</div>
+												<div class="description item-desc hidden">
+													<p>大屏就完事了</p>
+												</div>
+											</div>
+
+											<div class="button-group">
+												<button class="addToCart btn btn-default " type="button" data-toggle="tooltip" title="" onclick="cart.add('42', '1');" data-original-title="加入购物车"> <span class="">加入购物车</span></button>
+											</div>
+										</div><!-- right block -->
+									</div>
+								</div>
+
+							</div>				<!--// End Changed listings-->
+							<!-- Filters -->
+							<div class="product-filter filters-panel">
+								<div class="row">
+									<div class="col-md-5 visible-lg">
+										<div class="view-mode">
+											<div class="list-view">
+												<button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip" data-original-title="Grid"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+												<button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="short-by-show form-inline text-right col-lg-7 col-sm-12 col-xs-12">
+										<div class="text">
+											<p>item 01 - 16 of 47 total</p>
+										</div>
+										<div class="box-pagination text-right">
+											<ul class="pagination">
+												<li class="active"><span>1</span></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- //end Filters -->
+
+						</div>
+
+					</div>
+
+
+				</div>
+				<!--Middle Part End-->
+			</div>
+			<!-- //Main Container -->
+
+
+			<!-- Footer Container -->
+			<footer class="footer-container type_footer1">
+				<!-- Footer Top Container -->
+				<section class="footer-top">
+					<div class="container content">
+						<div class="">
+							<div class=" collapsed-block ">
+								<div class="module clearfix">
+									<h3 class="modtitle">Contact Us	</h3>
+									<div class="modcontent">
+										<ul class="contact-address">
+											<li><p><span class="fa fa-map-marker"></span><span>Address : </span> My Company, 42 avenue des Champs Elysées</p></li>
+											<li><span class="fa fa-envelope-o"></span><span>Email : </span> <a href="#"> sales@yourcompany.com</a></li>
+											<li><p><span class="fa fa-phone"> </span><span>Phone :</span> 0123456789</p> </li>
+										</ul>
+									</div>
+									<div class="share-icon">
+										<ul>
+											<li class="facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+											<li class="twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+											<li class="google"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+											<li class="skype"><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class=" box-information">
+								<div class="module clearfix">
+									<h3 class="modtitle">Information</h3>
+									<div class="modcontent">
+										<ul class="menu">
+											<li><a href="about-us.html">About Us</a></li>
+											<li><a href="faq.html">FAQ</a></li>
+											<li><a href="order-history.html">Order history</a></li>
+											<li><a href="order-information.html">Order information</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class=" box-extras">
+								<div class="module clearfix">
+									<h3 class="modtitle">Extras</h3>
+									<div class="modcontent">
+										<ul class="menu">
+											<li><a href="contact.html">Contact Us</a></li>
+											<li><a href="return.html">Returns</a></li>
+											<li><a href="sitemap.html">Site Map</a></li>
+											<li><a href="my-account.html">My Account</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="box-account">
+								<div class="module clearfix">
+									<h3 class="modtitle">My Account</h3>
+									<div class="modcontent">
+										<ul class="menu">
+											<li><a href="#">Brands</a></li>
+											<li><a href="gift-voucher.html">Gift Vouchers</a></li>
+											<li><a href="#">Affiliates</a></li>
+											<li><a href="#">Specials</a></li>
+											<li><a href="#" target="_blank">Our Blog</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div></section>
+					<!-- /Footer Top Container -->
+					<div class="footer-mid">
+						<div class=" help">
+							<div class=" container">
+								<div class=" row">
+									<div class="footer-mid-left col-sm-6 col-xs-12">
+										<h3>NEED HELP? </h3>
+										<p>SUPPORT TEAM 24/7 AT (844) 555-8386</p>
+									</div>
+									<div class="footer-mid-right col-sm-6 col-xs-12">
+										<div class="btn-sub">
+											<i class="fa fa-envelope" aria-hidden="true"></i>
+											<input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Your Email Address..." name="subscribe">
+											<button type="submit" class="button-search btn btn-primary" name="submit_subscribe">Subscribe</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+				<!-- //end Footer Container -->
+
+			</div>
+			<!-- Social widgets -->
+			<div class="footer-bottom-block ">
+				<div class=" container">
+					<div class="row">
+						<div class="footer-bottom-header">
+							<div class="col-xs-12 col-sm-12 col-md-5 download">
+								<h3>Download Our App</h3>
+								<a href="#"><img src="img/demo/download/app.jpg" alt=""></a>
+								<a href="#"><img src="img/demo/download/ggplay.jpg" alt=""></a>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-7 pay">
+								<ul>
+									<li><img src="img/demo/payment/visa.jpg" alt=""></li>
+									<li><img src="img/demo/payment/meastro.jpg" alt=""></li>
+									<li><img src="img/demo/payment/paypal.jpg" alt=""></li>
+									<li><img src="img/demo/payment/union.jpg" alt=""></li>
+									<li><img src="img/demo/payment/cirrus.jpg" alt=""></li>
+									<li><img src="img/demo/payment/ebay.jpg" alt=""></li>
+								</ul>
+							</div>
+						</div>
+						<div class="text-footer-bot">
+							<p>Destino - Premium Multipurpose HTML5/CSS3 Theme - Designed by <a href="#">SmartAddons.Com</a></p>
+						</div>
+						<div class="back-to-top"><i class="fa fa-angle-up"></i><span> Top </span></div>
+					</div>
+				</div>
+			</div>	<!-- End Social widgets -->	<!-- End Social widgets -->	
+
+<!-- Include Libs & Plugins
+	============================================ -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootstrapmb.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="js/themejs/libs.js"></script>
+	<script type="text/javascript" src="js/unveil/jquery.unveil.js"></script>
+	<script type="text/javascript" src="js/countdown/jquery.countdown.min.js"></script>
+	<script type="text/javascript" src="js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+	<script type="text/javascript" src="js/datetimepicker/moment.js"></script>
+	<script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+	
+	
+	<!-- Theme files
+	============================================ -->
+	
+	
+	<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+	<script type="text/javascript" src="js/themejs/addtocart.js"></script>
+	<script type="text/javascript" src="js/themejs/application.js"></script>
+	<script type="text/javascript"><!--
+	// Check if Cookie exists
+	if($.cookie('display')){
+		view = $.cookie('display');
+	}else{
+		view = 'grid';
+	}
+	if(view) display(view);
+	//--></script> 
+</body>
+</html>

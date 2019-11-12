@@ -22,11 +22,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 	<link rel="shortcut icon" href="ico/favicon.png">
-	
-	<!-- Google web fonts
-	============================================ -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-	
+
     <!-- Libs CSS
     ============================================ -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -47,6 +43,8 @@
 	<link id="color_scheme" href="css/theme.css" rel="stylesheet">
 	
 	<!-- <link href="css/responsive.css" rel="stylesheet"> -->
+
+	<link rel="stylesheet" href="../static/css/cart/cart.css">
 	
 	
 </head>
@@ -696,7 +694,6 @@
 							</div>
 						</div>
 						<!-- //end Main menu -->
-
 					</div>
 				</div>
 
@@ -707,184 +704,112 @@
 
 		</header>
 		<!-- //Header Container  -->
-		<!-- Main Container  -->
 		<div class="main-container container">
+			<!--页面导航-->
 			<ul class="header-main ">
-				<li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-				<li> Shopping Cart</li>
+				<li class="home"><a href="#">主页   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+				<li>购物车</li>
 			</ul>
+			<!--购物车内容-->
 			<div class="row">
-				<!--Middle Part Start-->
+				<!--购物车内商品展示以及商品操作-->
 				<div id="content" class="col-sm-12">
-					<h2 class="title">Shopping Cart</h2>
+					<h2 class="title">购物车</h2>
 					<div class="table-responsive form-group">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<td class="text-center">Image</td>
-									<td class="text-left">Product Name</td>
-									<td class="text-left">Model</td>
-									<td class="text-left">Quantity</td>
-									<td class="text-right">Unit Price</td>
-									<td class="text-right">Total</td>
+									<td class="text-center">
+										<div id="td-check-1" class="form-group form-check">
+											<input id="CheckBox1" type="checkbox" class="form-check-input">
+											<label id="td-label-1" class="form-check-label" for="CheckBox1">全选</label>
+										</div>
+									</td>
+									<td class="text-center">商品信息</td>
+									<td class="text-center">单价</td>
+									<td class="text-center">数量</td>
+									<td class="text-center">小计</td>
+									<td class="text-center">操作</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="text-center"><a href="product.html"><img width="70px" src="img/demo/shop/product/E3.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" /></a></td>
-									<td class="text-left"><a href="product.html">Emasa rumas gacem</a><br />
+									<!--全选的单选-->
+									<td class="text-center">
+										<input id="CheckBox2" type="checkbox" class="form-check-input">
 									</td>
-									<td class="text-left">Pt 001</td>
-									<td class="text-left" width="200px"><div class="input-group btn-block quantity">
-										<input type="text" name="quantity" value="1" size="1" class="form-control" />
-										<span class="input-group-btn">
-											<button type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i class="fa fa-clone"></i></button>
-											<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger" onClick=""><i class="fa fa-times-circle"></i></button>
-										</span></div></td>
-										<td class="text-right">$120.00</td>
-										<td class="text-right">$120.00</td>
+
+									<!--商品信息-->
+									<td class="text-left" width="300px">
+										<!--商品图片-->
+										<a href="product.html" id="tbody-tr-td-a">
+											<img width="70px" src="img/demo/shop/product/E3.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" />
+										</a>
+										<!--商品规格信息-->
+										<div id="tbody-tr-td-div">
+											<span id="tbody-tr-td-div-span">雏鹰精选</span>
+											<a href="product.html">苹果ipone13</a>
+											<br>
+											<a href="product.html">内存1：28G，颜色：太空银</a>
+										</div>
+									</td>
+
+									<!--商品单价-->
+									<td class="text-center" id="tbody-tr-td-1">￥100</td>
+
+									<!--商品数量-->
+									<td class="text-center" width="200px">
+										<div class="btn-group" role="group">
+											<button type="button" class="btn btn-danger" data-js="jian" onclick="jianshuliang(this)"><i class="fa fa-minus"></i></button>
+											<div class="btn-group disabled" role="group">
+												<input type="text" class="btn btn-default" value="1" style="width: 70px;" data-js="shuliang">
+											</div>
+											<button type="button" class="btn btn-info" data-js="jia" onclick="jiashuliang(this)"><i class="fa fa-plus"></i></button>
+										</div>
+									</td>
+
+									<!--商品小计-->
+									<td class="text-center" id="tbody-tr-td-2">￥120.00</td>
+
+									<!--商品操作-->
+									<td class="text-center">
+										<div class="input-group btn-block">
+											<button type="submit" data-toggle="tooltip" title="加入关注" class="btn btn-primary"><i class="fa fa-clone"></i></button>
+											<button type="button" title="删除" class="btn btn-danger" data-toggle="modal" data-target="#shanchuModal" data-js="shanchu" data-jss="${cartDomains.id}"><i class="fa fa-times-circle"></i></button>
+										</div>
+									</td>
 									</tr>
-									<tr>
-										<td class="text-center"><a href="product.html"><img width="70px" src="img/demo/shop/product/E1.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail" /></a></td>
-										<td class="text-left"><a href="product.html">Comas samer rumas</a></td>
-										<td class="text-left">Pt 002</td>
-										<td class="text-left" width="200px"><div class="input-group btn-block quantity">
-											<input type="text" name="quantity" value="1" size="1" class="form-control" />
-											<span class="input-group-btn">
-												<button type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i class="fa fa-clone"</i></button>
-												<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger" onClick=""><i class="fa fa-times-circle"></i></button>
-											</span></div></td>
-											<td class="text-right">$150.00</td>
-											<td class="text-right">$150.00</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
-							<h3 class="subtitle no-margin">What would you like to do next?</h3>
-							<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-							<div class="panel-group" id="accordion">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a href="#collapse-coupon" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">Use Coupon Code 
-												
-												<i class="fa fa-caret-down"></i>
-											</a>
-										</h4>
-									</div>
-									<div id="collapse-coupon" class="panel-collapse collapse in" aria-expanded="true">
-										<div class="panel-body">
-											<label class="col-sm-2 control-label" for="input-coupon">Enter your coupon here</label>
-											<div class="input-group">
-												<input type="text" name="coupon" value="" placeholder="Enter your coupon here" id="input-coupon" class="form-control">
-												<span class="input-group-btn"><input type="button" value="Apply Coupon" id="button-coupon" data-loading-text="Loading..." class="btn btn-primary"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a href="#collapse-shipping" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false">Estimate Shipping &amp; Taxes 
-												
-												<i class="fa fa-caret-down"></i>
-											</a>
-										</h4>
-									</div>
-									<div id="collapse-shipping" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-										<div class="panel-body">
-											<p>Enter your destination to get a shipping estimate.</p>
-											<div class="form-horizontal">
-												<div class="form-group required">
-													<label class="col-sm-2 control-label" for="input-country">Country</label>
-													<div class="col-sm-10">
-														<select name="country_id" id="input-country" class="form-control">
-															<option value=""> --- Please Select --- </option>
-															<option value="244">Aaland Islands</option>
-															<option value="1">Afghanistan</option>
-															<option value="2">Albania</option>
-															<option value="3">Algeria</option>
-														</select>
-													</div>
-												</div>
-												<div class="form-group required">
-													<label class="col-sm-2 control-label" for="input-zone">Region / State</label>
-													<div class="col-sm-10">
-														<select name="zone_id" id="input-zone" class="form-control">
-															<option value=""> --- Please Select --- </option>
-															<option value="3513">Aberdeen</option>
-															<option value="3514">Aberdeenshire</option>
-															<option value="3515">Anglesey</option>
-															<option value="3516">Angus</option>
-															<option value="3517">Argyll and Bute</option>
-															<option value="3518">Bedfordshire</option>
-															<option value="3519">Berkshire</option>
-														</select>
-													</div>
-												</div>
-												<div class="form-group required">
-													<label class="col-sm-2 control-label" for="input-postcode">Post Code</label>
-													<div class="col-sm-10"><input type="text" name="postcode" value="" placeholder="Post Code" id="input-postcode" class="form-control"></div>
-												</div>
-												<button type="button" id="button-quote" data-loading-text="Loading..." class="btn btn-primary">Get Quotes</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a href="#collapse-voucher" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed" aria-expanded="false">Use Gift Certificate 
-												
-												<i class="fa fa-caret-down"></i>
-											</a>
-										</h4>
-									</div>
-									<div id="collapse-voucher" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-										<div class="panel-body">
-											<label class="col-sm-2 control-label" for="input-voucher">Enter your gift certificate code here</label>
-											<div class="input-group">
-												<input type="text" name="voucher" value="" placeholder="Enter your gift certificate code here" id="input-voucher" class="form-control">
-												<span class="input-group-btn"><input type="submit" value="Apply Gift Certificate" id="button-voucher" data-loading-text="Loading..." class="btn btn-primary"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
+							<!--商品合计小表格-->
 							<div class="row">
 								<div class="col-sm-4 col-sm-offset-8">
 									<table class="table table-bordered">
 										<tbody>
 											<tr>
 												<td class="text-right">
-													<strong>Sub-Total:</strong>
+													<strong>商品总数量：</strong>
 												</td>
-												<td class="text-right">$168.71</td>
+												<td class="text-right">2</td>
 											</tr>
 											<tr>
 												<td class="text-right">
-													<strong>Flat Shipping Rate:</strong>
+													<strong>商品折扣：</strong>
 												</td>
-												<td class="text-right">$4.69</td>
+												<td class="text-right">0.7</td>
 											</tr>
 											<tr>
 												<td class="text-right">
-													<strong>Eco Tax (-2.00):</strong>
+													<strong>商品总价：</strong>
 												</td>
-												<td class="text-right">$5.62</td>
+												<td class="text-right">￥1000</td>
 											</tr>
 											<tr>
 												<td class="text-right">
-													<strong>VAT (20%):</strong>
+													<strong>商品折扣后总价：</strong>
 												</td>
-												<td class="text-right">$34.68</td>
-											</tr>
-											<tr>
-												<td class="text-right">
-													<strong>Total:</strong>
-												</td>
-												<td class="text-right">$213.70</td>
+												<td class="text-right">￥700</td>
 											</tr>
 										</tbody>
 									</table>
@@ -892,16 +817,13 @@
 							</div>
 
 							<div class="buttons">
-								<div class="pull-left"><a href="index.html" class="btn btn-primary">Continue Shopping</a></div>
-								<div class="pull-right"><a href="checkout.html" class="btn btn-primary">Checkout</a></div>
+								<div class="pull-left"><a href="index.html" class="btn btn-primary">返回主页</a></div>
+								<div class="pull-right"><a href="checkout.html" class="btn btn-primary">结算</a></div>
 							</div>
 						</div>
-						<!--Middle Part End -->
-						
+
 					</div>
 				</div>
-				<!-- //Main Container -->
-				
 
 				<!-- Footer Container -->
 				<footer class="footer-container type_footer1">
@@ -1001,7 +923,7 @@
 					<!-- //end Footer Container -->
 
 				</div>
-				<!-- Social widgets -->
+				<!--网页底部-->
 				<div class="footer-bottom-block ">
 					<div class=" container">
 						<div class="row">
@@ -1028,11 +950,9 @@
 							<div class="back-to-top"><i class="fa fa-angle-up"></i><span> Top </span></div>
 						</div>
 					</div>
-				</div>	<!-- End Social widgets -->
-				
-<!-- Include Libs & Plugins
-	============================================ -->
-	<!-- Placed at the end of the document so the pages load faster -->
+				</div>
+
+<!-- ============================系统js引入=========================================== -->
 	<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript" src="http://cdn.bootstrapmb.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
@@ -1043,15 +963,14 @@
 	<script type="text/javascript" src="js/datetimepicker/moment.js"></script>
 	<script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
-	
-	
-	<!-- Theme files
-	============================================ -->
-	
-	
+
+<!-- ============================模板js引入=========================================== -->
 	<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
 	<script type="text/javascript" src="js/themejs/addtocart.js"></script>
 	<script type="text/javascript" src="js/themejs/application.js"></script>
+
+	<!-- ============================个人js引入=========================================== -->
+
 	
 </body>
 </html>
