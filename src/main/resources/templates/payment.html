@@ -42,7 +42,7 @@
 <body class="res layout-subpage">
 <div id="wrapper" class="wrapper-full ">
     <!-- 头部容器  -->
-
+    <th:block th:include="include :: header" />
 
     <!-- 主要内容容器  -->
     <div class="main-container container">
@@ -125,7 +125,7 @@
     </div>
 
     <!-- 脚部容器 -->
-
+    <th:block th:include="include :: footer" />
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery-2.2.4.min.js}"></script>
