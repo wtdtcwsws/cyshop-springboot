@@ -40,9 +40,8 @@
 
 <body class="res layout-subpage">
 <div id="wrapper" class="wrapper-full ">
-    <!-- Header Container  -->
-
-    <!-- //Header Container  -->
+    <!--头部引入-->
+    <th:block th:include="include :: header" />
     <!--页面内容开始-->
     <div class="main-container container">
         <!--页面导航-->
@@ -172,13 +171,9 @@
         </div>
     </div>
 
-    <!-- Footer Container -->
-
-    <!-- //end Footer Container -->
-
 </div>
-<!--网页底部-->
-
+<!--底部引入-->
+<th:block th:include="include :: footer" />
 
 <!-- ============================系统js引入=========================================== -->
 <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
