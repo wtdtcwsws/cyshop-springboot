@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReturnController {
 
 
-    @RequestMapping("/return.html")
-    public String returns(){
+    @RequestMapping("/return")
+    public String returns() {
         return "return";
     }
 }

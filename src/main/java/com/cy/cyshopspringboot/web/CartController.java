@@ -18,6 +18,16 @@ public class CartController {
         return "cart";
     }
 
+    @RequestMapping("/head")
+    public String head(){
+        return "head";
+    }
+
+    @RequestMapping("/foot")
+    public String foot(){
+        return "foot";
+    }
+
 
 
 }
