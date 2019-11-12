@@ -22,11 +22,11 @@
     <%----------------------此处跳转商品详情页面----------------------%>
     <td class="text-center"><a href="javascript:;"><img width="60px" src="${root}${orderItemVO.getUrl()}" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail"></a></td>
     <td class="text-center">
-    <%--<a href="product.html"></a>--%>
+    <%--<a href="goods.html"></a>--%>
     <a href="javascript:;">${orderItemVO.getName()}</a>
     </td>
     <td class="text-center">
-    <%--<a href="product.html">Emasa rumas gacem</a>--%>
+    <%--<a href="goods.html">Emasa rumas gacem</a>--%>
     <f:formatDate value="${orderItemVO.getCreat_time()}" pattern="yyyy/MM/dd"/>
     <br />
     </td>
