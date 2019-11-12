@@ -38,6 +38,6 @@ public class CheckoutController {
 
     @RequestMapping("/payment")
     public Mono<String> payment(){
-        return Mono.create(checkoutMono->checkoutMono.success("payment"));
+        return Mono.create(paymentMono->paymentMono.success("payment"));
     }
 }
