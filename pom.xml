@@ -52,6 +52,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!--配置orm逆向工具 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
