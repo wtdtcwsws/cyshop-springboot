@@ -2,19 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/lib/font-awesome/css/font-awesome.min.css}">
     <title>商品展示(后期动态修改)</title>
 </head>
 <body>
 
 <div class="container">
+  <ul th:each="spu:${spus}">
+      <li th:text="${spu.spuName}"></li>
+
+  </ul>
 
 
 
 </div>
 
-<script type="text/javascript" src="lib/jquery/jquery.js"/>
-<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"/>
+<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>
+<script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"/>
 </body>
 </html>
