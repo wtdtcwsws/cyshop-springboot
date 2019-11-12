@@ -24,15 +24,16 @@ public class CheckoutController {
     @RequestMapping("/checkout")
     public Mono<String> checkout(Model model){
 //        ConfirmOrderVO confirmOrderVO = new ConfirmOrderVO();
-//        MemberAddress  memberAddress = new MemberAddress();
-//        List<MemberAddress> memberAddressess = new ArrayList<>();
-//        memberAddress.setSpecificAddress("成都市");
-//        memberAddress.setConsigneeName("小红");
-//        memberAddress.setMemberId(6);
-//        memberAddress.setId(3);
-//        memberAddress.setPhone("13112345678");
-//        memberAddressess.add(memberAddress);
-//        model.addAttribute("memberAddressess",memberAddressess);
+        MemberAddress  memberAddress = new MemberAddress();
+        List<MemberAddress> memberAddressess = new ArrayList<>();
+        memberAddress.setSpecificAddress("成都市");
+        memberAddress.setConsigneeName("小红");
+        memberAddress.setMemberId(6);
+        memberAddress.setId(3);
+        memberAddress.setPhone("13112345678");
+        memberAddressess.add(memberAddress);
+
+        model.addAttribute("memberAddressess",memberAddressess);
         return Mono.create(checkoutMono->checkoutMono.success("checkout"));
     }
 
