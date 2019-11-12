@@ -58,6 +58,7 @@
 
     <!-- 头部容器 -->
 
+
     <!-- 主要内容容器 -->
     <div class="main-container container">
         <ul class="header-main ">
@@ -183,10 +184,12 @@
                                                         <!--<span th:text="${memberAddress.getSpecific_address()} + ' '+ ${memberAddress.getConsignee_name()} + ' 收'"></span>-->
                                                         <span th:text="'成都西部金融中心 小桐桐 收'"></span>
                                                     </label>
-                                                    <a class="pull-right" data-toggle="modal" data-target="'#exampleModal' + ${memberAddress.getId()}">修改本地址</a>
+                                                    <!--<a class="pull-right" data-toggle="modal" data-target="'#exampleModal' + ${memberAddress.getId()}">修改本地址</a>-->
+                                                    <a class="pull-right" data-toggle="modal" data-target="motaikuang">修改本地址</a>
 
                                                     <!--修改地址的模态框-->
-                                                    <div class="modal fade" id="'exampleModal'+ ${memberAddress.getId()}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal fade" id="motaikuang" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <!--<div class="modal fade" id="'exampleModal'+ ${memberAddress.getId()}" tabindex="-1" role="dialog" aria-hidden="true">-->
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
