@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>页面找不到啦！</title>
+    <meta charset="utf-8">
+    <meta name="keywords"
+          content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business"/>
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="css/themecss/lib.css" rel="stylesheet">
+    <link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
+    <link href="css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="css/themecss/so-categories.css" rel="stylesheet">
+    <link href="css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="css/footer1.css" rel="stylesheet">
+    <link href="css/header1.css" rel="stylesheet">
+    <link href="css/checkout.css" rel="stylesheet">
+    <link id="color_scheme" href="css/theme.css" rel="stylesheet">
+
+    <!--个人css-->
+    <link rel="stylesheet" href="css/cart/cart.css">
+
+
+</head>
+
+<body class="res layout-subpage">
+
+<div id="wrapper" class="wrapper-full">
+
+        <th:block th:include="include :: header"></th:block>
+
+        <!-- Begin Hiraola's Error 404 Page Area -->
+        <div class="error404-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 ml-auto mr-auto text-center" style="margin: 0 auto;text-align: center">
+                        <div class="search-error-wrapper">
+                            <h1>404</h1>
+                            <h2>页面丢失啦！</h2>
+                            <p class="short_desc">对不起，您正在寻找的页面不存在，已被删除，名称已更改或暂时不可用。</p>
+                            <div class="hiraola-btn-ps_center"></div>
+                            <a href="index.html" class="hiraola-error_btn">返回主页<i class="fa fa-level-up" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hiraola's Error 404 Page End Here -->
+        <!-- Begin Hiraola's Footer Area -->
+
+        <th:block th:include="include :: footer"></th:block> <!-- End Social widgets -->
+        <!-- Hiraola's Footer Area End Here -->
+
+    </div>
+
+    <!-- ============================系统js引入=========================================== -->
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootstrapmb.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="js/themejs/libs.js"></script>
+    <script type="text/javascript" src="js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript" src="js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript" src="js/datetimepicker/moment.js"></script>
+    <script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- ============================模板js引入=========================================== -->
+    <script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript" src="js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="js/themejs/application.js"></script>
+
+    <!-- ============================个人js引入=========================================== -->
+
+    <style>
+        .error404-area{
+            text-align: center;
+            line-height: 60px;
+            font-size: xx-large;
+            color: #00abf0;
+            padding-left: 300px;
+            padding-top: 50px;
+            padding-bottom: 100px;
+
+        }
+
+        .search-error-wrapper>h1{
+            font-size: 100px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</body>
+
+</html>

@@ -12,4 +12,9 @@ public class IndexController {
         model.addAttribute("message", "Hello World");
         return "index";
     }
+
+    @GetMapping("/404.html")
+    public String page404() {
+        return "404";
+    }
 }
