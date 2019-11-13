@@ -1,0 +1,50 @@
+html{
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+body{
+	text-decoration: none;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	/* z-index: -1; */
+	
+}
+a{
+	color: #ADB5BD;
+	
+}
+a:hover{
+	text-decoration: none;
+}
+.total{
+	background-image: url(/image/009.png);
+	background-size: 100%;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+.login_box{
+	width: 300px;
+	height: 300px;
+	margin-top: 10%;
+	/* z-index: 1; */
+}
+.login_box_in{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin: 60px;
+	padding: 80px;
+	z-index: 1;
+	
+}
+div.row{
+	margin-bottom: 10px;
+	
+}
+div.login_input{
+	text-align: center;
+	margin: 0 auto;
+}

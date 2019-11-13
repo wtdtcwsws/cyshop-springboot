@@ -176,21 +176,21 @@
                                         <div class="panel-body checkout-shipping-methods">
 
                                             <!--此处应为根据用户查询数据库收货地址表的信息-->
-                                            <!--<div th:each="memberAddress,status : ${memberAddressess}">-->
+                                            <div th:each="memberAddress,status : ${memberAddresses}">
                                                 <div class="radio">
                                                     <label id="addressRadio">
-                                                        <input id="'radio'+ ${status.index}" type="radio" name="address" data-checkedRadio value="${memberAddress.getId()}">
+                                                        <input id="'radio'+ ${status.index}" type="radio" name="address" data-checkedRadio th:value="${memberAddress.getId()}">
                                                         <!--数据库查出来的地址和名字-->
                                                         <i class="fa fa-street-view">&nbsp;&nbsp;</i>
-                                                        <!--<span th:text="${memberAddress.getSpecific_address()} + ' '+ ${memberAddress.getConsignee_name()} + ' 收'"></span>-->
-                                                        <span th:text="'成都西部金融中心 小桐桐 收'"></span>
+                                                        <span th:text="${memberAddress.getSpecificAddress()} + ' '+ ${memberAddress.getConsigneeName()} + ' 收'"></span>
+                                                        <!--<span th:text="'成都西部金融中心 小桐桐 收'"></span>-->
                                                     </label>
-                                                    <!--<a class="pull-right" data-toggle="modal" data-target="'#exampleModal' + ${memberAddress.getId()}">修改本地址</a>-->
-                                                    <a class="pull-right" data-toggle="modal" data-target="motaikuang">修改本地址</a>
+                                                    <a class="pull-right" data-toggle="modal" th:data-target="'#exampleModal' + ${memberAddress.getId()}">修改本地址</a>
+                                                    <!--<a class="pull-right" data-toggle="modal" data-target="motaikuang">修改本地址</a>-->
 
                                                     <!--修改地址的模态框-->
-                                                    <div class="modal fade" id="motaikuang" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <!--<div class="modal fade" id="'exampleModal'+ ${memberAddress.getId()}" tabindex="-1" role="dialog" aria-hidden="true">-->
+                                                    <!--<div class="modal fade" id="motaikuang" tabindex="-1" role="dialog" aria-hidden="true">-->
+                                                    <div class="modal fade" th:id="'exampleModal'+ ${memberAddress.getId()}" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
@@ -205,21 +205,21 @@
                                                                             <div class="form-group">
                                                                                 <!--数据库查出来的收货地址-->
                                                                                 <label class="col-form-label">地址信息(请填写包括省/市/区在内的详细信息):</label>
-                                                                                <input class="form-control" placeholder="${memberAddress.getSpecificAddress()}" data-DAmessage />
+                                                                                <input class="form-control" th:placeholder="${memberAddress.getSpecificAddress()}" data-DAmessage />
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <!--数据库查出来的收货人名字-->
                                                                                 <label class="col-form-label">收货人名称:</label>
-                                                                                <input class="form-control" placeholder="${memberAddress.getConsigneeName()}" data-DAname/>
+                                                                                <input class="form-control" th:placeholder="${memberAddress.getConsigneeName()}" data-DAname/>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <!--数据库查出来的收货人电话-->
                                                                                 <label class="col-form-label">收货人电话:</label>
-                                                                                <input class="form-control" placeholder="${memberAddress.getPhone()}" data-DAphone/>
+                                                                                <input class="form-control" th:placeholder="${memberAddress.getPhone()}" data-DAphone/>
                                                                             </div>
                                                                         </div>
                                                                         <div class="pull-right">
-                                                                            <a id="${status.index}" type="button" class="btn btn-primary" data-Daddress data-UAid="${memberAddress.getId()}">保存</a>
+                                                                            <a th:id="${status.index}" type="button" class="btn btn-primary" data-Daddress th:data-UAid="${memberAddress.getId()}">保存</a>
                                                                             <a type="button" class="btn btn-danger ml-3" data-dismiss="modal">取消</a>
                                                                         </div>
                                                                     </div>
@@ -227,7 +227,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                <!--</div>-->
+                                                </div>
                                             </div>
 
                                         </div>

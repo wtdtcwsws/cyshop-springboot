@@ -3,7 +3,10 @@ package com.cy.cyshopspringboot.service.impl;
 import com.cy.cyshopspringboot.domain.MemberAddress;
 import com.cy.cyshopspringboot.domain.Order;
 import com.cy.cyshopspringboot.domain.OrderItem;
-import com.cy.cyshopspringboot.service.CheckoutService;
+import com.cy.cyshopspringboot.mapper.MemberAddressMapper;
+import com.cy.cyshopspringboot.service.ICheckoutService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,11 +18,16 @@ import java.util.List;
  * @place 工作地点
  * @remarks TODO
  */
-public class CheckoutServiceImpl implements CheckoutService {
+@Service
+public class CheckoutServiceImpl implements ICheckoutService {
+
+    @Autowired
+    private MemberAddressMapper memberAddressMapper;
 
     @Override
     public List<MemberAddress> findAderessByMemberId(String id) {
-        return null;
+        List<MemberAddress> memberAddresses = memberAddressMapper.findAllByMemberId(id);
+        return memberAddresses;
     }
 
     @Override
