@@ -83,14 +83,14 @@
 												 src="img/demo/shop/product/B8.jpg">
 											</a>
 										</td>
-										<td class="text-left"><a href="product.html">爱马仕女包（黄）</a>
+										<td class="text-left"><a href="product.html" th:text="${order.goodsName}"></a>
 										</td>
-										<td class="text-center">#214521</td>
-										<td class="text-center">1</td>
-										<td class="text-center" th:text="${order.status}">已发货</td>
-										<td class="text-center" th:text="*{creatTime}">2019年11月12日07:30:00</td>
-										<td class="text-right" th:text="*{payment}">228.00元</td>
-										<td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" th:href="@{order-information}" href="404.html"
+										<td class="text-center" th:text="${order.oid}"></td>
+										<td class="text-center"  th:text="${order.status}"></td>
+										<td class="text-center" th:text="${order.status}"></td>
+										<td class="text-center" th:text="${#dates.format(order.time, 'yyyy-MM-dd HH:mm:ss')}"></td>
+										<td class="text-right" th:text="${order.payment}"></td>
+										<td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" th:href="@{order-information(oid=${order.oid},sid=${order.sid})}" href="404.html"
 											 data-original-title="详情"><i class="fa fa-eye"></i></a>
 										</td>
 									</tr>
