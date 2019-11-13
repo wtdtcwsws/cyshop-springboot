@@ -4,6 +4,7 @@ import com.cy.cyshopspringboot.viewobject.Catalog1VO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -22,5 +23,12 @@ public class LoginController {
         return Mono.create(indexMono->indexMono.success("login"));
     }
 
+    @RequestMapping("/dologin")
+    public Mono<String> login() {
+
+
+
+        return Mono.create(indexMono->indexMono.success("login"));
+    }
 
 }
