@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>注册页面</title>
+
+		<link rel="stylesheet" th:href="@{/css/registerred/registerred.css}">
+		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstarp.css}">
+		<link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
+		<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>
+		<script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"/>
+		<script type="text/javascript" th:src="@{/js/registerred/jquery.min.js}"/>
+		<script type="text/javascript" th:src="@{/js/registerred/popper.min.js}"/>
+	</head>
+	<script type="text/javascript">
+		
+		function checkForm() {
+			var username = document.getElementById("username"); //获取username那个div
+			var feedback = document.getElementById("username-feedback");
+			//不能为空
+			if (username.value == "") {
+				feedback.innerHTML = "用户名不能空！"; //修改username-feedback div中的内容
+				username.classList.remove("is-valid"); //清除合法状态
+				username.classList.add("is-invalid"); //添加非法状态
+				return false; //onsubmit  return false阻止表单提交
+			}
+			//不能有特殊符号
+			var patrn = /[@#\$%\^&\*]+/g; //正则表达式
+			if (patrn.exec(username.value)) {
+				feedback.innerHTML = "用户名不能存在特殊符号！";
+				username.classList.remove("is-valid");
+				username.classList.add("is-invalid");
+				return false;
+			}
+			
+			//长度设定
+			var name = $('#user').val();
+			if(name.length<6 || name.length>18 ){
+				feedback.innerHTML = "用户名长度必须为6-18位"; //修改username-feedback div中的内容
+				username.classList.remove("is-valid"); //清除合法状态
+				username.classList.add("is-invalid"); //添加非法状态
+				return false; //onsubmit  return false阻止表单提交
+			}
+
+			//清除错误提示，改成成功提示
+			username.classList.remove("is-invalid");
+			username.classList.add("is-valid");
+			feedback.innerHTML = "";
+			return true;
+			
+			
+			var password1 = document.getElementById("password1"); 
+			var feedback_pass1 = document.getElementById("password1-feedback");
+			
+			//不能为空
+			if (passwrd1.value == "") {
+				feedback_pass1.innerHTML = "密码不能为空！"; 
+				password1.classList.remove("is-valid"); 
+				password.classList.add("is-invalid"); 
+				return false; 
+			}
+			//不能有特殊符号
+			var patrn = /[@#\$%\^&\*]+/g; 
+			if (patrn.exec(password1.value)) {
+				feedback_pass1.innerHTML = "密码不能存在特殊符号！";
+				password1.classList.remove("is-valid");
+				password1.classList.add("is-invalid");
+				return false;
+			}
+			//清除错误提示，改成成功提示
+			password1.classList.remove("is-invalid");
+			password1.classList.add("is-valid");
+			feedback_pass1.innerHTML = "";
+			return true;
+		}
+	</script>
+	<body>
+		<!-- 总容器 -->
+		<div class="container alert alert-light total">
+			<!-- 注册容器 -->
+			<div class="container alert alert-primary  registered_box">
+				<!-- 内容器 -->
+				<div class="alert alert-light registered_box_in">
+					<form action="" method="" onsubmit="return checkForm()">
+						<!-- 设置账号标题 -->
+						<div class="row">
+							<span>
+								设置登录账号
+							</span>
+						</div>
+						<div class="row mb-3">
+							<div class="form-group">
+								<!-- <label for="exampleInputEmail1">Email address</label> -->
+								<input  type="email" class="form-control" name="username" id="username" aria-describedby="emailHelp"
+								 placeholder=" 设置登录账号">
+								<!--放错误反馈-->
+								<div class="invalid-feedback" id="username-feedback"></div>
+								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+							</div>
+						</div>
+						<!-- 设置密码标题 -->
+						<div class="row">
+							<span>
+								设置登录密码
+							</span>
+						</div>
+						<!-- 密码 -->
+						<div class="row mb-3">
+							<div class="form-group">
+								<!-- <label for="exampleInputPassword1">Password</label> -->
+								<input type="password" class="form-control" name="password1" id="password1" placeholder="设置登录密码">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="form-group">
+								<!-- <label for="exampleInputPassword1">Password</label> -->
+								<input type="password" class="form-control" name="password2" id="password2" placeholder="再次确认密码">
+							</div>
+						</div>
+						<!-- 提交按钮	 -->
+						<div class="row mt-4">
+							<div class="col-2 form-group">
+								<button id="loginButton" type="submit" class="btn btn-primary btn-block">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+
+			</div>
+		</div>
+	</body>
+</html>
