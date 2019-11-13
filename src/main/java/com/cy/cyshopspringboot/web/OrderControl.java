@@ -35,4 +35,17 @@ public class OrderControl {
         model.addAttribute("orders",orders);
         return Mono.create(orderListMono->orderListMono.success("order-history"));
     }
+
+    /**
+     * 查询返回订单列表
+     * @return
+     */
+    @RequestMapping("/order-information")
+    public Mono<String> orderInfo(Model model){
+        //联动了要加登录的用户id @RequestMapping("id") integer id
+        //测试用户id为5
+//        List<Order> orders = iOrderService.selectAllByMenId(5);
+//        model.addAttribute("orders",orders);
+        return Mono.create(orderListMono->orderListMono.success("order-information"));
+    }
 }

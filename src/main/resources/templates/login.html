@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" th:href="@{/css/login/login.css}">
+		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstarp.css}">
+		<link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
+
+		<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>
+		<script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"/>
+		<script type="text/javascript" th:src="@{/js/login/jquery.min.js}"/>
+		<script type="text/javascript" th:src="@{/js/login/popper.min.js}"/>
+
+
+
+	</head>
+	<script>
+	$(function(){
+	   $("#loginButton").click(function(){
+		   var name = $('#user').val();
+		   var pass = $('password').val();
+		   if(name == ""|| pass == ""){
+			   // $("#user").removeClass("is-invalid");
+			   // $("#password").removeClass("is-invalid");
+			   $("#user").addClass("is-invalid");
+			   $("#password").addleClass("is-invalid");
+		   }
+		   // else{
+			  //  $("#user").toggleClass("is-valid");
+			  //  $("#password").toggleClass("is-valid");
+		   // }
+		   // $("#user").removeClass("is-invalid");
+		   // $("#password").removeClass("is-invalid");
+		   
+		 //   var pssword = new Array;
+		 //   if (pssword.length<6) {
+		 //   	alert("密码长度必须>6");
+			// $("#password").toggleClass("is-invalid");
+		 //   }
+	    
+	
+	   });
+	   
+	});
+	
+	// $(function(){
+	 
+	//    $("#form").submit(function(){
+	//       alert("提交账号密码");
+	//    });
+	// });
+	
+	   
+	</script>
+	<body>
+		<!-- 总容器 -->
+		<div class="total alert  alert-light " >
+			
+			<!-- 登录框 -->
+			<div class="container alert alert-primary  login_box"  >
+				<!-- 内框 -->
+				<div class="alert alert-light login_box_in">
+					<form action="" method="">
+						<!-- 账户登录 -->
+						<div class="row">
+							<h5>账户登录</h5>
+							<span>
+								
+							</span>
+						</div>
+						<!-- 账号输入 -->
+						<div class="row mb-3">
+							<div class="form-group login_input col-8 ">
+							    <!-- <label for="exampleInputEmail1">Email address</label> -->
+							    <input  type="email" class="form-control" id="user" aria-describedby="emailHelp" placeholder="输入账号">
+							     <div class="invalid-feedback">
+							            账号错误！
+							     </div>
+								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+							  </div>
+						</div>
+						<!-- 密码输入 -->
+						<div class="row mb-3">
+							
+							<div class="form-group login_input col-8 col-auto">
+							    <!-- <label for="exampleInputPassword1">Password</label> -->
+							    <input  type="password" class="form-control " id="password" placeholder="输入密码" >
+							  </div>
+							  <div class="invalid-feedback">
+							         密码错误！
+							  </div>
+						</div>
+						
+						<!-- 登录按钮 -->
+						<div class="row mt-4">
+							<div class="col-12 form-group">
+								<button id="loginButton" type="submit" class="btn btn-primary btn-block">登录</button>
+							</div>
+						</div>
+						<!-- 忘记密码和注册 -->
+						<div class="pull-right mt-1">
+							<span class="">
+								<a href="">免费注册</a>
+							</span>
+						</div>
+					</form>
+					
+					
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>
