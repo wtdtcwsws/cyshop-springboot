@@ -12,18 +12,18 @@
 	// Cart add remove functions
 	var cart = {
 		'add': function(product_id, quantity) {
-			addProductNotice('Product added to Cart', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="product.html">product</a> added to <a href="cart.html">shopping cart</a>!</h3>', 'success');
+			addProductNotice('Product added to Cart', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="goods.html">product</a> added to <a href="cart.html">shopping cart</a>!</h3>', 'success');
 		}
 	}
 
 	var wishlist = {
 		'add': function(product_id) {
-			addProductNotice('Product added to Wishlist', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>You must <a href="login.html">login</a>  to save <a href="product.html">Apple Cinema 30"</a> to your <a href="wishlist.html">wish list</a>!</h3>', 'success');
+			addProductNotice('Product added to Wishlist', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>You must <a href="login.html">login</a>  to save <a href="goods.html">Apple Cinema 30"</a> to your <a href="wishlist.html">wish list</a>!</h3>', 'success');
 		}
 	}
 	var compare = {
 		'add': function(product_id) {
-			addProductNotice('Product added to compare', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>Success: You have added <a href="product.html">Apple Cinema 30"</a> to your <a href="compare.html">product comparison</a>!</h3>', 'success');
+			addProductNotice('Product added to compare', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>Success: You have added <a href="goods.html">Apple Cinema 30"</a> to your <a href="compare.html">product comparison</a>!</h3>', 'success');
 		}
 	}
 

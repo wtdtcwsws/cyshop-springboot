@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>我的购物车-雏鹰商城</title>
+    <meta charset="utf-8">
+    <meta name="keywords"
+          content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business"/>
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="css/themecss/lib.css" rel="stylesheet">
+    <link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
+    <link href="css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="css/themecss/so-categories.css" rel="stylesheet">
+    <link href="css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="css/footer1.css" rel="stylesheet">
+    <link href="css/header1.css" rel="stylesheet">
+    <link href="css/checkout.css" rel="stylesheet">
+    <link id="color_scheme" href="css/theme.css" rel="stylesheet">
+
+    <!--个人css-->
+    <link rel="stylesheet" href="css/cart/cart.css">
+
+
+</head>
+
+<body class="res layout-subpage">
+<div id="wrapper" class="wrapper-full ">
+    <!--头部引入-->
+    <th:block th:include="include :: header" />
+    <!--页面内容开始-->
+    <div class="main-container container">
+        <!--页面导航-->
+        <ul class="header-main ">
+            <li class="home"><a href="#">主页 </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li>购物车</li>
+        </ul>
+        <!--购物车内容-->
+        <div class="row">
+            <!--购物车内商品展示以及商品操作-->
+            <div id="content" class="col-sm-12">
+                <h2 class="title">购物车</h2>
+                <div class="table-responsive form-group">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="text-center">
+                                <div id="td-check-1" class="form-group form-check">
+                                    <input id="CheckBox1" type="checkbox" class="form-check-input">
+                                    <label id="td-label-1" class="form-check-label" for="CheckBox1">全选</label>
+                                </div>
+                            </td>
+                            <td class="text-center">商品信息</td>
+                            <td class="text-center">单价</td>
+                            <td class="text-center">数量</td>
+                            <td class="text-center">小计</td>
+                            <td class="text-center">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <!--全选的单选-->
+                            <td class="text-center">
+                                <input id="CheckBox2" type="checkbox" class="form-check-input">
+                            </td>
+
+                            <!--商品信息-->
+                            <td class="text-left" width="300px">
+                                <!--商品图片-->
+                                <a href="product.html" id="tbody-tr-td-a">
+                                    <img width="70px" src="img/demo/shop/product/E3.jpg" alt="Aspire Ultrabook Laptop"
+                                         title="Aspire Ultrabook Laptop" class="img-thumbnail"/>
+                                </a>
+                                <!--商品规格信息-->
+                                <div id="tbody-tr-td-div">
+                                    <span id="tbody-tr-td-div-span">雏鹰精选</span>
+                                    <a href="product.html">苹果ipone13</a>
+                                    <br>
+                                    <a href="product.html">内存1：28G，颜色：太空银</a>
+                                </div>
+                            </td>
+
+                            <!--商品单价-->
+                            <td class="text-center" id="tbody-tr-td-1">￥100</td>
+
+                            <!--商品数量-->
+                            <td class="text-center" width="200px" id="tbody-tr-td-3">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-danger" data-js="jian"
+                                            onclick="jianshuliang(this)"><i class="fa fa-minus"></i></button>
+                                    <div class="btn-group disabled" role="group">
+                                        <input type="text" class="btn btn-default" value="1" style="width: 70px;"
+                                               data-js="shuliang">
+                                    </div>
+                                    <button type="button" class="btn btn-info" data-js="jia"
+                                            onclick="jiashuliang(this)"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </td>
+
+                            <!--商品小计-->
+                            <td class="text-center" id="tbody-tr-td-2">￥120.00</td>
+
+                            <!--商品操作-->
+                            <td class="text-center" id="tbody-tr-td-4">
+                                <div class="input-group btn-block">
+                                    <button type="submit" data-toggle="tooltip" title="加入关注" class="btn btn-primary"><i
+                                            class="fa fa-clone"></i></button>
+                                    <button type="button" title="删除" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#shanchuModal" data-js="shanchu" data-jss="${cartDomains.id}">
+                                        <i class="fa fa-times-circle"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--商品合计小表格-->
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>商品总数量：</strong>
+                                </td>
+                                <td class="text-right">2</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>商品折扣：</strong>
+                                </td>
+                                <td class="text-right">0.7</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>商品总价：</strong>
+                                </td>
+                                <td class="text-right">￥1000</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>商品折扣后总价：</strong>
+                                </td>
+                                <td class="text-right">￥700</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <div class="pull-left"><a href="index.html" class="btn btn-primary">返回主页</a></div>
+                    <div class="pull-right"><a th:href="@{/checkout}" class="btn btn-primary">结算</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--底部引入-->
+<th:block th:include="include :: footer" />
+
+<!-- ============================系统js引入=========================================== -->
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootstrapmb.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="js/themejs/libs.js"></script>
+<script type="text/javascript" src="js/unveil/jquery.unveil.js"></script>
+<script type="text/javascript" src="js/countdown/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+<script type="text/javascript" src="js/datetimepicker/moment.js"></script>
+<script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- ============================模板js引入=========================================== -->
+<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="js/themejs/addtocart.js"></script>
+<script type="text/javascript" src="js/themejs/application.js"></script>
+
+<!-- ============================个人js引入=========================================== -->
+
+
+</body>
+</html>

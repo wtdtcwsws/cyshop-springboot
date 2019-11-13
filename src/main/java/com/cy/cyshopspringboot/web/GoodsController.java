@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -32,10 +33,10 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("/")
-    public String index(Model model) {
+    public Mono<String> index(Model model) {
         List<Catalog1VO> catalogS = iCatalogService.getCatalog();
         model.addAttribute("catalogs", catalogS);
-        return "index";
+        return Mono.create(indexMono->indexMono.success("index"));
     }
 
     /**
@@ -43,17 +44,25 @@ public class GoodsController {
      * @param id 三级分类id，可以通过三级分类id找到对应的商品列表
      * @return
      */
+//    @RequestMapping("/goods")
+//    public Mono<String> enterCatalog(@RequestParam(value = "id",required = false) String id,Model model) {
+//        List<Spu> spus = iGoodsService.getSpuByCatalog3Id(id);
+//        model.addAttribute("spus", spus);
+//        System.out.println(">>>>>>>>>>>>enterCatalog<<<<<<<<<<");
+//        return Mono.create(indexMono->indexMono.success("goods"));
+//    }
+
     @RequestMapping("/goods")
-    public String enterCatalog(@RequestParam(value = "id",required = false) String id,Model model) {
-        List<Spu> spus = iGoodsService.getSpuByCatalog3Id(id);
-        model.addAttribute("spus", spus);
-        System.out.println(">>>>>>>>>>>>enterCatalog<<<<<<<<<<");
-        return "goods";
+    public Mono<String> enterGoods() {
+
+        System.out.println(">>>>>>>>>>>>enterGoods<<<<<<<<<<");
+        return Mono.create(indexMono->indexMono.success("goods"));
     }
 
     @RequestMapping("/category")
-    public String enterCatalog() {
+    public Mono<String> enterCatalog() {
         System.out.println(">>>>>>>>>>>>enterCatalog2<<<<<<<<<<");
-        return "category";
+        return Mono.create(indexMono->indexMono.success("category"));
     }
+
 }
