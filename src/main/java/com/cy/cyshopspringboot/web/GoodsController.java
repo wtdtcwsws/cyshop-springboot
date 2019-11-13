@@ -1,6 +1,5 @@
 package com.cy.cyshopspringboot.web;
 
-import com.cy.cyshopspringboot.domain.Spu;
 import com.cy.cyshopspringboot.service.ICatalogService;
 import com.cy.cyshopspringboot.service.IGoodsService;
 import com.cy.cyshopspringboot.viewobject.Catalog1VO;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -55,13 +53,11 @@ public class GoodsController {
     @RequestMapping("/goods")
     public Mono<String> enterGoods() {
 
-        System.out.println(">>>>>>>>>>>>enterGoods<<<<<<<<<<");
         return Mono.create(indexMono->indexMono.success("goods"));
     }
 
     @RequestMapping("/category")
     public Mono<String> enterCatalog() {
-        System.out.println(">>>>>>>>>>>>enterCatalog2<<<<<<<<<<");
         return Mono.create(indexMono->indexMono.success("category"));
     }
 
