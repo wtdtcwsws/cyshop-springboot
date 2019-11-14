@@ -86,7 +86,7 @@
                                 <!--商品图片-->
                                 <a href="product.html" id="tbody-tr-td-a">
                                     <img width="70px" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop"
-                                         class="img-thumbnail" th:src="'img/demo/shop/product/' + ${cart.img}"/>
+                                         class="img-thumbnail" th:src="'img/sku-img/' + ${cart.img}"/>
                                 </a>
                                 <!--商品规格信息-->
                                 <div id="tbody-tr-td-div">
@@ -97,7 +97,7 @@
                                 </div>
                             </td>
                             <!--商品单价-->
-                            <td class="text-center" id="tbody-tr-td-1" th:text="'￥' + ${cart.price}">￥100</td>
+                            <td data-price="price" class="text-center" id="tbody-tr-td-1" th:text="'￥' + ${cart.price}">￥100</td>
                             <!--商品数量-->
                             <td class="text-center" width="200px" id="tbody-tr-td-3">
                                 <div class="btn-group" role="group">

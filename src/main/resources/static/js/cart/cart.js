@@ -1,4 +1,6 @@
 (function () {
+
+
 })();
 var color = "rgb(223,223,255)";
 var colors = "transparent";
@@ -103,7 +105,7 @@ function submits() {
             number: numberss
         },
         success: function (retult) {
-            console.log(retult)
+            window.location.href="/checkout";
         }
     })
 

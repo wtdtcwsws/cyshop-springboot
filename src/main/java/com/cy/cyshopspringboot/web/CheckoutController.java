@@ -40,7 +40,6 @@ public class CheckoutController {
 //        memberAddress.setPhone("13112345678");
 //        memberAddressess.add(memberAddress);
 //        model.addAttribute("memberAddressess",memberAddressess);
-        System.out.println("罗海");
         List<MemberAddress> memberAddresses = iCheckoutService.findAderessByMemberId("6");
         model.addAttribute("memberAddresses",memberAddresses);
         return Mono.create(checkoutMono->checkoutMono.success("checkout"));

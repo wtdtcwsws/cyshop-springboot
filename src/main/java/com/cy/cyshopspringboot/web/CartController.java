@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -50,7 +51,7 @@ public class CartController {
     public Mono<String> cartNumber(@RequestParam(value = "skuId", required = false) String skuId,
                                    @RequestParam(value = "price", required = false) String price,
                                    @RequestParam(value = "number", required = false) String number,
-                                   Model model) throws IOException {
+                                   Model model, HttpServletResponse response) throws IOException {
 
         // 创建jackson对象，用来将jackson数据转化
         ObjectMapper objectMapper = new ObjectMapper();
@@ -88,8 +89,7 @@ public class CartController {
         model.addAttribute("cartMessage",cartMessages);
 
 
-
-         return Mono.create(indexMono -> indexMono.success("/checkout"));
+         return Mono.create(indexMono -> indexMono.success("true"));
     }
 
 
