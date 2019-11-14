@@ -19,4 +19,5 @@
   <select id="findAllByMemberId" parameterType="String" resultType="com.cy.cyshopspringboot.domain.MemberAddress">
         select * from `member_address` where `member_id` = #{member_id}
     </select>
+
 </mapper>

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MemberAddressMapper extends Mapper<MemberAddress> {
     List<MemberAddress> findAllByMemberId(String id);
+
 }

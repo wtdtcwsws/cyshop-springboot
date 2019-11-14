@@ -1,6 +1,7 @@
 package com.cy.cyshopspringboot.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "`order_item`")
 public class OrderItem {
@@ -27,7 +28,7 @@ public class OrderItem {
      * 商品数量
      */
     @Column(name = "`nums`")
-    private Integer nums;
+    private BigDecimal nums;
 
     /**
      * 获取订单项编号
@@ -88,7 +89,7 @@ public class OrderItem {
      *
      * @return nums - 商品数量
      */
-    public Integer getNums() {
+    public BigDecimal getNums() {
         return nums;
     }
 
@@ -97,7 +98,7 @@ public class OrderItem {
      *
      * @param nums 商品数量
      */
-    public void setNums(Integer nums) {
+    public void setNums(BigDecimal nums) {
         this.nums = nums;
     }
 }
