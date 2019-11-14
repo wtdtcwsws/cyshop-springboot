@@ -1,0 +1,99 @@
+#td-check-1{
+    margin-bottom: 0;
+}
+
+#td-label-1{
+    color: #555555;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+#CheckBox1{
+    margin-top: 0;
+    margin-right: 5px;
+}
+
+#CheckBox2{
+    margin-top: 30px;
+}
+
+#tbody-tr-td-1,#tbody-tr-td-2,#tbody-tr-td-3,#tbody-tr-td-4{
+    padding-top: 30px
+}
+
+#tbody-tr-td-a{
+    float: left;
+}
+
+#tbody-tr-td-div{
+    border: 1px solid #ddd;
+    margin-left: 80px;
+    width: 180px;
+    height: 70px;
+    padding: 8px
+}
+
+#tbody-tr-td-div-span{
+    padding: 2px;
+    background-color: red;
+    color: white;
+    display: inline-block;
+    margin-bottom: 6px
+}
+
+#span-1,#span-2{
+    color: red;
+}
+
+#form-div{
+width: 847.5px;
+margin-left: 0px;
+}
+
+#span-3,#span-4{
+    margin: 0;
+    font-size: 16px;
+}
+
+#button-1{
+    right: 10px;
+    padding: 0 5px 0 5px;
+}
+
+#button-2{
+    right: 10px;
+    padding: 0 4px 0 4px;
+}
+
+#button-1:hover,#button-2:hover{
+    color: red;
+    size: 35px;
+}
+
+#input-1{
+    width: 30px;
+}
+
+#textarea-1{
+    width: 500px;
+    height: 100px;
+}
+
+#span-5{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 600px;
+    color: #858585;
+}
+
+#a-1{
+    color: #1f5d5b;
+}
+
+#a-1:hover{
+    color: red;
+}
+
+#inpunt-1,#inpunt-2,#inpunt-3,#inpunt-4{
+    width: 400px;
+}
