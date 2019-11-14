@@ -1,5 +1,6 @@
 package com.cy.cyshopspringboot.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -40,25 +41,25 @@ public class Order {
      * 原价格
      */
     @Column(name = "`total_price`")
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
 
     /**
      * 折扣
      */
     @Column(name = "`discounts`")
-    private Integer discounts;
+    private BigDecimal discounts;
 
     /**
      * 邮费
      */
     @Column(name = "`post_price`")
-    private Integer postPrice;
+    private BigDecimal postPrice;
 
     /**
      * 支付价格
      */
     @Column(name = "`payment`")
-    private Integer payment;
+    private BigDecimal payment;
 
     /**
      * 支付方式编号
@@ -173,7 +174,7 @@ public class Order {
      *
      * @return total_price - 原价格
      */
-    public Integer getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
@@ -182,7 +183,7 @@ public class Order {
      *
      * @param totalPrice 原价格
      */
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -191,7 +192,7 @@ public class Order {
      *
      * @return discounts - 折扣
      */
-    public Integer getDiscounts() {
+    public BigDecimal getDiscounts() {
         return discounts;
     }
 
@@ -200,7 +201,7 @@ public class Order {
      *
      * @param discounts 折扣
      */
-    public void setDiscounts(Integer discounts) {
+    public void setDiscounts(BigDecimal discounts) {
         this.discounts = discounts;
     }
 
@@ -209,7 +210,7 @@ public class Order {
      *
      * @return post_price - 邮费
      */
-    public Integer getPostPrice() {
+    public BigDecimal getPostPrice() {
         return postPrice;
     }
 
@@ -218,7 +219,7 @@ public class Order {
      *
      * @param postPrice 邮费
      */
-    public void setPostPrice(Integer postPrice) {
+    public void setPostPrice(BigDecimal postPrice) {
         this.postPrice = postPrice;
     }
 
@@ -227,7 +228,7 @@ public class Order {
      *
      * @return payment - 支付价格
      */
-    public Integer getPayment() {
+    public BigDecimal getPayment() {
         return payment;
     }
 
@@ -236,7 +237,7 @@ public class Order {
      *
      * @param payment 支付价格
      */
-    public void setPayment(Integer payment) {
+    public void setPayment(BigDecimal payment) {
         this.payment = payment;
     }
 
