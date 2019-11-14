@@ -5,75 +5,14 @@
 		<title>注册页面</title>
 
 		<link rel="stylesheet" th:href="@{/css/registerred/registerred.css}">
-		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstarp.css}">
+		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.css}">
 		<link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
-		<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>
-		<script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"/>
-		<script type="text/javascript" th:src="@{/js/registerred/jquery.min.js}"/>
-		<script type="text/javascript" th:src="@{/js/registerred/popper.min.js}"/>
+		<!--<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>-->
+		<!--<script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"/>-->
+		<!--<script type="text/javascript" th:src="@{/js/registerred/jquery.min.js}"/>-->
+		<!--<script type="text/javascript" th:src="@{/js/registerred/popper.min.js}"/>-->
 	</head>
-	<script type="text/javascript">
-		
-		function checkForm() {
-			var username = document.getElementById("username"); //获取username那个div
-			var feedback = document.getElementById("username-feedback");
-			//不能为空
-			if (username.value == "") {
-				feedback.innerHTML = "用户名不能空！"; //修改username-feedback div中的内容
-				username.classList.remove("is-valid"); //清除合法状态
-				username.classList.add("is-invalid"); //添加非法状态
-				return false; //onsubmit  return false阻止表单提交
-			}
-			//不能有特殊符号
-			var patrn = /[@#\$%\^&\*]+/g; //正则表达式
-			if (patrn.exec(username.value)) {
-				feedback.innerHTML = "用户名不能存在特殊符号！";
-				username.classList.remove("is-valid");
-				username.classList.add("is-invalid");
-				return false;
-			}
-			
-			//长度设定
-			var name = $('#user').val();
-			if(name.length<6 || name.length>18 ){
-				feedback.innerHTML = "用户名长度必须为6-18位"; //修改username-feedback div中的内容
-				username.classList.remove("is-valid"); //清除合法状态
-				username.classList.add("is-invalid"); //添加非法状态
-				return false; //onsubmit  return false阻止表单提交
-			}
 
-			//清除错误提示，改成成功提示
-			username.classList.remove("is-invalid");
-			username.classList.add("is-valid");
-			feedback.innerHTML = "";
-			return true;
-			
-			
-			var password1 = document.getElementById("password1"); 
-			var feedback_pass1 = document.getElementById("password1-feedback");
-			
-			//不能为空
-			if (passwrd1.value == "") {
-				feedback_pass1.innerHTML = "密码不能为空！"; 
-				password1.classList.remove("is-valid"); 
-				password.classList.add("is-invalid"); 
-				return false; 
-			}
-			//不能有特殊符号
-			var patrn = /[@#\$%\^&\*]+/g; 
-			if (patrn.exec(password1.value)) {
-				feedback_pass1.innerHTML = "密码不能存在特殊符号！";
-				password1.classList.remove("is-valid");
-				password1.classList.add("is-invalid");
-				return false;
-			}
-			//清除错误提示，改成成功提示
-			password1.classList.remove("is-invalid");
-			password1.classList.add("is-valid");
-			feedback_pass1.innerHTML = "";
-			return true;
-		}
-	</script>
 	<body>
 		<!-- 总容器 -->
 		<div class="container alert alert-light total">
@@ -81,7 +20,8 @@
 			<div class="container alert alert-primary  registered_box">
 				<!-- 内容器 -->
 				<div class="alert alert-light registered_box_in">
-					<form action="" method="" onsubmit="return checkForm()">
+					<form id="" action="login" method=""  onsubmit="return checkForm()">
+						<!--onsubmit="return checkForm()"-->
 						<!-- 设置账号标题 -->
 						<div class="row">
 							<span>
@@ -91,10 +31,10 @@
 						<div class="row mb-3">
 							<div class="form-group">
 								<!-- <label for="exampleInputEmail1">Email address</label> -->
-								<input  type="email" class="form-control" name="username" id="username" aria-describedby="emailHelp"
+								<input  type="text" class="form-control" name="account" id="account" aria-describedby="emailHelp"
 								 placeholder=" 设置登录账号">
 								<!--放错误反馈-->
-								<div class="invalid-feedback" id="username-feedback"></div>
+								<div class="invalid-feedback" id="account-feedback"></div>
 								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 							</div>
 						</div>
@@ -108,19 +48,37 @@
 						<div class="row mb-3">
 							<div class="form-group">
 								<!-- <label for="exampleInputPassword1">Password</label> -->
-								<input type="password" class="form-control" name="password1" id="password1" placeholder="设置登录密码">
+								<input type="password" class="form-control" name="password" id="password" placeholder="设置登录密码">
 							</div>
 						</div>
 						<div class="row mb-3">
 							<div class="form-group">
 								<!-- <label for="exampleInputPassword1">Password</label> -->
-								<input type="password" class="form-control" name="password2" id="password2" placeholder="再次确认密码">
+								<input type="password" class="form-control" name="verifvPassword" id="verifvPassword" placeholder="再次确认密码">
+							</div>
+						</div>
+						<!-- 手机号 -->
+						<div class="row">
+							<span>
+								设置姓名和手机号
+							</span>
+						</div>
+						<div class="row mb-3">
+							<div class="form-group">
+								<!-- <label for="exampleInputPassword1">Password</label> -->
+								<input type="text" class="form-control" name="name" id="name" placeholder="您的姓名">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="form-group">
+								<!-- <label for="exampleInputPassword1">Password</label> -->
+								<input type="text" class="form-control" name="phone" id="phone" placeholder="设置手机号">
 							</div>
 						</div>
 						<!-- 提交按钮	 -->
 						<div class="row mt-4">
 							<div class="col-2 form-group">
-								<button id="loginButton" type="submit" class="btn btn-primary btn-block">提交</button>
+								<button id="registeredButton" name="registeredButton" type="submit" class="btn btn-primary btn-block">提交</button>
 							</div>
 						</div>
 					</form>
@@ -130,4 +88,127 @@
 			</div>
 		</div>
 	</body>
+	<script type="text/javascript">
+
+        // function checkForm() {
+        // 	var account = document.getElementById("account"); //获取username那个div
+        // 	var feedback = document.getElementById("account-feedback");
+        // 	//不能为空
+        // 	if (account.value == "") {
+        // 		feedback.innerHTML = "用户名不能空！"; //修改username-feedback div中的内容
+        // 		account.classList.remove("is-valid"); //清除合法状态
+        // 		account.classList.add("is-invalid"); //添加非法状态
+        // 		return false; //onsubmit  return false阻止表单提交
+        // 	}
+        // 	//不能有特殊符号
+        // 	var patrn = /[@#\$%\^&\*]+/g; //正则表达式
+        // 	if (patrn.exec(username.value)) {
+        // 		feedback.innerHTML = "用户名不能存在特殊符号！";
+        // 		account.classList.remove("is-valid");
+        // 		account.classList.add("is-invalid");
+        // 		return false;
+        // 	}
+        //
+        // 	//长度设定
+        // 	var name = $('#user').val();
+        // 	if(name.length<6 || name.length>18 ){
+        // 		feedback.innerHTML = "用户名长度必须为6-18位"; //修改username-feedback div中的内容
+        // 		account.classList.remove("is-valid"); //清除合法状态
+        // 		account.classList.add("is-invalid"); //添加非法状态
+        // 		return false; //onsubmit  return false阻止表单提交
+        // 	}
+        //
+        // 	//清除错误提示，改成成功提示
+        // 	account.classList.remove("is-invalid");
+        // 	account.classList.add("is-valid");
+        // 	feedback.innerHTML = "";
+        // 	return true;
+        //
+        //
+        // 	var password = document.getElementById("password1");
+        // 	var feedback_pass1 = document.getElementById("password1-feedback");
+        //
+        // 	//不能为空
+        // 	if (passwrd.value == "") {
+        // 		feedback_pass1.innerHTML = "密码不能为空！";
+        // 		password.classList.remove("is-valid");
+        // 		password.classList.add("is-invalid");
+        // 		return false;
+        // 	}
+        // 	//不能有特殊符号
+        // 	var patrn = /[@#\$%\^&\*]+/g;
+        // 	if (patrn.exec(password1.value)) {
+        // 		feedback_pass1.innerHTML = "密码不能存在特殊符号！";
+        // 		password1.classList.remove("is-valid");
+        // 		password1.classList.add("is-invalid");
+        // 		return false;
+        // 	}
+        // 	//清除错误提示，改成成功提示
+        // 	password.classList.remove("is-invalid");
+        // 	password.classList.add("is-valid");
+        // 	feedback_pass1.innerHTML = "";
+        // 	return true;
+        // };
+
+        $("#registeredButton").on('click',function () {
+            //验证动作
+            var accountVal = $.trim($('#account').val());
+            var password = $.trim($('#password').val());
+            var verifvPassword = $.trim($('#verifvPassword').val());
+            var name = $.trim($('#name').val);
+            var phone = $.trim($('#phone').val());
+            	var account = document.getElementById("account"); //获取那个div
+            var feedback = document.getElementById("account-feedback");
+
+            // 中文
+            var namePattern =  /^[\u4e00-\u9fa5]$/;
+            // 中文+下划线
+            var accountPattern = /^[\u4e00-\u9fa5_a-zA-Z0-9]$/;
+            // 字母+下划线+数字
+            var passwordPattern = /^[_a-zA-Z0-9]$/;
+            // 1开头，并且都是数字，一共11位
+            var phoneePattern = /^1\d{10}$/;
+
+            if (accountPattern.test(account) == false){
+                // bootstrap.alert("账号格式不对");
+                feedback.innerHTML = "账号格式不对！";
+                account.classList.remove("is-valid");
+                account.classList.add("is-invalid");
+                return false;
+            }else if (passwordPattern.test(password) == false) {
+                bootstrap.alert("密码格式不对");
+            }else if (namePattern.test(name) == false) {
+                bootstrap.alert("姓名格式不对");
+            }else if (phoneePattern.test(phone) == false) {
+                bootstrap.alert("手机号不正确");
+            }else if (verifvPassword == "") {
+                bootstrap.alert("密码不一致");
+            }else if (verifvPassword != password) {
+                bootstrap.alert("密码不一致");
+            }else if (account == ""){
+                feedback.innerHTML = "账号不能空！";
+                account.classList.remove("is-valid");
+                account.classList.add("is-invalid");
+                return false;
+			}
+            // else {
+            //     //满足条件后向服务器提交表单
+            // 	//给隐藏域赋值
+            //
+            // 	$.ajax({
+            // 		type:'post',
+            // 		url:'registered',
+            // 		dataType:'json',
+            // 		data:'',
+            // 		success: function (returnData) {
+            // 			bootbox.alert(returnData.success,function () {
+            // 				validateButtonClicked = true;
+            //             })
+            //         }
+            // 	});
+            //
+            // }
+
+        });
+	</script>
 </html>

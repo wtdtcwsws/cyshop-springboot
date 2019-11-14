@@ -19,7 +19,7 @@ a:hover{
 	text-decoration: none;
 }
 .total{
-	background-image: url(../img/009.png);
+	background-image: url(/image/009.png);
 	background-size: 100%;
 	z-index: 1;
 	width: 100%;

@@ -16,7 +16,7 @@
                         <div class="form-group currencies-block">
                             <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
                                 <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <span class="icon icon-credit "></span> USD <span class="fa fa-angle-down"></span>
+                                    <span class="icon icon-credit "></span> CN <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu btn-xs">
                                     <li> <a href="#">(€)&nbsp;Euro</a></li>
@@ -28,12 +28,12 @@
                         <div class="form-group languages-block ">
                             <form action="index.html" method="post" enctype="multipart/form-data" id="bt-language">
                                 <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <img src="img/demo/flags/gb.png" alt="English" title="English">
+                                    <img src="img/demo/flags/cn.jpg" alt="中文" title="中文">
                                     <span class="hidden-xs">中文</span>
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu" >
-                                    <li><a href="index.php"><img class="image_flag" src="img/demo/flags/gb.png" alt="English" title="English"> English </a></li>
+                                    <li><a th:href="@{/index}"><img class="image_flag" src="img/demo/flags/cn.jpg" alt="中文" title="中文"> 中文 </a></li>
                                     <li> <a href="html_width_RTL/index.php"> <img class="image_flag" src="img/demo/flags/lb.png" alt="Arabic" title="Arabic"> Arabic </a> </li>
                                 </ul>
                             </form>
@@ -42,9 +42,15 @@
                     <div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
                         <div class="tabBlock1" id="TabBlock-1">
                             <ul class="top-link list-inline">
-                                <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!"><span>欢迎用户</span></a></li>
-                                <li class="signin"><a th:href="@{/login}" class="top-link-checkout" title="Sign In"><span>登录</span></a></li>
-                                <li class="register"><a th:href="@{/register}" title="Register"><span>注册</span></a></li>
+                                <li class="wishlist hidden-xs"><a href="javaScript:;" id="wishlist-total"
+                                                                  class="top-link-wishlist"
+                                                                  title="请登录"><span th:text="${#lists.isEmpty(session.loginfo)?'请登录':session.loginfo.name}">请登录</span></a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a href="/order-history">我的订单</a></li>
+                                <li class="login" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/login" class="top-link-checkout"
+                                                                                                title="登录"><span>登录</span></a></li>
+                                <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
+                                                                                                   title="注册"><span>注册</span></a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/logout}">退出</a></li>
                             </ul>
                         </div>
                     </div>
@@ -85,7 +91,7 @@
                             <p><i class="fa fa-phone" aria-hidden="true"></i>	   Call Us: (888) 123456789</p>
                         </div>
                         <!--cart-->
-                        <div id="cart" class=" btn-group btn-shopping-cart">
+                        <div th:if="${not #lists.isEmpty(session.loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
                             <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                 <div class="shopcart">
                                     <span class="handle pull-left"></span>
