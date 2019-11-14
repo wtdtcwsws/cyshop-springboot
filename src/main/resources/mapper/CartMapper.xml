@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.cyshopspringboot.mapper.CartMapper">
+
+    <select id="selectCartMessageAll" parameterType="INTEGER" resultType="com.cy.cyshopspringboot.domain.CartMessage">
+
+        select m.id memberId,ml.discount memberDiscount,s.`name` skuName,s.price,ci.nums `number`,si.url img,ci.sku_id skuId,s.description from member m
+        inner join (shopping_cart_item ci,shopping_cart c,sku s,sku_img si,member_level ml)
+        on(m.id = c.member_id and c.id = ci.cart_id and ci.sku_id = s.id and s.id = si.sku_id and m.level_id = ml.id)
+        where m.id = #{memberId}
+
+    </select>
+</mapper>

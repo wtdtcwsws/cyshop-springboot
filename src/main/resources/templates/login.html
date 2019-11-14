@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title></title>
 		<link rel="stylesheet" th:href="@{/css/login/login.css}">
-		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstarp.css}">
+		<link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.css}">
 		<link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
 
 		<script type="text/javascript" th:src="@{/lib/jquery/jquery.js}"/>
@@ -16,16 +16,16 @@
 
 	</head>
 	<script>
-	$(function(){
-	   $("#loginButton").click(function(){
-		   var name = $('#user').val();
-		   var pass = $('password').val();
-		   if(name == ""|| pass == ""){
-			   // $("#user").removeClass("is-invalid");
-			   // $("#password").removeClass("is-invalid");
-			   $("#user").addClass("is-invalid");
-			   $("#password").addleClass("is-invalid");
-		   }
+	// $(function(){
+	//    $("#loginButton").click(function(){
+	// 	   var name = $('#user').val();
+	// 	   var pass = $('password').val();
+	// 	   if(name == ""|| pass == ""){
+	// 		   // $("#user").removeClass("is-invalid");
+	// 		   // $("#password").removeClass("is-invalid");
+	// 		   $("#user").addClass("is-invalid");
+	// 		   $("#password").addClass("is-invalid");
+	// 	   }
 		   // else{
 			  //  $("#user").toggleClass("is-valid");
 			  //  $("#password").toggleClass("is-valid");
@@ -40,17 +40,52 @@
 		 //   }
 	    
 	
-	   });
-	   
-	});
-	
+	//    });
+	//
+	// });
+	//
 	// $(function(){
 	 
 	//    $("#form").submit(function(){
 	//       alert("提交账号密码");
 	//    });
 	// });
-	
+
+    function checkForm() {
+        var account = document.getElementById("account"); //获取username那个div
+        var feedback = document.getElementById("account-feedback");
+        //不能为空
+        if (account.value == "") {
+            feedback.innerHTML = "用户名不能空！"; //修改username-feedback div中的内容
+            account.classList.remove("is-valid"); //清除合法状态
+            account.classList.add("is-invalid"); //添加非法状态
+            return false; //onsubmit  return false阻止表单提交
+        }
+        //不能有特殊符号
+        var patrn = /[@#\$%\^&\*]+/g; //正则表达式
+        if (patrn.exec(username.value)) {
+            feedback.innerHTML = "用户名不能存在特殊符号！";
+            account.classList.remove("is-valid");
+            account.classList.add("is-invalid");
+            return false;
+        }
+
+        //长度设定
+        // var name = $('#user').val();
+        // if(name.length<6 || name.length>18 ){
+        // 	feedback.innerHTML = "用户名长度必须为6-18位"; //修改username-feedback div中的内容
+        // 	account.classList.remove("is-valid"); //清除合法状态
+        // 	account.classList.add("is-invalid"); //添加非法状态
+        // 	return false; //onsubmit  return false阻止表单提交
+        // }
+
+        //清除错误提示，改成成功提示
+        account.classList.remove("is-invalid");
+        account.classList.add("is-valid");
+        feedback.innerHTML = "";
+        return true;
+    }
+
 	   
 	</script>
 	<body>
@@ -61,7 +96,7 @@
 			<div class="container alert alert-primary  login_box"  >
 				<!-- 内框 -->
 				<div class="alert alert-light login_box_in">
-					<form action="" method="">
+					<form action="goods" method="" onsubmit="return checkForm()">
 						<!-- 账户登录 -->
 						<div class="row">
 							<h5>账户登录</h5>
@@ -73,8 +108,8 @@
 						<div class="row mb-3">
 							<div class="form-group login_input col-8 ">
 							    <!-- <label for="exampleInputEmail1">Email address</label> -->
-							    <input  type="email" class="form-control" id="user" aria-describedby="emailHelp" placeholder="输入账号">
-							     <div class="invalid-feedback">
+							    <input  type="text" class="form-control" id="account"  placeholder="输入账号">
+							     <div class="invalid-feedback" id="account-feedback">
 							            账号错误！
 							     </div>
 								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
@@ -91,7 +126,7 @@
 							         密码错误！
 							  </div>
 						</div>
-						
+
 						<!-- 登录按钮 -->
 						<div class="row mt-4">
 							<div class="col-12 form-group">
@@ -101,7 +136,7 @@
 						<!-- 忘记密码和注册 -->
 						<div class="pull-right mt-1">
 							<span class="">
-								<a href="">免费注册</a>
+								<a href="register">免费注册</a>
 							</span>
 						</div>
 					</form>

@@ -142,7 +142,13 @@
 									<div class="product-label form-group">
 										<div class="stock">
 											<span>库存:</span> <span class="instock">充足</span>
-											<p>商品编号: 3721 -Vlk</p>
+											<p class="cy-style-btn-group">
+												<input type="button" value="存储128G 内存8G 太空灰" class="addToCart btn btn-default cy-style-btn"/>
+												<input type="button" value="存储128G 内存8G 天空蓝" class="addToCart btn btn-default cy-style-btn"/>
+												<input type="button" value="存储256G 内存12G 太空灰" class="addToCart btn btn-default cy-style-btn"/>
+												<input type="button" value="存储256G 内存12G 科技黑" class="addToCart btn btn-default cy-style-btn" />
+												<input type="button" value="存储256G 内存12G 皓月银" class="addToCart btn btn-default cy-style-btn"/>
+											</p>
 										</div>
 										<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
 											<span class="price-new" itemprop="price">2114.00</span>
@@ -830,6 +836,15 @@
 	<!-- //Main Container -->
 <!-- End Social widgets -->
 	</div>
-<th:block th:include="include :: footer"></th:block>
+	<th:block th:include="include :: footer"></th:block>
+
+	<style type="text/css">
+		.cy-style-btn{
+			margin-right: 5px;
+		}
+		.cy-style-btn-group{
+			line-height: 50px;word-spacing: normal;
+		}
+	</style>
 </body>
 </html>

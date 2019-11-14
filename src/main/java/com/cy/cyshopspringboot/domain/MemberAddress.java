@@ -220,4 +220,19 @@ public class MemberAddress {
     public void setDefualt(Integer defualt) {
         this.defualt = defualt;
     }
+
+    @Override
+    public String toString() {
+        return "MemberAddress{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", specificAddress='" + specificAddress + '\'' +
+                ", consigneeName='" + consigneeName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", defualt=" + defualt +
+                '}';
+    }
 }

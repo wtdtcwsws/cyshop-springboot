@@ -76,12 +76,19 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td style="width: 50%;" class="text-left"> <b>订单 ID:</b> #214521
+									<td style="width: 50%;" class="text-left"> <b>订单 ID:</b>
+										<span th:text="${order.oid}"></span>
 										<br>
-										<b>添加日期:</b> 20/06/2016</td>
-									<td style="width: 50%;" class="text-left"> <b>付款方式:</b> Cash On Delivery
+										<b>添加日期:</b>
+										<span th:text="${#dates.format(order.time, 'yyyy-MM-dd HH:mm:ss')}"></span>
+									</td>
+									<td style="width: 50%;" class="text-left">
+										<b>付款方式:</b>
+										<span th:text="${order.payway}"></span>
 										<br>
-										<b>配送方式:</b> 顺丰快递 </td>
+										<b>付款时间:</b>
+										<span th:text="${#dates.format(order.ptime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -94,17 +101,25 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="text-left">**
-										<br>四川 成都
-										<br>锦江区
-										<br>国际金融中心2单元
-										<br>2022****
+									<td class="text-left">
+										<b>收货人：</b><span th:text="${address.consigneeName}"></span>
+										<br>
+										<b>省：</b><span th:text="${address.province}"></span>
+										<br>
+										<b>市：</b><span th:text="${address.city}"></span>
+										<br>
+										<b>详细地址：</b><span th:text="${address.district}"></span>
+										<span th:text="${address.specificAddress}"></span>
 									</td>
-									<td class="text-left">**
-										<br>四川 成都
-										<br>锦江区
-										<br>国际金融中心2单元
-										<br>2022****
+									<td class="text-left">
+										<b>收货人：</b><span th:text="${address.consigneeName}"></span>
+										<br>
+										<b>省：</b><span th:text="${address.province}"></span>
+										<br>
+										<b>市：</b><span th:text="${address.city}"></span>
+										<br>
+										<b>详细地址：</b><span th:text="${address.district}"></span>
+										<span th:text="${address.specificAddress}"></span>
 									</td>
 								</tr>
 							</tbody>
@@ -123,11 +138,11 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td class="text-left">iPhone5 </td>
-										<td class="text-left">product 11</td>
-										<td class="text-right">1</td>
-										<td class="text-right">$123.20</td>
-										<td class="text-right">$123.20</td>
+										<td class="text-left" th:text="${order.goodsName}"></td>
+										<td class="text-left" th:text="${order.des}"></td>
+										<td class="text-right" th:text="${order.nums}"></td>
+										<td class="text-right" th:text="${order.price}"></td>
+										<td class="text-right" th:text="${order.price}"></td>
 										<td style="white-space: nowrap;" class="text-right">
 											<a class="btn btn-primary" title="" data-toggle="tooltip"
 											 href="#" data-original-title="再次购买"><i class="fa fa-shopping-cart"></i></a>
@@ -142,49 +157,49 @@
 										<td colspan="3"></td>
 										<td class="text-right"><b>运费</b>
 										</td>
-										<td class="text-right">$5.00</td>
+										<td class="text-right" th:text="${order.postPrice}+'￥'"></td>
 										<td></td>
 									</tr>
 									<tr>
 										<td colspan="3"></td>
-										<td class="text-right"><b>折扣 (20%)</b>
+										<td class="text-right"><b>折扣</b>
 										</td>
-										<td class="text-right">$21.20</td>
+										<td class="text-right" th:text="${#numbers.formatDecimal(order.discounts,1,2)}+'￥'"></td>
 										<td></td>
 									</tr>
 									<tr>
 										<td colspan="3"></td>
 										<td class="text-right"><b>总价</b>
 										</td>
-										<td class="text-right">$133.20</td>
+										<td class="text-right" th:text="${order.totle}+'￥'"></td>
 										<td></td>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
-						<h3>Order History</h3>
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<td class="text-left">Date Added</td>
-									<td class="text-left">Status</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="text-left">20/06/2016</td>
-									<td class="text-left">Processing</td>
-								</tr>
-								<tr>
-									<td class="text-left">21/06/2016</td>
-									<td class="text-left">Shipped</td>
-								</tr>
-								<tr>
-									<td class="text-left">24/06/2016</td>
-									<td class="text-left">Complete</td>
-								</tr>
-							</tbody>
-						</table>
+						<!--<h3>Order History</h3>-->
+						<!--<table class="table table-bordered table-hover">-->
+							<!--<thead>-->
+								<!--<tr>-->
+									<!--<td class="text-left">Date Added</td>-->
+									<!--<td class="text-left">Status</td>-->
+								<!--</tr>-->
+							<!--</thead>-->
+							<!--<tbody>-->
+								<!--<tr>-->
+									<!--<td class="text-left">20/06/2016</td>-->
+									<!--<td class="text-left">Processing</td>-->
+								<!--</tr>-->
+								<!--<tr>-->
+									<!--<td class="text-left">21/06/2016</td>-->
+									<!--<td class="text-left">Shipped</td>-->
+								<!--</tr>-->
+								<!--<tr>-->
+									<!--<td class="text-left">24/06/2016</td>-->
+									<!--<td class="text-left">Complete</td>-->
+								<!--</tr>-->
+							<!--</tbody>-->
+						<!--</table>-->
 						<div class="buttons clearfix">
 							<div class="pull-right"><a class="btn btn-primary" href="#">Continue</a>
 							</div>
@@ -194,34 +209,34 @@
 					<!--Middle Part End-->
 					<!--Right Part Start -->
 					<aside class="col-sm-3 hidden-xs" id="column-right">
-						<h2 class="subtitle">Account</h2>
+						<h2 class="subtitle">账户</h2>
 						<div class="list-group">
 							<ul class="list-item">
-								<li><a href="login.html">Login</a>
+								<li><a href="login.html">登录</a>
 								</li>
-								<li><a href="register.html">Register</a>
+								<li><a href="register.html">帐户</a>
 								</li>
-								<li><a href="#">Forgotten Password</a>
+								<li><a href="#">密码</a>
 								</li>
-								<li><a href="#">My Account</a>
+								<li><a href="#">我的账号</a>
 								</li>
-								<li><a href="#">Address Books</a>
+								<li><a href="#">我的地址</a>
 								</li>
-								<li><a href="wishlist.html">Wish List</a>
+								<li><a href="wishlist.html">愿望单</a>
 								</li>
-								<li><a href="#">Order History</a>
+								<li><a th:href="@{/order-history}">历史订单</a>
 								</li>
-								<li><a href="#">Downloads</a>
+								<li><a href="#">下载</a>
 								</li>
 								<li><a href="#">Reward Points</a>
 								</li>
-								<li><a href="#">Returns</a>
+								<li><a href="#">返回</a>
 								</li>
-								<li><a href="#">Transactions</a>
+								<li><a href="#">个人报告</a>
 								</li>
-								<li><a href="#">Newsletter</a>
+								<li><a href="#">新闻快讯</a>
 								</li>
-								<li><a href="#">Recurring payments</a>
+								<li><a href="#">分期信贷</a>
 								</li>
 							</ul>
 						</div>
@@ -231,36 +246,8 @@
 			</div>
 			<!-- //Main Container -->
 			<th:block th:include="include :: footer"></th:block>
-
 		</div>
-		<!-- Social widgets -->
-		<div class="footer-bottom-block ">
-			<div class=" container">
-				<div class="row">
-					<div class="footer-bottom-header">
-						<div class="col-xs-12 col-sm-12 col-md-5 download">
-							<h3>Download Our App</h3>
-							<a href=""><img src="img/demo/download/app.jpg" alt=""></a>
-							<a href=""><img src="img/demo/download/ggplay.jpg" alt=""></a>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-7 pay">
-							<ul>
-								<li><img src="img/demo/payment/visa.jpg" alt=""></li>
-								<li><img src="img/demo/payment/meastro.jpg" alt=""></li>
-								<li><img src="img/demo/payment/paypal.jpg" alt=""></li>
-								<li><img src="img/demo/payment/union.jpg" alt=""></li>
-								<li><img src="img/demo/payment/cirrus.jpg" alt=""></li>
-								<li><img src="img/demo/payment/ebay.jpg" alt=""></li>
-							</ul>
-						</div>
-					</div>
-					<div class="text-footer-bot">
-						<p>Destino - Premium Multipurpose HTML5/CSS3 Theme - Designed by <a href="#">SmartAddons.Com</a></p>
-					</div>
-					<div class="back-to-top"><i class="fa fa-angle-up"></i><span> Top </span></div>
-				</div>
-			</div>
-		</div> <!-- End Social widgets -->
+
 		<!-- Include Libs & Plugins
 	============================================ -->
 		<!-- Placed at the end of the document so the pages load faster -->
