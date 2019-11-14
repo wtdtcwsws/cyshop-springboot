@@ -45,6 +45,13 @@ public class GoodsController {
         System.out.println(member);
         return "index";
     }
+    @RequestMapping("/index")
+    public String index(Model model) {
+        List<Catalog1VO> catalogS = iCatalogService.getCatalog();
+        model.addAttribute("catalogs", catalogS);
+
+        return "index";
+    }
 
     /**
      *  选择三级分类进入商品列表

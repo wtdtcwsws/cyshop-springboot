@@ -42,9 +42,15 @@
                     <div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
                         <div class="tabBlock1" id="TabBlock-1">
                             <ul class="top-link list-inline">
-                                <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!"><span>欢迎用户</span></a></li>
-                                <li class="signin"><a th:href="@{/login}" class="top-link-checkout" title="Sign In"><span>登录</span></a></li>
-                                <li class="register"><a th:href="@{/register}" title="Register"><span>注册</span></a></li>
+                                <li class="wishlist hidden-xs"><a href="javaScript:;" id="wishlist-total"
+                                                                  class="top-link-wishlist"
+                                                                  title="请登录"><span th:text="${#lists.isEmpty(session.loginfo)?'请登录':session.loginfo.name}">请登录</span></a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a href="/order-history">我的订单</a></li>
+                                <li class="login" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/login" class="top-link-checkout"
+                                                                                                title="登录"><span>登录</span></a></li>
+                                <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
+                                                                                                   title="注册"><span>注册</span></a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
                             </ul>
                         </div>
                     </div>
@@ -85,7 +91,7 @@
                             <p><i class="fa fa-phone" aria-hidden="true"></i>	   Call Us: (888) 123456789</p>
                         </div>
                         <!--cart-->
-                        <div th:if="${not #lists.isEmpty(loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
+                        <div th:if="${not #lists.isEmpty(session.loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
                             <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                 <div class="shopcart">
                                     <span class="handle pull-left"></span>

@@ -96,7 +96,7 @@
                                                          title="登录"><span>登录</span></a></li>
                                     <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
                                                             title="注册"><span>注册</span></a></li>
-                                    <li ><a href="" th:text="${session.loginfo.name}"></a></li>
+                                    <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                             <div class="header-text hidden-xs">
                             </div>
                             <!--cart-->
-                            <div th:if="${not #lists.isEmpty(loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
+                            <div th:if="${not #lists.isEmpty(session.loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
                                 <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                     <div class="shopcart">
                                         <span class="handle pull-left"></span>
