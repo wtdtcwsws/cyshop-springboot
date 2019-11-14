@@ -142,8 +142,9 @@
 									<div class="product-label form-group">
 										<div class="stock">
 											<span>库存:</span> <span class="instock">充足</span>
-											<p class="cy-style-btn-group">
-												<input type="button" th:each="sku:${skus}" th:value="${sku.description}" class="addToCart btn btn-default cy-style-btn"/>
+											<p class="cy-style-btn-group" data-skuId="skuId" data-value="">
+												<input type="button" th:data-sku="${sku.id}" th:each="sku:${skus}" th:value="${sku.description}" class="addToCart btn btn-default cy-style-btn"/>
+
 											</p>
 										</div>
 										<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
@@ -157,7 +158,7 @@
 											<div class="option quantity">
 												<div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
 													<label>数量:  </label>
-													<input class="form-control" type="text" name="quantity" value="1">
+													<input class="form-control" type="text" name="quantity" id="nums" value="1">
 													<input type="hidden" name="product_id" value="50">
 													<span class="input-group-addon product_quantity_down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 													<span class="input-group-addon product_quantity_up"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
@@ -166,8 +167,9 @@
 											</div>
 											<div class="info-product-right">
 												<div class="cart">
-													<input type="button" data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车">
-												</div>
+													<input type="button" data-toggle="tooltip" id="addcart" title="" value="加入购物车" data-loading-text="Loading..."  class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车">
+
+                                                </div>
 												<div class="add-to-links wish_comp">
 													<ul class="blank list-inline">
 														<li class="wishlist">
@@ -842,5 +844,39 @@
 			line-height: 50px;word-spacing: normal;
 		}
 	</style>
+    <script type="text/javascript">
+        (function () {
+            $('#addcart').on('click',function () {
+                let id = $("[data-skuId='skuId']").attr('data-value');
+                let nums = $('#nums').val();
+                $.ajax({
+                    url:'/addCart',
+                    method:'post',
+                    data:{
+                        skuId:id,
+                        nums:nums
+
+                    }
+                });
+            })
+        })();
+    </script>
+    <script type="text/javascript">
+        (function () {
+            $("[data-sku]").on('click',function (e) {
+                let bt = $(e.target);
+                let skuid = bt.attr('data-sku');
+                // console.log(bt.attr('data-sku'));
+                $("[data-skuId='skuId']").attr('data-value',skuid);
+                let id = $("[data-skuId='skuId']").attr('data-value');
+
+
+
+            })
+
+
+
+        })();
+    </script>
 </body>
 </html>

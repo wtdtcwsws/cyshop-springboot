@@ -1,9 +1,6 @@
 package com.cy.cyshopspringboot.web;
 
-import com.cy.cyshopspringboot.domain.Catalog3;
-import com.cy.cyshopspringboot.domain.Member;
-import com.cy.cyshopspringboot.domain.Sku;
-import com.cy.cyshopspringboot.domain.Spu;
+import com.cy.cyshopspringboot.domain.*;
 import com.cy.cyshopspringboot.service.ICatalogService;
 import com.cy.cyshopspringboot.service.IGoodsService;
 import com.cy.cyshopspringboot.viewobject.Catalog1VO;
@@ -16,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -86,6 +85,27 @@ public class GoodsController {
         model.addAttribute("spus", spus);
         model.addAttribute("catalog3", catalog3);
         return Mono.create(indexMono->indexMono.success("category"));
+    }
+    @RequestMapping("/addCart")
+    public void addCart(@RequestParam(value = "skuId")String skuId,@RequestParam(value = "nums")String nums, HttpServletResponse response,HttpSession session) throws IOException {
+        Member member = (Member) session.getAttribute("loginfo");
+        Integer cartId = member.getId();
+        System.out.println(skuId);
+        System.out.println(nums);
+        System.out.println(cartId);
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setCartId(cartId);
+        shoppingCartItem.setNums(Integer.parseInt(nums));
+        shoppingCartItem.setSkuId(Integer.parseInt(skuId));
+
+        Integer row= iGoodsService.addCart(shoppingCartItem);
+        if (row == 1) {
+            System.out.println("success");
+            response.getWriter().write("success");
+        } else {
+            return;
+        }
+
     }
 
 }

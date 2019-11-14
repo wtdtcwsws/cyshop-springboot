@@ -1,5 +1,6 @@
 package com.cy.cyshopspringboot.service;
 
+import com.cy.cyshopspringboot.domain.ShoppingCartItem;
 import com.cy.cyshopspringboot.domain.Sku;
 import com.cy.cyshopspringboot.domain.Spu;
 
@@ -40,4 +41,11 @@ public interface IGoodsService {
      * @return
      */
     List<Sku> getSkuBySpuId(Integer id);
+
+    /**
+     * 添加至购物车
+     * @param shoppingCartItem
+     * @return
+     */
+    Integer addCart(ShoppingCartItem shoppingCartItem);
 }

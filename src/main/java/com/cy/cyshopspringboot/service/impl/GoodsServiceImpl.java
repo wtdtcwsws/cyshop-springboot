@@ -1,7 +1,9 @@
 package com.cy.cyshopspringboot.service.impl;
 
+import com.cy.cyshopspringboot.domain.ShoppingCartItem;
 import com.cy.cyshopspringboot.domain.Sku;
 import com.cy.cyshopspringboot.domain.Spu;
+import com.cy.cyshopspringboot.mapper.ShoppingCartItemMapper;
 import com.cy.cyshopspringboot.mapper.SkuMapper;
 import com.cy.cyshopspringboot.mapper.SpuMapper;
 import com.cy.cyshopspringboot.service.IGoodsService;
@@ -23,6 +25,8 @@ public class GoodsServiceImpl implements IGoodsService {
     private SpuMapper spuMapper;
     @Autowired
     private SkuMapper skuMapper;
+    @Autowired
+    private ShoppingCartItemMapper shoppingCartItemMapper;
     @Override
     public List<Spu> getSpuByCatalog3Id(String catalog3Id) {
         Spu spu = new Spu();
@@ -47,5 +51,11 @@ public class GoodsServiceImpl implements IGoodsService {
         Sku sku = new Sku();
         sku.setSpuId(id);
         return skuMapper.select(sku);
+    }
+
+    @Override
+    public Integer addCart(ShoppingCartItem shoppingCartItem) {
+
+        return shoppingCartItemMapper.insert(shoppingCartItem);
     }
 }
