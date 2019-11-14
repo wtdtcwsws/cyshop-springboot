@@ -50,7 +50,7 @@
                                                                                                 title="登录"><span>登录</span></a></li>
                                 <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
                                                                                                    title="注册"><span>注册</span></a></li>
-                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/logout}">退出</a></li>
                             </ul>
                         </div>
                     </div>

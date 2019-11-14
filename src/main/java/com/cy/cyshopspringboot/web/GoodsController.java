@@ -39,18 +39,18 @@ public class GoodsController {
     public String index(Model model,HttpSession session) {
         List<Catalog1VO> catalogS = iCatalogService.getCatalog();
         model.addAttribute("catalogs", catalogS);
-        Member member = new Member();
-        member.setName("我是顾客");
-        session.setAttribute("loginfo", member);
-        System.out.println(member);
+//        Member member = new Member();
+//        member.setName("我是顾客");
+//        session.setAttribute("loginfo", member);
+//        System.out.println(member);
         return "index";
     }
-    @RequestMapping("/index")
-    public String index(Model model) {
+    @RequestMapping("/logout")
+    public String logout(Model model,HttpSession session) {
         List<Catalog1VO> catalogS = iCatalogService.getCatalog();
         model.addAttribute("catalogs", catalogS);
-
-        return "index";
+        session.removeAttribute("loginfo");
+        return "redirect:/index.html";
     }
 
     /**

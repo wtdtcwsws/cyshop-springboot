@@ -96,7 +96,7 @@
 			<div class="container alert alert-primary  login_box" >
 				<!-- 内框 -->
 				<div class="alert alert-light login_box_in">
-					<form action="goods" method="" onsubmit="return checkForm()">
+					<form action="/dologin" method="post" onsubmit="return checkForm()">
 						<!-- 账户登录 -->
 						<div class="row">
 							<h5>账户登录</h5>
@@ -108,7 +108,7 @@
 						<div class="row mb-3">
 							<div class="form-group login_input col-8 ">
 							    <!-- <label for="exampleInputEmail1">Email address</label> -->
-							    <input  type="text" class="form-control" id="account"  placeholder="输入账号">
+							    <input  type="text" class="form-control" id="account" name="account"  placeholder="输入账号">
 							     <div class="invalid-feedback" id="account-feedback">
 							            账号错误！
 							     </div>
@@ -120,7 +120,7 @@
 							
 							<div class="form-group login_input col-8 col-auto">
 							    <!-- <label for="exampleInputPassword1">Password</label> -->
-							    <input  type="password" class="form-control " id="password" placeholder="输入密码" >
+							    <input  type="password" class="form-control " id="password" name="password"  placeholder="输入密码" >
 							  </div>
 							  <div class="invalid-feedback">
 							         密码错误！
