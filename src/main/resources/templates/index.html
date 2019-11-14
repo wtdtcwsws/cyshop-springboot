@@ -61,7 +61,7 @@
                             <div class="form-group currencies-block">
                                 <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
                                     <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        <span class="icon icon-credit "></span> USD <span
+                                        <span class="icon icon-credit "></span> CN <span
                                             class="fa fa-caret-down"></span>
                                     </a>
                                     <ul class="dropdown-menu btn-xs">
@@ -72,21 +72,15 @@
                                 </form>
                             </div>
                             <div class="form-group languages-block ">
-                                <form action="index.html" method="post" enctype="multipart/form-data"
-                                      id="bt-language">
+                                <form action="/index" method="post" enctype="multipart/form-data" id="bt-language">
                                     <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        <img src="img/demo/flags/gb.png" alt="English" title="English">
-                                        <span class="hidden-xs">English</span>
-                                        <span class="fa fa-caret-down"></span>
+                                        <img src="img/demo/flags/cn.jpg" alt="中文" title="English">
+                                        <span class="hidden-xs">中文</span>
+                                        <span class="fa fa-angle-down"></span>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index.html"><img class="image_flag" src="img/demo/flags/gb.png"
-                                                                      alt="English" title="English"> English </a></li>
-                                        <li><a href="html_width_RTL/home2.html"> <img class="image_flag"
-                                                                                      src="img/demo/flags/lb.png"
-                                                                                      alt="Arabic" title="Arabic">
-                                            Arabic
-                                        </a></li>
+                                    <ul class="dropdown-menu" >
+                                        <li><a th:href="@{/index}"><img class="image_flag" src="img/demo/flags/cn.jpg" alt="中文" title="中文"> 中文 </a></li>
+                                        <li> <a href="html_width_RTL/index.php"> <img class="image_flag" src="img/demo/flags/lb.png" alt="Arabic" title="Arabic"> Arabic </a> </li>
                                     </ul>
                                 </form>
                             </div>
@@ -94,14 +88,15 @@
                         <div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
                             <div class="tabBlock" id="TabBlock-1">
                                 <ul class="top-link list-inline">
-                                    <li class="wishlist hidden-xs"><a href="wishlist.html" id="wishlist-total"
+                                    <li class="wishlist hidden-xs"><a href="javaScript:;" id="wishlist-total"
                                                                       class="top-link-wishlist"
-                                                                      title="Welcome Customer!"><span>欢迎进入
-                                                </span></a></li>
-                                    <li class="login"><a href="login.html" class="top-link-checkout"
-                                                         title="Sign In"><span>登录</span></a></li>
-                                    <li class="register"><a href="register.html"
-                                                            title="Register"><span>注册</span></a></li>
+                                                                      title="请登录"><span th:text="${#lists.isEmpty(session.loginfo)?'请登录':session.loginfo.name}">请登录</span></a></li>
+                                    <li th:if="${not #lists.isEmpty(session.loginfo)}"><a href="/order-history">我的订单</a></li>
+                                    <li class="login" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/login" class="top-link-checkout"
+                                                         title="登录"><span>登录</span></a></li>
+                                    <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
+                                                            title="注册"><span>注册</span></a></li>
+                                    <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -142,55 +137,47 @@
                             <div class="header-text hidden-xs">
                             </div>
                             <!--cart-->
-                            <div id="cart" class=" btn-group btn-shopping-cart">
-                                <a data-loading-text="Loading..." class="top_cart dropdown-toggle"
-                                   data-toggle="dropdown">
+                            <div th:if="${not #lists.isEmpty(session.loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">
+                                <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                     <div class="shopcart">
                                         <span class="handle pull-left"></span>
-                                        <span class="number-shopping-cart">0</span>
-                                        <span class="title hidden-xs">我的购物车</span>
-                                        <p class="text-shopping-cart cart-total-full hidden-xs"> ￥0.00 </p>
+                                        <span class="number-shopping-cart">2</span>
+                                        <span class="title">购物车</span>
+                                        <p class="text-shopping-cart cart-total-full"> 0.00 </p>
                                     </div>
                                 </a>
 
-                                <ul class="tab-content content dropdown-menu pull-right shoppingcart-box"
-                                    role="menu">
+                                <ul class="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu">
 
                                     <li>
                                         <table class="table table-striped">
                                             <tbody>
                                             <tr>
                                                 <td class="text-center" style="width:70px">
-                                                    <a href="product.html"> <img
-                                                            src="img/demo/shop/product/35.jpg"
-                                                            style="width:70px" alt="Filet Mign"
-                                                            title="Filet Mign" class="preview"> </a>
+                                                    <a href="goods.html"> <img src="img/demo/shop/product/35.jpg" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview"> </a>
                                                 </td>
-                                                <td class="text-left"><a class="cart_product_name"
-                                                                         href="product.html">Filet Mign</a></td>
-                                                <td class="text-center"> x1</td>
-                                                <td class="text-center"> $1,202.00</td>
-
+                                                <td class="text-left"> <a class="cart_product_name" href="goods.html">吸尘器</a> </td>
+                                                <td class="text-center"> x1 </td>
+                                                <td class="text-center"> 1,202.00 </td>
                                                 <td class="text-right">
-                                                    <a onclick="cart.remove('2');"
-                                                       class="fa fa-times fa-delete"></a>
+                                                    <a href="goods.html" class="fa fa-edit"></a>
+                                                </td>
+                                                <td class="text-right">
+                                                    <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center" style="width:70px">
-                                                    <a href="product.html"> <img
-                                                            src="img/demo/shop/product/141.jpg"
-                                                            style="width:70px" alt="Canon EOS 5D"
-                                                            title="Canon EOS 5D" class="preview"> </a>
+                                                    <a href="goods.html"> <img src="img/demo/shop/product/141.jpg" style="width:70px" alt="Canon EOS 5D" title="Canon EOS 5D" class="preview"> </a>
                                                 </td>
-                                                <td class="text-left"><a class="cart_product_name"
-                                                                         href="product.html">Canon EOS 5D</a></td>
-                                                <td class="text-center"> x1</td>
-                                                <td class="text-center"> $60.00</td>
-
+                                                <td class="text-left"> <a class="cart_product_name" href="goods.html">佳能 EOS 5D</a> </td>
+                                                <td class="text-center"> x1 </td>
+                                                <td class="text-center"> 3660.00 </td>
                                                 <td class="text-right">
-                                                    <a onclick="cart.remove('1');"
-                                                       class="fa fa-times fa-delete"></a>
+                                                    <a href="goods.html" class="fa fa-edit"></a>
+                                                </td>
+                                                <td class="text-right">
+                                                    <a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -201,33 +188,24 @@
                                             <table class="table table-bordered">
                                                 <tbody>
                                                 <tr>
-                                                    <td class="text-left"><strong>Sub-Total</strong>
+                                                    <td class="text-left"><strong>原总价</strong>
                                                     </td>
-                                                    <td class="text-right">$1,060.00</td>
+                                                    <td class="text-right">4,060.00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left"><strong>折扣 (20%)</strong>
+                                                    </td>
+                                                    <td class="text-right">200.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><strong>Eco Tax (-2.00)</strong>
+                                                    <td class="text-left"><strong>总计</strong>
                                                     </td>
-                                                    <td class="text-right">$2.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><strong>VAT (20%)</strong>
-                                                    </td>
-                                                    <td class="text-right">$200.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><strong>Total</strong>
-                                                    </td>
-                                                    <td class="text-right">$1,262.00</td>
+                                                    <td class="text-right">3806.00</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                            <p class="text-right"><a class="btn view-cart" href="cart.html"><i
-                                                    class="fa fa-shopping-cart"></i>View
-                                                Cart</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart"
-                                                                              href="checkout.html"><i
-                                                    class="fa fa-share"></i>Checkout</a>
-                                            </p>
+                                            <p class="text-right"> <a class="btn view-cart" th:href="@{/cart}"><i class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="/checkout"><i class="fa fa-share"></i>结算</a> </p>
                                         </div>
                                     </li>
                                 </ul>

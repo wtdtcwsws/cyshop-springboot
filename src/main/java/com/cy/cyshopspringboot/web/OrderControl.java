@@ -47,10 +47,6 @@ public class OrderControl {
     //联动了要加登录的用户id @RequestMapping("id") integer id
         //测试用户id为5
         List<OrderInfoVO> list = iOrderInfoService.sellectAllInfo(5);
-        for (OrderInfoVO vo:list
-        ) {
-            System.out.println(vo.toString());
-        }
         model.addAttribute("orders",list);
         return Mono.create(orderListMono->orderListMono.success("order-history"));
     }
@@ -65,17 +61,17 @@ public class OrderControl {
 
 
         OrderInfoVO orderInfoVO = iOrderInfoService.selectByOrderId(oid,sid);
-        System.out.println(orderInfoVO.toString());
+
 
         BigDecimal discount = orderInfoVO.getDiscounts().multiply(orderInfoVO.getPrice());
 
         orderInfoVO.setDiscounts(discount);
 
         Member member = iMemberService.selectById(orderInfoVO.getMid());
-        System.out.println(member.toString());
+
 
         MemberAddress address = iMemberAddressService.selectById(orderInfoVO.getAddress());
-        System.out.println(address.toString());
+
 
         model.addAttribute("order",orderInfoVO);
         model.addAttribute("member",member);
