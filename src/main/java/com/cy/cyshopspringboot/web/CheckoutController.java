@@ -42,7 +42,7 @@ public class CheckoutController {
      * @param session
      * @return
      */
-    @RequestMapping("/checkout")
+//    @RequestMapping("/checkout")
     public Mono<String> checkout(
             @RequestParam(value = "id",required = false) String id,
             @RequestParam(value = "shuId",required = false) String skuId,
@@ -91,7 +91,7 @@ public class CheckoutController {
         return Mono.create(checkoutMono->checkoutMono.success("checkout"));
     }
 
-    @RequestMapping("/checkout2")
+    @RequestMapping("/checkout")
     public Mono<String> checkout(
             HttpSession session
     ){
