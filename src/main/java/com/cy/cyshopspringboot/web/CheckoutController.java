@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,22 +43,25 @@ public class CheckoutController {
             HttpSession session
     ){
 
-        System.out.println("----------------到时候删除------------------");
-        List<CartVO> cartVOs = new ArrayList<>();
-        for (int i=1;i<3;i++){
-            CartVO cartVO = new CartVO();
-            cartVO.setSkuId(6);
-            cartVO.setNumber(2);
-            cartVO.setPrice(new BigDecimal("5789.00"));
-            cartVOs.add(cartVO);
-        }
-        Member member = new Member();
-        member.setId(6);
-        System.out.println("------------------------------------------");
+//        System.out.println("----------------不连通时的单页面测试数据，到时候删除------------------");
+//        List<CartVO> cartVOs = new ArrayList<>();
+//        for (int i=1;i<3;i++){
+//            CartVO cartVO = new CartVO();
+//            cartVO.setSkuId(6);
+//            cartVO.setNumber(2);
+//            cartVO.setPrice(new BigDecimal("5789.00"));
+//            cartVOs.add(cartVO);
+//        }
+//        Member member = new Member();
+//        member.setId(6);
+//        System.out.println("------------------------------------------------------------");
 
-//        Member member = (Member)session.getAttribute("loginfo");
-//        //        看看罗海放在session里的购物车对象名是啥
-//        List<CartVO> cartVOs = (List<CartVO>)session.getAttribute("cartVOs");
+//        System.out.println("----------------单页面测试数据时注释点下方两句代码，到时候删除------------------");
+        Member member = (Member)session.getAttribute("loginfo");
+        //        看看罗海放在session里的购物车对象名是啥
+        List<CartVO> cartVOs = (List<CartVO>)session.getAttribute("cartVOs");
+//        System.out.println("------------------------------------------------------------");
+
         //        订单确认页面的获取地址
         List<MemberAddress> memberAddresses = this.findAlladdress(String.valueOf(member.getId()));
         session.setAttribute("postPrice","0");
@@ -193,11 +198,11 @@ public class CheckoutController {
             @RequestParam(value = "phone",required = false) String phone,
             HttpSession session
     ){
-//        Member member = (Member)session.getAttribute("loginfo");
+        Member member = (Member)session.getAttribute("loginfo");
         MemberAddress memberAddress = new MemberAddress();
 
-        Member member = new Member();
-        member.setId(6);
+//        Member member = new Member();
+//        member.setId(6);
 
         memberAddress.setMemberId(member.getId());
         memberAddress.setSpecificAddress(address);
@@ -220,10 +225,10 @@ public class CheckoutController {
             @RequestParam(value = "phone",required = false) String phone,
             HttpSession session
     ){
-//        Member member = (Member)session.getAttribute("loginfo");
+        Member member = (Member)session.getAttribute("loginfo");
 
-        Member member = new Member();
-        member.setId(6);
+//        Member member = new Member();
+//        member.setId(6);
 
         MemberAddress memberAddress = new MemberAddress();
         memberAddress.setId(Integer.parseInt(id));
@@ -245,12 +250,13 @@ public class CheckoutController {
      * @param session
      */
     @RequestMapping("/createOrder")
-    public Mono<String> createOrder(HttpSession session){
+    public void createOrder(HttpSession session, HttpServletResponse response) throws IOException {
         System.out.println("进来创建订单了");
         List<ConfirmOrderVO> confirmOrderVOs = (List<ConfirmOrderVO>)session.getAttribute("confirmOrderVOs");
-//        Member member = (Member)session.getAttribute("loginfo");
-        Member member = new Member();
-        member.setId(6);
+        Member member = (Member)session.getAttribute("loginfo");
+
+//        Member member = new Member();
+//        member.setId(6);
 
         String addressId = (String)session.getAttribute("addressId");
         OrderItem orderItem = new OrderItem();
@@ -280,6 +286,7 @@ public class CheckoutController {
         }
         session.setAttribute("orderId",order.getId());
         System.out.println("orderId:"+session.getAttribute("orderId"));
-        return Mono.create(createOrderMono->createOrderMono.success("payment"));
+//        return Mono.create(createOrderMono->createOrderMono.success("payment"));
+        response.sendRedirect("/payment");
     }
 }

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author zhy
@@ -28,13 +30,16 @@ public class PaymentController {
     }
 
     @RequestMapping("/confirmPayment")
-    public Mono<String> confirmPayment(HttpSession session){
+    public void confirmPayment(HttpSession session, HttpServletResponse response) throws IOException {
         Integer orderId = (Integer)session.getAttribute("orderId");
         System.out.println(orderId);
         int valid = iPaymentService.updateOrderPaymentTime(orderId);
         if (valid>0) {
-            return Mono.create(confirmPaymentMono -> confirmPaymentMono.success("order-history"));
+//            return Mono.create(confirmPaymentMono -> confirmPaymentMono.success("/order-history"));
+            response.sendRedirect("/order-history");
+        }else {
+//        return Mono.create(confirmPaymentMono -> confirmPaymentMono.success("payment"));
+            response.sendRedirect("/payment");
         }
-        return Mono.create(confirmPaymentMono -> confirmPaymentMono.success("payment"));
     }
 }
