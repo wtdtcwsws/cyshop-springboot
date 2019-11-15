@@ -2,12 +2,23 @@
     $(document).ready(function () {
         // 获取默认快递方式
         let $expressRadio = $('#expressId');
-        // $expressRadio.attr("checked",true);
         let $expressVal = $expressRadio.val();
+        // console.log($expressVal);
         $.ajax({
-            url:"/views/checkout?method=confirmExpress",
+            url:"/confirmExpress",
             data:{
                 expressVal : $expressVal
+            }
+        })
+
+        // 获取默认支付方式
+        let $paymentRadio = $('#paymentId');
+        let $paymentVal = $paymentRadio.val();
+        console.log($paymentVal);
+        $.ajax({
+            url:"/confirmPayment",
+            data:{
+                paymentVal : $paymentVal
             }
         })
 
@@ -16,7 +27,7 @@
         $addressRadio.attr("checked",true);
         let $addressId = $addressRadio.val();
         $.ajax({
-            url:"/views/checkout?method=confirmAddress",
+            url:"/confirmAddress",
             data:{
                 addressId : $addressId
             }
@@ -27,13 +38,36 @@
     $(document).on('change','[data-expressRadio]',function () {
         console.log($('input[name="Delivery"]:checked'))
         let $expressVal = $('input[name="Delivery"]:checked').val();
+        console.log("$expressVal:" + $expressVal);
         // 执行ajax之前先获取地址栏的单选按钮的id
         let $checked = $('input[data-checkedRadio]:checked')[0];
         var $val = $($checked).attr('id');
         $.ajax({
-            url:"/views/checkout?method=confirmExpress",
+            url:"/confirmExpressChange",
             data:{
                 expressVal : $expressVal
+            },
+            success:function (result) {
+                $('#confirmOrder').html(result);
+                // 重新加载页面后，再将地址栏的按钮重新赋予激活状态
+                let $old = $(`#${$val}`);
+                $old.attr('checked',true);
+            }
+        })
+    })
+
+    // 当支付方式选择发生改变
+    $(document).on('change','[data-paymentRadio]',function () {
+        console.log($('input[name="Payment"]:checked'))
+        let $paymentVal = $('input[name="Payment"]:checked').val();
+        console.log("$paymentVal:" + $paymentVal);
+        // 执行ajax之前先获取地址栏的单选按钮的id
+        let $checked = $('input[data-checkedRadio]:checked')[0];
+        var $val = $($checked).attr('id');
+        $.ajax({
+            url:"/confirmPayment",
+            data:{
+                paymentVal : $paymentVal
             },
             success:function (result) {
                 $('#confirmOrder').html(result);
@@ -48,7 +82,7 @@
     $(document).on('change','[data-checkedRadio]',function () {
         let $addressId = $('input[name="address"]:checked').val();
         $.ajax({
-            url:"/views/checkout?method=confirmAddress",
+            url:"/confirmAddress",
             data:{
                 addressId : $addressId
             }
@@ -61,10 +95,12 @@
         var name = $('[data-AAname]').val();
         var phone = $('[data-AAphone]').val();
         var $modal = $(this).closest('.modal');
-        console.log("进来没？");
+        // 执行ajax之前先获取地址栏的单选按钮的id
+        let $checked = $('input[data-checkedRadio]:checked')[0];
+        var $val = $($checked).attr('id');
         if( address != "" && name != "" && phone != ""){
             $.ajax({
-                url:"/views/checkout?method=addAddress",
+                url:"/addAddress",
                 data:{
                     address : address,
                     name : name,
@@ -74,21 +110,29 @@
                     $modal.modal('hide');
                     $modal.on('hidden.bs.modal',function () {
                         $('#confirmOrder').html(result);
+                        // 重新加载页面后，再将地址栏的按钮重新赋予激活状态
+                        let $old = $(`#${$val}`);
+                        $old.attr('checked',true);
                     });
                 }
             })
         }else{
             alert("输入框不能为空！");
+            // 重新加载页面后，再将地址栏的按钮重新赋予激活状态
+            let $old = $(`#${$val}`);
+            $old.attr('checked',true);
         }
     })
 
     // 修改地址
     $(document).on('click','[data-Daddress]',function () {
         let $confire = $('[data-Daddress]');
+        // 执行ajax之前先获取地址栏的单选按钮的id
+        let $checked = $('input[data-checkedRadio]:checked')[0];
+        var $val = $($checked).attr('id');
         $confire.each(function (index,item) {
             let $item = $(item);
             let $id= parseInt($item.attr("id"));
-
             if($id == index){
                 var $modal1 = $(this).closest('.modal');
 
@@ -135,7 +179,7 @@
                 })
 
                 $.ajax({
-                    url:"/views/checkout?method=updateAddress",
+                    url:"/updateAddress",
                     data:{
                         id : id,
                         address : address,
@@ -146,6 +190,9 @@
                         $modal1.modal('hide');
                         $modal1.on('hidden.bs.modal',function () {
                             $('#confirmOrder').html(result);
+                            // 重新加载页面后，再将地址栏的按钮重新赋予激活状态
+                            let $old = $(`#${$val}`);
+                            $old.attr('checked',true);
                         });
                     }
                 })
@@ -154,30 +201,30 @@
     })
 
 
-    // 修改地址
-    $(document).on('click','[data-addressId]',function () {
-        let $addressId = $('[data-addressId]');
-
-        $addressId.each(function (index,item) {
-            let $item = $(item);
-            let $index= parseInt($item.attr("data-addressId"));
-
-            // if($index == 1){
-            //     var addressDefaule = $item.val();
-            // }
-
-            if($index == index){
-                let addressId = $item.val();
-
-                $.ajax({
-                    url:"/views/checkout?method=confirmAdress",
-                    data:{
-                        addressId : addressId,
-                        // addressDefaule : addressDefaule
-                    }
-                })
-            }
-        })
-    })
+    // // 修改地址
+    // $(document).on('click','[data-addressId]',function () {
+    //     let $addressId = $('[data-addressId]');
+    //
+    //     $addressId.each(function (index,item) {
+    //         let $item = $(item);
+    //         let $index= parseInt($item.attr("data-addressId"));
+    //
+    //         // if($index == 1){
+    //         //     var addressDefaule = $item.val();
+    //         // }
+    //
+    //         if($index == index){
+    //             let addressId = $item.val();
+    //
+    //             $.ajax({
+    //                 url:"/views/checkout?method=confirmAdress",
+    //                 data:{
+    //                     addressId : addressId,
+    //                     // addressDefaule : addressDefaule
+    //                 }
+    //             })
+    //         }
+    //     })
+    // })
 
 })(jQuery);

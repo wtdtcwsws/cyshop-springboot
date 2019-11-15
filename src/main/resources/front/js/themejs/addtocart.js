@@ -12,7 +12,7 @@
 	// Cart add remove functions
 	var cart = {
 		'add': function(product_id, quantity) {
-			addProductNotice('Product added to Cart', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="goods.html">product</a> added to <a href="cart.html">shopping cart</a>!</h3>', 'success');
+			addProductNotice('商品添加到购物车', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="javascript:;">商品</a> 添加<a href="/cart">购物车</a>！</h3>', '成功');
 		}
 	}
 

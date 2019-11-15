@@ -1,18 +1,21 @@
 package com.cy.cyshopspringboot.web;
 
-import com.cy.cyshopspringboot.domain.Member;
-import com.cy.cyshopspringboot.domain.Spu;
+import com.cy.cyshopspringboot.domain.*;
 import com.cy.cyshopspringboot.service.ICatalogService;
 import com.cy.cyshopspringboot.service.IGoodsService;
 import com.cy.cyshopspringboot.viewobject.Catalog1VO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,13 +39,10 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("/")
-    public String index(Model model,HttpSession session) {
+    public String index(Model model, HttpServletRequest request) {
         List<Catalog1VO> catalogS = iCatalogService.getCatalog();
         model.addAttribute("catalogs", catalogS);
-//        Member member = new Member();
-//        member.setName("我是顾客");
-//        session.setAttribute("loginfo", member);
-//        System.out.println(member);
+        request.getServletContext().setAttribute("catalogs", catalogS);
         return "index";
     }
     @RequestMapping("/logout")
@@ -54,27 +54,58 @@ public class GoodsController {
     }
 
     /**
-     *  选择三级分类进入商品列表
-     * @param id 三级分类id，可以通过三级分类id找到对应的商品列表
+     * 通过商品列表进入商品详情页面
+     * @param id
+     * @param model
      * @return
      */
     @RequestMapping("/goods")
-    public Mono<String> enterCatalog(@RequestParam(value = "id", required = false) String id, Model model) {
-        List<Spu> spus = iGoodsService.getSpuByCatalog3Id(id);
-        model.addAttribute("spus", spus);
+    public Mono<String> enterGoods(@RequestParam(value = "id", required = false) String id,@RequestParam(value = "c3", required = false) String c3, Model model) {
+        List<Spu> spus = iGoodsService.getSpuById(id);
+        model.addAttribute("spu", spus.get(0));
+        Catalog3 catalog3 =  iCatalogService.getCatalog3ById(c3).get(0);
+        model.addAttribute("catalog3", catalog3);
 
+        List<Sku> skus = iGoodsService.getSkuBySpuId(spus.get(0).getId());
+        model.addAttribute("skus", skus);
         return Mono.create(indexMono->indexMono.success("goods"));
     }
 
-//    @RequestMapping("/goods")
-//    public Mono<String> enterGoods() {
-//
-//        return Mono.create(indexMono->indexMono.success("goods"));
-//    }
-
+    /**
+     *  选择三级分类进入商品列表
+     * @param c3 三级分类id，可以通过三级分类id找到对应的商品列表
+     * @return
+     */
     @RequestMapping("/category")
-    public Mono<String> enterCatalog() {
+    public Mono<String> enterCatalog(@RequestParam(value = "c3",required = false)String c3,Model model) {
+        List<Spu> spus= iGoodsService.getSpuByCatalog3Id(c3);
+         Catalog3 catalog3 =  iCatalogService.getCatalog3ById(c3).get(0);
+        System.out.println(spus);
+
+        model.addAttribute("spus", spus);
+        model.addAttribute("catalog3", catalog3);
         return Mono.create(indexMono->indexMono.success("category"));
+    }
+    @RequestMapping("/addCart")
+    public void addCart(@RequestParam(value = "skuId")String skuId,@RequestParam(value = "nums")String nums, HttpServletResponse response,HttpSession session) throws IOException {
+        Member member = (Member) session.getAttribute("loginfo");
+        Integer cartId = member.getId();
+        System.out.println(skuId);
+        System.out.println(nums);
+        System.out.println(cartId);
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setCartId(cartId);
+        shoppingCartItem.setNums(Integer.parseInt(nums));
+        shoppingCartItem.setSkuId(Integer.parseInt(skuId));
+
+        Integer row= iGoodsService.addCart(shoppingCartItem);
+        if (row == 1) {
+            System.out.println("success");
+            response.getWriter().write("success");
+        } else {
+            return;
+        }
+
     }
 
 }
