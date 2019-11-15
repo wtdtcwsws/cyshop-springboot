@@ -10,6 +10,7 @@ public class Order {
      * 订单编号
      */
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY,generator="Mysql")
     @Column(name = "`id`")
     private Integer id;
 

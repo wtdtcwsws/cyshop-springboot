@@ -16,7 +16,7 @@
         let $paymentVal = $paymentRadio.val();
         console.log($paymentVal);
         $.ajax({
-            url:"/confirmPayment",
+            url:"/confirmPaymentId",
             data:{
                 paymentVal : $paymentVal
             }
@@ -65,7 +65,7 @@
         let $checked = $('input[data-checkedRadio]:checked')[0];
         var $val = $($checked).attr('id');
         $.ajax({
-            url:"/confirmPayment",
+            url:"/confirmPaymentId",
             data:{
                 paymentVal : $paymentVal
             },
@@ -201,30 +201,30 @@
     })
 
 
-    // // 修改地址
-    // $(document).on('click','[data-addressId]',function () {
-    //     let $addressId = $('[data-addressId]');
-    //
-    //     $addressId.each(function (index,item) {
-    //         let $item = $(item);
-    //         let $index= parseInt($item.attr("data-addressId"));
-    //
-    //         // if($index == 1){
-    //         //     var addressDefaule = $item.val();
-    //         // }
-    //
-    //         if($index == index){
-    //             let addressId = $item.val();
-    //
-    //             $.ajax({
-    //                 url:"/views/checkout?method=confirmAdress",
-    //                 data:{
-    //                     addressId : addressId,
-    //                     // addressDefaule : addressDefaule
-    //                 }
-    //             })
-    //         }
-    //     })
-    // })
+    // 修改地址
+    $(document).on('click','[data-addressId]',function () {
+        let $addressId = $('[data-addressId]');
+
+        $addressId.each(function (index,item) {
+            let $item = $(item);
+            let $index= parseInt($item.attr("data-addressId"));
+
+            // if($index == 1){
+            //     var addressDefaule = $item.val();
+            // }
+
+            if($index == index){
+                let addressId = $item.val();
+
+                $.ajax({
+                    url:"/views/checkout?method=confirmAdress",
+                    data:{
+                        addressId : addressId,
+                        // addressDefaule : addressDefaule
+                    }
+                })
+            }
+        })
+    })
 
 })(jQuery);
