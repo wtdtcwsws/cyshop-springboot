@@ -167,7 +167,7 @@
 											</div>
 											<div class="info-product-right">
 												<div class="cart">
-													<input type="button" data-toggle="tooltip" id="addcart" title="" value="加入购物车" data-loading-text="Loading..."  class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车">
+													<input type="button" data-toggle="tooltip" id="addcart" title="" value="加入购物车" data-loading-text="Loading..."  class="btn btn-mega btn-lg" onclick="cart.add('iPhone12', '1')" data-original-title="加入购物车">
 
                                                 </div>
 												<div class="add-to-links wish_comp">
@@ -254,13 +254,13 @@
 															</table>
 															<div class="text-right"></div>
 														</div>
-														<h2 id="review-title">Write a review</h2>
+														<h2 id="review-title">发表一条评论</h2>
 														<div class="contacts-form">
 															<div class="form-group"> <span class="icon icon-user"></span>
-																<input type="text" name="name" class="form-control" value="Your Name" onblur="if (this.value == '') {this.value = 'Your Name';}" onfocus="if(this.value == 'Your Name') {this.value = '';}">
+																<input type="text" name="name" class="form-control" value="Your Name" onblur="if (this.value == '') {this.value = '你的名字';}" onfocus="if(this.value == '你的名字') {this.value = '';}">
 															</div>
 															<div class="form-group"> <span class="icon icon-bubbles-2"></span>
-																<textarea class="form-control" name="text" onblur="if (this.value == '') {this.value = 'Your Review';}" onfocus="if(this.value == 'Your Review') {this.value = '';}">Your Review</textarea>
+																<textarea class="form-control" name="text" onblur="if (this.value == '') {this.value = '评论内容';}" onfocus="if(this.value == '评论内容') {this.value = '';}">Your Review</textarea>
 															</div>
 															<span style="font-size: 11px;"><span class="text-danger">Note:</span>						HTML is not translated!</span>
 
@@ -278,8 +278,8 @@
 													</form>
 												</div>
 												<div id="tab-4" class="tab-pane fade">
-													<a href="#">Monitor</a>,
-													<a href="#">Apple</a>
+													<a href="#">显示</a>,
+													<a href="#">苹果</a>
 												</div>
 												<div id="tab-5" class="tab-pane fade">
 													<p>Lorem ipsum dolor sit amet, consetetur
@@ -856,6 +856,14 @@
                         skuId:id,
                         nums:nums
 
+                    },
+                    success:function (result) {
+                        if (result == 'failed') {
+
+                            window.alert("请先登录！");
+
+                            window.location = '/login';
+                        }
                     }
                 });
             })
@@ -876,8 +884,6 @@
                 $('#price').text(price);
                 $('#stock').text(stock);
                 let id = $("[data-skuId='skuId']").attr('data-value');
-
-
             });
             let firstbt = $("[data-sku]")[0];
             let $firstbt = $(firstbt);
