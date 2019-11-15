@@ -1,6 +1,6 @@
 package com.cy.cyshopspringboot.service.impl;
 
-import com.cy.cyshopspringboot.domain.CartMessage;
+import com.cy.cyshopspringboot.viewobject.CartVO;
 import com.cy.cyshopspringboot.mapper.CartMapper;
 import com.cy.cyshopspringboot.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService {
     private CartMapper cartMapper;
 
     @Override
-    public List<CartMessage> cartMessageAll(Integer memberId) {
+    public List<CartVO> cartMessageAll(Integer memberId) {
         return cartMapper.selectCartMessageAll(memberId);
     }
 }
