@@ -63,7 +63,7 @@
 					<div id="content" class="col-sm-9">
 						<h2 class="title">历史订单</h2>
 						<div class="table-responsive">
-							<table class="table table-bordered table-hover">
+							<table class="table table-bordered table-hover" id="dataTable">
 								<thead>
 									<tr>
 										<td class="text-center">商品图片</td>
@@ -80,7 +80,7 @@
 									<tr th:each="order:${orders}">
 										<td class="text-center">
 											<a href="product.html"><img width="85" class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop"
-												 src="img/demo/shop/product/B8.jpg">
+												 th:src="@{'img/sku-img/'+${order.url}}" src="img/demo/shop/product/B8.jpg">
 											</a>
 										</td>
 										<td class="text-left"><a href="product.html" th:text="${order.goodsName}"></a>
@@ -96,6 +96,12 @@
 									</tr>
 								</tbody>
 							</table>
+							<nav aria-label="" style="text-align:center" th:if="${count gt 1}">
+								<ul class="pagination">
+									<!--<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>-->
+									<li class="" th:each="i:${#numbers.sequence(1,count)}"><a th:href="@{/order-history(limit=${i})}" th:text="${i}"> <span class="sr-only">(current)</span></a></li>
+								</ul>
+							</nav>
 						</div>
 
 					</div>
@@ -164,6 +170,9 @@
 			<script type="text/javascript" src="js/themejs/addtocart.js"></script>
 			<script type="text/javascript" src="js/themejs/application.js"></script>
 
+			<script type="text/javascript">
+
+			</script>
 
 	</body>
 </html>
