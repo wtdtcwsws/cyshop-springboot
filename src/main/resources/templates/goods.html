@@ -5,7 +5,7 @@
 
     <!-- Basic page needs
     ============================================ -->
-    <title>Destino - Advanced & High Customizable eCommerce HTML5/CSS3 Theme</title>
+    <title th:text="'商品详情【'+${spu.spuName}+'】'">商品详情</title>
     <meta charset="utf-8">
     <meta name="keywords" content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business" />
     <meta name="author" content="Magentech">
@@ -141,14 +141,14 @@
 									</div>
 									<div class="product-label form-group">
 										<div class="stock">
-											<span>库存:</span> <span class="instock">充足</span>
-											<p class="cy-style-btn-group" data-skuId="skuId" data-value="">
-												<input type="button" th:data-sku="${sku.id}" th:each="sku:${skus}" th:value="${sku.description}" class="addToCart btn btn-default cy-style-btn"/>
+											<span>库存:</span> <span class="instock" id="stock" >充足</span>
+											<p class="cy-style-btn-group" data-skuId="skuId" data-value="" data-stocks data-prices>
+												<input type="button" th:data-sku="${sku.id}" th:data-stock="${sku.stock}" th:data-price="${sku.price}" th:each="sku:${skus}" th:value="${sku.description}" class="addToCart btn btn-default cy-style-btn"/>
 
 											</p>
 										</div>
 										<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
-											<span class="price-new" itemprop="price">2114.00</span>
+											<span class="price-new" itemprop="price" id="price">2114.00</span>
 											<span class="price-old">2122.00</span>
 										</div>
 
@@ -167,7 +167,7 @@
 											</div>
 											<div class="info-product-right">
 												<div class="cart">
-													<input type="button" data-toggle="tooltip" id="addcart" title="" value="加入购物车" data-loading-text="Loading..."  class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="加入购物车">
+													<input type="button" data-toggle="tooltip" id="addcart" title="" value="加入购物车" data-loading-text="Loading..."  class="btn btn-mega btn-lg" onclick="cart.add('iPhone12', '1')" data-original-title="加入购物车">
 
                                                 </div>
 												<div class="add-to-links wish_comp">
@@ -254,13 +254,13 @@
 															</table>
 															<div class="text-right"></div>
 														</div>
-														<h2 id="review-title">Write a review</h2>
+														<h2 id="review-title">发表一条评论</h2>
 														<div class="contacts-form">
 															<div class="form-group"> <span class="icon icon-user"></span>
-																<input type="text" name="name" class="form-control" value="Your Name" onblur="if (this.value == '') {this.value = 'Your Name';}" onfocus="if(this.value == 'Your Name') {this.value = '';}">
+																<input type="text" name="name" class="form-control" value="Your Name" onblur="if (this.value == '') {this.value = '你的名字';}" onfocus="if(this.value == '你的名字') {this.value = '';}">
 															</div>
 															<div class="form-group"> <span class="icon icon-bubbles-2"></span>
-																<textarea class="form-control" name="text" onblur="if (this.value == '') {this.value = 'Your Review';}" onfocus="if(this.value == 'Your Review') {this.value = '';}">Your Review</textarea>
+																<textarea class="form-control" name="text" onblur="if (this.value == '') {this.value = '评论内容';}" onfocus="if(this.value == '评论内容') {this.value = '';}">Your Review</textarea>
 															</div>
 															<span style="font-size: 11px;"><span class="text-danger">Note:</span>						HTML is not translated!</span>
 
@@ -278,8 +278,8 @@
 													</form>
 												</div>
 												<div id="tab-4" class="tab-pane fade">
-													<a href="#">Monitor</a>,
-													<a href="#">Apple</a>
+													<a href="#">显示</a>,
+													<a href="#">苹果</a>
 												</div>
 												<div id="tab-5" class="tab-pane fade">
 													<p>Lorem ipsum dolor sit amet, consetetur
@@ -856,6 +856,14 @@
                         skuId:id,
                         nums:nums
 
+                    },
+                    success:function (result) {
+                        if (result == 'failed') {
+
+                            window.alert("请先登录！");
+
+                            window.location = '/login';
+                        }
                     }
                 });
             })
@@ -863,16 +871,24 @@
     </script>
     <script type="text/javascript">
         (function () {
-            $("[data-sku]").on('click',function (e) {
+
+            $("[data-sku]").on('click', function (e) {
                 let bt = $(e.target);
                 let skuid = bt.attr('data-sku');
-                // console.log(bt.attr('data-sku'));
-                $("[data-skuId='skuId']").attr('data-value',skuid);
+                let price = bt.attr('data-price');
+                let stock = bt.attr('data-stock');
+                // sku按钮父级标签属性保存skuid
+                $("[data-skuId='skuId']").attr('data-value', skuid);
+                $("[data-skuId='skuId']").attr('data-prices', price);
+                $("[data-skuId='skuId']").attr('data-stocks', stock);
+                $('#price').text(price);
+                $('#stock').text(stock);
                 let id = $("[data-skuId='skuId']").attr('data-value');
+            });
+            let firstbt = $("[data-sku]")[0];
+            let $firstbt = $(firstbt);
 
-
-
-            })
+            $firstbt.trigger('click');
 
 
 

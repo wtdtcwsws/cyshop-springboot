@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,72 +38,36 @@ public class CheckoutController {
     @Autowired
     private ISkuService iSkuService;
 
-    /**
-     * 订单确认页面
-     * @param id
-     * @param session
-     * @return
-     */
-//    @RequestMapping("/checkout")
-    public Mono<String> checkout(
-            @RequestParam(value = "id",required = false) String id,
-            @RequestParam(value = "shuId",required = false) String skuId,
-            @RequestParam(value = "count",required = false) String count,
-            @RequestParam(value = "price",required = false) String price,
-            HttpSession session
-    ){
-//        订单确认页面的获取地址
-        List<MemberAddress> memberAddresses = this.findAlladdress("6");
-        session.setAttribute("memberAddresses",memberAddresses);
-
-        ConfirmOrderVO confirmOrderVO = new ConfirmOrderVO();
-
-        System.out.println("-------------测试数据-------------");
-        confirmOrderVO.setSkuImg("/img/sku-img/0.jpg");
-        confirmOrderVO.setSpuName("小罗嗨");
-        confirmOrderVO.setSkuName("内存:1G;颜色:死亡芭比粉");
-        confirmOrderVO.setNums(new BigDecimal("2"));
-        confirmOrderVO.setUnitPrice(new BigDecimal("5000"));
-        BigDecimal allPrice = confirmOrderVO.getUnitPrice().multiply(confirmOrderVO.getNums());
-        confirmOrderVO.setPrice(allPrice);
-        confirmOrderVO.setPostPrice(new BigDecimal("0"));
-        confirmOrderVO.setSkuId(6);
-        confirmOrderVO.setSpuId(5);
-        confirmOrderVO.setPaymentId(1);
-        confirmOrderVO.setOrderPrice(allPrice.add(confirmOrderVO.getPostPrice()));
-        System.out.println("--------------------------");
-
-//        String SkuImg = iSkuImgService.selectSkuImgUrlById(skuId);
-//        Sku sku = iSkuService.selectSkuById(skuId);
-//        confirmOrderVO.setSkuImg(SkuImg);
-//        confirmOrderVO.setSpuName(sku.getName());
-//        confirmOrderVO.setSkuName(sku.getDescription());
-//        confirmOrderVO.setNums(new BigDecimal("count"));
-//        confirmOrderVO.setUnitPrice(new BigDecimal("price"));
-////        计算商品总价
-//        BigDecimal allPrice = confirmOrderVO.getUnitPrice().multiply(confirmOrderVO.getNums());
-//        confirmOrderVO.setPrice(allPrice);
-//        confirmOrderVO.setPostPrice(new BigDecimal("0"));
-//
-//        confirmOrderVO.setOrderPrice(allPrice.add(new BigDecimal("postPrice")));
-//        confirmOrderVO.setSkuId(sku.getId());
-//        confirmOrderVO.setSpuId(sku.getSpuId());
-//        model.addAttribute(confirmOrderVO);
-        session.setAttribute("confirmOrderVO",confirmOrderVO);
-        return Mono.create(checkoutMono->checkoutMono.success("checkout"));
-    }
-
     @RequestMapping("/checkout")
     public Mono<String> checkout(
             HttpSession session
     ){
+
+//        System.out.println("----------------不连通时的单页面测试数据，到时候删除------------------");
+//        List<CartVO> cartVOs = new ArrayList<>();
+//        for (int i=1;i<3;i++){
+//            CartVO cartVO = new CartVO();
+//            cartVO.setSkuId(6);
+//            cartVO.setNumber(2);
+//            cartVO.setPrice(new BigDecimal("5789.00"));
+//            cartVOs.add(cartVO);
+//        }
+//        Member member = new Member();
+//        member.setId(6);
+//        System.out.println("------------------------------------------------------------");
+
+//        System.out.println("----------------单页面测试数据时注释点下方两句代码，到时候删除------------------");
+        Member member = (Member)session.getAttribute("loginfo");
+        //        看看罗海放在session里的购物车对象名是啥
+        List<CartVO> cartVOs = (List<CartVO>)session.getAttribute("cartVOs");
+//        System.out.println("------------------------------------------------------------");
+
         //        订单确认页面的获取地址
-        List<MemberAddress> memberAddresses = this.findAlladdress("6");
-//        model.addAttribute("memberAddresses",memberAddresses);
+        List<MemberAddress> memberAddresses = this.findAlladdress(String.valueOf(member.getId()));
+        session.setAttribute("postPrice","0");
+        session.setAttribute("paymentId","1");
         session.setAttribute("memberAddresses",memberAddresses);
         List<ConfirmOrderVO> confirmOrderVOs = new ArrayList<ConfirmOrderVO>();
-//        看看罗海放在session里的购物车对象名是啥
-        List<CartVO> cartVOs = (List<CartVO>)session.getAttribute("cartVOs");
         BigDecimal orderPrice = new BigDecimal("0");
         for (CartVO cartVO : cartVOs){
             ConfirmOrderVO confirmOrderVO = new ConfirmOrderVO();
@@ -109,6 +75,7 @@ public class CheckoutController {
             String SkuImg = iSkuImgService.selectSkuImgUrlById(skuId);
             Sku sku = iSkuService.selectSkuById(skuId);
             confirmOrderVO.setSkuImg(SkuImg);
+//            confirmOrderVO.setSkuImg("/img/sku-img/0.jpg");
             confirmOrderVO.setSpuName(sku.getName());
             confirmOrderVO.setSkuName(sku.getDescription());
             confirmOrderVO.setNums(new BigDecimal(cartVO.getNumber()));
@@ -148,14 +115,15 @@ public class CheckoutController {
      */
     @RequestMapping("/confirmExpress")
     public Mono<String> confirmExpress(HttpSession session){
-        session.setAttribute("postPrice",0);
+        session.setAttribute("postPrice","0");
         List<ConfirmOrderVO> confirmOrderVOS = (List<ConfirmOrderVO>)session.getAttribute("confirmOrderVOs");
         List<ConfirmOrderVO> confirmOrderVOs = new ArrayList<>();
         for (ConfirmOrderVO confirmOrderVO:confirmOrderVOS){
             confirmOrderVO.setPostPrice(new BigDecimal("0"));
+            confirmOrderVOs.add(confirmOrderVO);
         }
         session.setAttribute("confirmOrderVOs",confirmOrderVOs);
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(confirmExpressMono->confirmExpressMono.success("checkout-form"));
     }
 
     /**
@@ -168,32 +136,25 @@ public class CheckoutController {
     public Mono<String> confirmExpress(@RequestParam(value = "expressVal",required = false) String expressVal,HttpSession session){
         String postPrice = expressVal;
         session.setAttribute("postPrice",postPrice);
-//        ConfirmOrderVO confirmOrderVO = (ConfirmOrderVO)session.getAttribute("confirmOrderVOs");
-        List<ConfirmOrderVO> confirmOrderVOS = (List<ConfirmOrderVO>)session.getAttribute("confirmOrderVOs");
-        List<ConfirmOrderVO> confirmOrderVOs = new ArrayList<>();
-        for (ConfirmOrderVO confirmOrderVO:confirmOrderVOS){
-            confirmOrderVO.setPostPrice(new BigDecimal(postPrice));
-            if("10".equals(postPrice)){
-                confirmOrderVO.setOrderPrice(confirmOrderVO.getPrice().add(new BigDecimal("10")));
-            }
-            if("0".equals(postPrice)){
-                confirmOrderVO.setOrderPrice(confirmOrderVO.getPrice());
-            }
-            confirmOrderVOs.add(confirmOrderVO);
+        BigDecimal oP = (BigDecimal)session.getAttribute("orderPrice");
+        if ("10".equals(postPrice)){
+            BigDecimal op = oP.add(new BigDecimal("10"));
+            session.setAttribute("orderPrice",op);
+        }else{
+            BigDecimal op = oP.subtract(new BigDecimal("10"));
+            session.setAttribute("orderPrice",op);
         }
-        session.setAttribute("confirmOrderVOs",confirmOrderVOs);
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(confirmExpressMono->confirmExpressMono.success("checkout-form"));
     }
 
     /**
      * 进入页面时获取默认的支付方式
-     * 待检验-----------------------------------------
      * @param paymentVal
      * @param session
      * @return
      */
-    @RequestMapping("/confirmPayment")
-    public Mono<String> confirmPayment(@RequestParam(value = "paymentVal",required = false) String paymentVal,HttpSession session){
+    @RequestMapping("/confirmPaymentId")
+    public Mono<String> confirmPaymentId(@RequestParam(value = "paymentVal",required = false) String paymentVal,HttpSession session){
         System.out.println("paymentVal:"+paymentVal);
         String paymentId = paymentVal;
         session.setAttribute("paymentId",paymentId);
@@ -204,11 +165,11 @@ public class CheckoutController {
             confirmOrderVOs.add(confirmOrderVO);
         }
         session.setAttribute("confirmOrderVOs",confirmOrderVOs);
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(confirmPaymentIdMono->confirmPaymentIdMono.success("checkout-form"));
     }
 
     /**
-     * 获取收货地址
+     * 更改订单的收货地址
      * @param addressId
      * @param session
      */
@@ -219,7 +180,7 @@ public class CheckoutController {
     ){
         session.setAttribute("addressId",addressId);
         System.out.println(addressId);
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(confirmAddressMono->confirmAddressMono.success("checkout-form"));
     }
 
     /**
@@ -239,6 +200,10 @@ public class CheckoutController {
     ){
         Member member = (Member)session.getAttribute("loginfo");
         MemberAddress memberAddress = new MemberAddress();
+
+//        Member member = new Member();
+//        member.setId(6);
+
         memberAddress.setMemberId(member.getId());
         memberAddress.setSpecificAddress(address);
         memberAddress.setConsigneeName(name);
@@ -246,11 +211,10 @@ public class CheckoutController {
         int valid = iCheckoutService.addAddress(memberAddress);
         if(valid>0){
             List<MemberAddress> memberAddresses = this.findAlladdress(String.valueOf(member.getId()));
-//            List<MemberAddress> memberAddresses = this.findAlladdress("6");
             session.setAttribute("memberAddresses",memberAddresses);
-            return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+            return Mono.create(addAddressMono->addAddressMono.success("checkout-form"));
         }
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(addAddressMono->addAddressMono.success("checkout-form"));
     }
 
     @RequestMapping("/updateAddress")
@@ -262,21 +226,23 @@ public class CheckoutController {
             HttpSession session
     ){
         Member member = (Member)session.getAttribute("loginfo");
+
+//        Member member = new Member();
+//        member.setId(6);
+
         MemberAddress memberAddress = new MemberAddress();
         memberAddress.setId(Integer.parseInt(id));
         memberAddress.setMemberId(member.getId());
-//        memberAddress.setMemberId(6);
         memberAddress.setSpecificAddress(address);
         memberAddress.setConsigneeName(name);
         memberAddress.setPhone(phone);
         int valid = iCheckoutService.updateAddress(memberAddress);
         if(valid>0){
             List<MemberAddress> memberAddresses = this.findAlladdress(String.valueOf(member.getId()));
-//            List<MemberAddress> memberAddresses = this.findAlladdress("6");
             session.setAttribute("memberAddresses",memberAddresses);
-            return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+            return Mono.create(updateAddressMono->updateAddressMono.success("checkout-form"));
         }
-        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
+        return Mono.create(updateAddressMono->updateAddressMono.success("checkout-form"));
     }
 
     /**
@@ -284,24 +250,30 @@ public class CheckoutController {
      * @param session
      */
     @RequestMapping("/createOrder")
-    public Mono<String> createOrder(HttpSession session){
+    public void createOrder(HttpSession session, HttpServletResponse response) throws IOException {
+        System.out.println("进来创建订单了");
         List<ConfirmOrderVO> confirmOrderVOs = (List<ConfirmOrderVO>)session.getAttribute("confirmOrderVOs");
         Member member = (Member)session.getAttribute("loginfo");
-        int addressId = (int)session.getAttribute("addressId");
+
+//        Member member = new Member();
+//        member.setId(6);
+
+        String addressId = (String)session.getAttribute("addressId");
         OrderItem orderItem = new OrderItem();
         Order order = new Order();
-
         order.setMemberId(member.getId());
-        order.setMemberAddressId(addressId);
+        order.setMemberAddressId(Integer.parseInt(addressId));
         order.setCreatTime(new Date());
         BigDecimal orderPrice = (BigDecimal)session.getAttribute("orderPrice");
-        BigDecimal postPrice = (BigDecimal)session.getAttribute("postPrice");
-        order.setTotalPrice(orderPrice.subtract(postPrice));
-        order.setPostPrice(postPrice);
+        String postPrice = (String)session.getAttribute("postPrice");
+        order.setTotalPrice(orderPrice.subtract(new BigDecimal(postPrice)));
+        order.setPostPrice(new BigDecimal(postPrice));
         order.setPayment(orderPrice);
         order.setStatus(1);
-        int paymentId = (int)session.getAttribute("paymentId");
-        order.setPaymentWayId(paymentId);
+        String paymentId = (String)session.getAttribute("paymentId");
+        order.setPaymentWayId(Integer.parseInt(paymentId));
+        order.setDeletestatus(0);
+        order.setDiscounts(new BigDecimal("0.00"));
         int OrderCreatevalid = iCheckoutService.insertOrder(order);
         session.removeAttribute("postPrice");
         session.removeAttribute("orderPrice");
@@ -312,7 +284,9 @@ public class CheckoutController {
             orderItem.setNums(confirmOrderVO.getNums());
             int OrderItemCreatevalid = iCheckoutService.insertOrderItem(orderItem);
         }
-//        return Mono.create(checkoutMono->checkoutMono.success("checkout-form"));
-        return Mono.create(checkoutMono->checkoutMono.success("payment"));
+        session.setAttribute("orderId",order.getId());
+        System.out.println("orderId:"+session.getAttribute("orderId"));
+//        return Mono.create(createOrderMono->createOrderMono.success("payment"));
+        response.sendRedirect("/payment");
     }
 }

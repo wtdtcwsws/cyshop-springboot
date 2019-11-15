@@ -25,7 +25,7 @@ public class SkuImgServiceImpl implements ISkuImgService {
     @Override
     public String selectSkuImgUrlById(String id) {
         SkuImg skuImg = new SkuImg();
-        skuImg.setId(Integer.parseInt(id));
+        skuImg.setSkuId(Integer.parseInt(id));
         List<SkuImg> skuImgs = skuImgMapper.select(skuImg);
         skuImg = skuImgs.get(0);
         return skuImg.getUrl();

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<div th:fragment="form">
 <form id="creatOrderForm" th:action="@{/createOrder}" method="post" >
     <div class="row">
         <!--快递方式及支付方式-->
@@ -17,7 +17,7 @@
                     </div>
                     <div class="panel-body ">
                         <p>请选择订单使用的运送方式</p>
-                        <div class="radio" th:switch="${#session.getAttribute('confirmOrderVO').getPostPrice()}">
+                        <div class="radio" th:switch="${#session.getAttribute('postPrice')}">
                             <label>
                                 <input id="expressId" th:case="'0'" type="radio" checked data-expressRadio name="Delivery" value="0">
                                 <!--<input th:case="null" type="radio" checked data-expressRadio name="Delivery" value="0">-->
@@ -25,7 +25,7 @@
                                 平邮快递 - ￥0.00
                             </label>
                         </div>
-                        <div class="radio" th:switch="${#session.getAttribute('confirmOrderVO').getPostPrice()}">
+                        <div class="radio" th:switch="${#session.getAttribute('postPrice')}">
                             <label>
                                 <input th:case="'10'" type="radio" checked data-expressRadio name="Delivery" value="10">
                                 <input th:case="'0'" type="radio" data-expressRadio name="Delivery" value="10">
@@ -40,30 +40,30 @@
                     </div>
                     <div class="panel-body">
                         <p>请选择订单的付款方式</p>
-                        <div class="radio" th:switch="${#session.getAttribute('confirmOrderVO').getPaymentId()}">
+                        <div class="radio" th:switch="${#session.getAttribute('paymentId')}">
                             <label>
                                 <input id="paymentId" th:case="'1'" type="radio" checked="checked" data-paymentRadio name="Payment" value="1">
                                 <input th:case="'2'" type="radio" name="Payment" data-paymentRadio value="1">
-                                <input th:case="'3'" type="radio" name="Payment" data-paymentRadio value="1">
+                                <!--<input th:case="'3'" type="radio" name="Payment" data-paymentRadio value="1">-->
                                 微信
                             </label>
                         </div>
-                        <div class="radio" th:switch="${#session.getAttribute('confirmOrderVO').getPaymentId()}">
+                        <div class="radio" th:switch="${#session.getAttribute('paymentId')}">
                             <label>
                                 <input th:case="'1'" type="radio" name="Payment" data-paymentRadio value="2">
                                 <input th:case="'2'" type="radio" checked="checked" data-paymentRadio name="Payment" value="2">
-                                <input th:case="'3'" type="radio" name="Payment" data-paymentRadio value="2">
+                                <!--<input th:case="'3'" type="radio" name="Payment" data-paymentRadio value="2">-->
                                 支付宝
                             </label>
                         </div>
-                        <div class="radio" th:switch="${#session.getAttribute('confirmOrderVO').getPaymentId()}">
-                            <label>
-                                <input th:case="'1'" type="radio" name="Payment" data-paymentRadio value="3">
-                                <input th:case="'2'" type="radio" name="Payment" data-paymentRadio value="3">
-                                <input th:case="'3'" type="radio" checked="checked" data-paymentRadio name="Payment" value="3">
-                                银联
-                            </label>
-                        </div>
+                        <!--<div class="radio" th:switch="${#session.getAttribute('paymentId')}">-->
+                            <!--<label>-->
+                                <!--<input th:case="'1'" type="radio" name="Payment" data-paymentRadio value="3">-->
+                                <!--<input th:case="'2'" type="radio" name="Payment" data-paymentRadio value="3">-->
+                                <!--<input th:case="'3'" type="radio" checked="checked" data-paymentRadio name="Payment" value="3">-->
+                                <!--银联-->
+                            <!--</label>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -195,10 +195,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr th:each="confirmOrderVO : ${#session.getAttribute('confirmOrderVOs')}">
                                 <!--商品查出来的商品图片-->
                                 <td class="text-center">
-                                    <a href="javascript:;"><img width="60px" th:src="@{${#session.getAttribute('confirmOrderVO').getSkuImg()}}" class="img-thumbnail"></a>
+                                    <a href="javascript:;"><img width="60px" th:src="@{${confirmOrderVO.getSkuImg()}}" class="img-thumbnail"></a>
                                     <!--<a href="${root}/product?method=detail&spu_id=${spu_detail.id}"><img width="60px" th:src="@{/img/sku-img/iphone_hei.png}" class="img-thumbnail"></a>-->
 
                                 </td>
@@ -206,13 +206,13 @@
                                 <td class="text-left">
                                     <a href="javascript:;">
                                         <!--<span th:text="${confirmOrderVO.getSpu_name()}"></span>-->
-                                        <span th:text="${#session.getAttribute('confirmOrderVO').getSpuName()}"></span>
+                                        <span th:text="${confirmOrderVO.getSpuName()}"></span>
                                     </a>
                                 </td>
                                 <!--数据库查出的sku值-->
                                 <td>
                                     <!--<div th:each="sku_name : ${confirmOrderVO.getSkuName()}">-->
-                                        <span th:text="${#session.getAttribute('confirmOrderVO').getSkuName()}"></span><br>
+                                        <span th:text="${confirmOrderVO.getSkuName()}"></span><br>
                                     <!--</div>-->
                                     <!--<span>颜色:红色</span><br>-->
                                     <!--<span>内存:256G</span>-->
@@ -221,17 +221,17 @@
 
                                     <div class="option quantity">
                                         <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;width: 60px">
-                                            <input class="form-control" type="text" name="quantity" th:value="${#session.getAttribute('confirmOrderVO').getNums()}" disabled />
+                                            <input class="form-control" type="text" name="quantity" th:value="${confirmOrderVO.getNums()}" disabled />
                                             <!--<input class="form-control" type="text" name="quantity" th:value="'1'" disabled />-->
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-right">
-                                    <span th:text="${#session.getAttribute('confirmOrderVO').getUnitPrice()}"></span>
+                                    <span th:text="${confirmOrderVO.getUnitPrice()}"></span>
                                     <!--<span th:text="'6588'"></span>-->
                                 </td>
                                 <td class="text-right">
-                                    <span th:text="${#session.getAttribute('confirmOrderVO').getPrice()}"></span>
+                                    <span th:text="${confirmOrderVO.getPrice()}"></span>
                                     <!--<span th:text="'6588'"></span>-->
 
                                 </td>
@@ -254,13 +254,13 @@
                                 <td class="text-right" colspan="3" style="border-right: none"></td>
                                 <td class="text-right" colspan="3" style="border-left: none">
                                     <strong>运费:￥</strong>
-                                    <span th:text="${#session.getAttribute('confirmOrderVO').getPostPrice()}"></span>
+                                    <span th:text="${#session.getAttribute('postPrice')}"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-right" colspan="6">
                                     <strong>订单合计:
-                                        <span th:text="${#session.getAttribute('confirmOrderVO').getOrderPrice()}"></span>
+                                        <span th:text="${#session.getAttribute('orderPrice')}"></span>
                                     </strong>
                                 </td>
                             </tr>
@@ -284,6 +284,6 @@
 
     </div>
 </form>
-
+</div>
 </body>
 </html>

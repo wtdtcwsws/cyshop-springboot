@@ -5,7 +5,6 @@ import com.cy.cyshopspringboot.service.ICatalogService;
 import com.cy.cyshopspringboot.service.IGoodsService;
 import com.cy.cyshopspringboot.viewobject.Catalog1VO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,6 +88,10 @@ public class GoodsController {
     @RequestMapping("/addCart")
     public void addCart(@RequestParam(value = "skuId")String skuId,@RequestParam(value = "nums")String nums, HttpServletResponse response,HttpSession session) throws IOException {
         Member member = (Member) session.getAttribute("loginfo");
+        if (member == null) {
+            response.getWriter().write("failed");
+            return;
+        }
         Integer cartId = member.getId();
         System.out.println(skuId);
         System.out.println(nums);
