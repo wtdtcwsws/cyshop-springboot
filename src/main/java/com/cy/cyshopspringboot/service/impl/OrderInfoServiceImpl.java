@@ -13,13 +13,18 @@ public class OrderInfoServiceImpl implements IOrderInfoService {
     @Autowired
     OrderInfoVOMapper orderInfoVOMapper;
     @Override
-    public List<OrderInfoVO> sellectAllInfo(Integer id) {
-        return orderInfoVOMapper.sellectAllInfo(id);
+    public List<OrderInfoVO> sellectAllInfo(Integer id,Integer limit) {
+        return orderInfoVOMapper.sellectAllInfo(id,limit);
     }
 
     @Override
     public OrderInfoVO selectByOrderId(Integer orderId,Integer sid) {
         return orderInfoVOMapper.selectByOrderId(orderId,sid);
+    }
+
+    @Override
+    public Integer selectCount(Integer uid) {
+        return orderInfoVOMapper.selectCount(uid);
     }
 
 }
