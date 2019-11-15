@@ -50,7 +50,7 @@
                                                                                                 title="登录"><span>登录</span></a></li>
                                 <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
                                                                                                    title="注册"><span>注册</span></a></li>
-                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
+                                <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/logout}">退出</a></li>
                             </ul>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="row">
                     <!-- Logo -->
                     <div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
-                        <a href="index.php"><img src="img/demo/logo/logo.png" title="Your Store" alt="Your Store"></a>
+                        <a href="/"><img src="/img/雏鹰商城图标最终版.png" style="width: 200px;height: 100px" title="最懂你的商城" alt="最懂你的商城"></a>
                     </div>
                     <!-- //end Logo -->
 
@@ -88,7 +88,7 @@
                     <!-- Secondary menu -->
                     <div class="col-md-4 col-sm-4 col-xs-5 shopping_cart pull-right">
                         <div class="header-text hidden-xs">
-                            <p><i class="fa fa-phone" aria-hidden="true"></i>	   Call Us: (888) 123456789</p>
+                            <p><i class="fa fa-phone" aria-hidden="true"></i>	   联系我们: (888) 123456789</p>
                         </div>
                         <!--cart-->
                         <div th:if="${not #lists.isEmpty(session.loginfo)}"  id="cart" class=" btn-group btn-shopping-cart">

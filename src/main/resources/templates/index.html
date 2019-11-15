@@ -96,7 +96,7 @@
                                                          title="登录"><span>登录</span></a></li>
                                     <li class="register" th:if="${#lists.isEmpty(session.loginfo)}"><a href="/register"
                                                             title="注册"><span>注册</span></a></li>
-                                    <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/index}" th:onclick="${#session.removeAttribute('loginfo')}">退出</a></li>
+                                    <li th:if="${not #lists.isEmpty(session.loginfo)}"><a th:href="@{/logout}">退出</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                     <div class="row">
                         <!-- Logo -->
                         <div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
-                            <a href="index.html"><img src="img/demo/logo/logo.png" title="Your Store"
+                            <a href="/"><img style="width: 200px;height: 100px" src="/img/雏鹰商城图标最终版.png" title="最懂你的商城"
                                                       alt="Your Store"></a>
                         </div>
                         <!-- //end Logo -->
@@ -250,7 +250,7 @@
                                                 <span id="remove-verticalmenu" class="fa fa-times"></span>
                                                 <div class="megamenu-pattern">
                                                     <div class="container">
-                                                        <ul class="megamenu" th:each="catalog:${catalogs}">
+                                                        <ul class="megamenu" th:each="catalog:${#servletContext.getAttribute('catalogs')}">
                                                             <li class="item-vertical style1 with-sub-menu hover">
                                                                 <p class="close-menu"></p>
                                                                 <a href="javaScript:;" class="clearfix">
@@ -273,7 +273,7 @@
                                                                                                        class="main-menu" th:text="${c2.name}"></a>
                                                                                                     <ul  th:each="c3:${c2.children}">
                                                                                                         <li><a
-                                                                                                                href="/category" th:text="${c3.name}">
+                                                                                                                th:href="@{/category(c3=${c3.id})}" th:text="${c3.name}">
 
                                                                                                         </a>
                                                                                                         </li>

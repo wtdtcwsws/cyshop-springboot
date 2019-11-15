@@ -1,4 +1,4 @@
-package com.cy.cyshopspringboot.viewObject;
+package com.cy.cyshopspringboot.viewobject;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,9 +13,9 @@ import java.util.List;
  * @remarks TODO
  */
 public class ConfirmOrderVO implements Serializable {
-    private String spu_img;
-    private String spu_name;
-    private List<String> sku_name;
+    private String skuImg;
+    private String spuName;
+    private String skuName;
     private BigDecimal nums;
 //    单价
     private BigDecimal unitPrice;
@@ -23,30 +23,32 @@ public class ConfirmOrderVO implements Serializable {
     private BigDecimal price;
     private BigDecimal postPrice;
     private BigDecimal orderPrice;
-    private String skuId;
+    private Integer skuId;
+    private Integer spuId;
+    private Integer paymentId;
 
-    public String getSpu_img() {
-        return spu_img;
+    public String getSkuImg() {
+        return skuImg;
     }
 
-    public void setSpu_img(String spu_img) {
-        this.spu_img = spu_img;
+    public void setSkuImg(String skuImg) {
+        this.skuImg = skuImg;
     }
 
-    public String getSpu_name() {
-        return spu_name;
+    public String getSpuName() {
+        return spuName;
     }
 
-    public void setSpu_name(String spu_name) {
-        this.spu_name = spu_name;
+    public void setSpuName(String spuName) {
+        this.spuName = spuName;
     }
 
-    public List<String> getSku_name() {
-        return sku_name;
+    public String getSkuName() {
+        return skuName;
     }
 
-    public void setSku_name(List<String> sku_name) {
-        this.sku_name = sku_name;
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 
     public BigDecimal getNums() {
@@ -89,26 +91,44 @@ public class ConfirmOrderVO implements Serializable {
         this.orderPrice = orderPrice;
     }
 
-    public String getSkuId() {
+    public Integer getSkuId() {
         return skuId;
     }
 
-    public void setSkuId(String skuId) {
+    public void setSkuId(Integer skuId) {
         this.skuId = skuId;
+    }
+
+    public Integer getSpuId() {
+        return spuId;
+    }
+
+    public void setSpuId(Integer spuId) {
+        this.spuId = spuId;
+    }
+
+    public Integer getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
     }
 
     @Override
     public String toString() {
         return "ConfirmOrderVO{" +
-                "spu_img='" + spu_img + '\'' +
-                ", spu_name='" + spu_name + '\'' +
-                ", sku_name=" + sku_name +
+                "skuImg='" + skuImg + '\'' +
+                ", spuName='" + spuName + '\'' +
+                ", skuName='" + skuName + '\'' +
                 ", nums=" + nums +
                 ", unitPrice=" + unitPrice +
                 ", price=" + price +
                 ", postPrice=" + postPrice +
                 ", orderPrice=" + orderPrice +
-                ", skuId='" + skuId + '\'' +
+                ", skuId=" + skuId +
+                ", spuId=" + spuId +
+                ", paymentId=" + paymentId +
                 '}';
     }
 }
