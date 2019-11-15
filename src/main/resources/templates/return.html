@@ -72,8 +72,8 @@
                                     <td class="text-left" width="350px">
                                         <!--商品图片-->
                                         <a href="product.html" id="tbody-tr-td-a">
-                                            <img width="70px" th:src="img/demo/shop/product/${skuURL}" alt="Aspire Ultrabook Laptop"
-                                                 title="Aspire Ultrabook Laptop" class="img-thumbnail"/>
+                                            <img width="70px" alt="Aspire Ultrabook Laptop"
+                                                 title="Aspire Ultrabook Laptop" th:src="'img/sku-img/' + ${skuURL}" class="img-thumbnail"/>
                                         </a>
                                         <!--商品规格信息-->
                                         <div id="tbody-tr-td-div">
@@ -113,7 +113,6 @@
                             <label for="select-1" class="col-sm-2 control-label">服务类型：</label>
                             <select class="form-control" id="select-1" style="width: 100px">
                                 <option selected>换货</option>
-                                <option>退货</option>
                                 <option>退货并退款</option>
                             </select>
                         </div>

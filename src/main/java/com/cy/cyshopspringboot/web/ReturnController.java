@@ -32,12 +32,12 @@ public class ReturnController {
 
     @RequestMapping("/return")
     public Mono<String> returnLogin(Model model) {
-
+        // sku数据传输
         Sku skus = iSkuService.selectSkuById("3");
         model.addAttribute("skuMessage",skus);
-
-        String url = iSkuImgService.selectSkuImgUrlById("3");
-
+        // sku图片传输
+        String url = iSkuImgService.selectSkuImgUrlById("1");
+        System.out.println(url);
         model.addAttribute("skuURL",url);
 
         return Mono.create(returnMono -> returnMono.success("return"));
