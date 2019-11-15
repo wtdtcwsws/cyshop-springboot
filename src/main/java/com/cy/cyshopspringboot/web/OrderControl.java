@@ -99,6 +99,7 @@ public class OrderControl {
         model.addAttribute("order",orderInfoVO);
         model.addAttribute("member",member);
         model.addAttribute("address",address);
+        System.out.println(orderInfoVO);
         return Mono.create(orderListMono->orderListMono.success("order-information"));
     }
 

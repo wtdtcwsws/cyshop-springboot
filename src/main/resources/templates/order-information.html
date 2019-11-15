@@ -22,10 +22,6 @@
 		<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 		<link rel="shortcut icon" href="ico/favicon.png">
 
-		<!-- Google web fonts
-	============================================ -->
-		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-
 		<!-- Libs CSS
     ============================================ -->
 		<link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -146,7 +142,7 @@
 										<td style="white-space: nowrap;" class="text-right">
 											<a class="btn btn-primary" title="" data-toggle="tooltip"
 											 href="#" data-original-title="再次购买"><i class="fa fa-shopping-cart"></i></a>
-											<a class="btn btn-danger" title="退货/退款" data-toggle="tooltip" href="return.html" data-original-title="Return"><i
+											<a class="btn btn-danger" title="退货/退款" data-toggle="tooltip" th:href="@{/return(nums = ${order.nums},skuid = ${order.sid},orderid = ${order.oid})}" data-original-title="Return"><i
 												 class="fa fa-reply"></i></a>
 										</td>
 									</tr>
