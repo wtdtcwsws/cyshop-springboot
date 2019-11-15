@@ -8,6 +8,7 @@ public class Member {
      * 编号
      */
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY,generator="Mysql")
     @Column(name = "`id`")
     private Integer id;
 

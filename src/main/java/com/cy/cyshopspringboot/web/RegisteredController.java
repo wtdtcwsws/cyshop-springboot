@@ -1,6 +1,8 @@
 package com.cy.cyshopspringboot.web;
 
 import com.cy.cyshopspringboot.domain.Member;
+import com.cy.cyshopspringboot.domain.ShoppingCart;
+import com.cy.cyshopspringboot.service.CartService;
 import com.cy.cyshopspringboot.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import java.io.IOException;
 public class RegisteredController {
     @Autowired
     private IRegisterService iRegisterService;
+    @Autowired
+    private CartService iShoppingService;
 
     @RequestMapping("/register")
     public Mono<String> register(){
@@ -38,6 +42,12 @@ public class RegisteredController {
             member.setStatus(1);
             member.setLevelId(1);
             int createMember = iRegisterService.registerMember(member);
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setId(member.getId());
+            System.out.println(shoppingCart.getId());
+            shoppingCart.setMemberId(member.getId());
+            System.out.println(shoppingCart.getMemberId());
+            int createShoppingCart = iShoppingService.createShoppingCart(shoppingCart);
             return "账号创建成功";
         }
         return "账号已存在";

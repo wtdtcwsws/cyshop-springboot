@@ -5,6 +5,5 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface ShoppingCartMapper extends Mapper<ShoppingCart> {
 
-
-
+    int insertshoppingCart(ShoppingCart shoppingCart);
 }

@@ -8,4 +8,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="member_id" jdbcType="INTEGER" property="memberId" />
   </resultMap>
+  <insert id="insertshoppingCart" parameterType="com.cy.cyshopspringboot.domain.ShoppingCart">
+    insert into `shopping_cart` ( `id`,`member_id`) values (#{id},#{memberId})
+  </insert>
 </mapper>
