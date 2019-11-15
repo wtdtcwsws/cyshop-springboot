@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface MemberMapper extends Mapper<Member> {
+    int findMemberByAccount(String account);
 }

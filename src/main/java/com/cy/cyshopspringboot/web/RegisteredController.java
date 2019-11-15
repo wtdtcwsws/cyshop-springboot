@@ -1,10 +1,15 @@
 package com.cy.cyshopspringboot.web;
 
+import com.cy.cyshopspringboot.domain.Member;
+import com.cy.cyshopspringboot.service.IRegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author lz - PC
@@ -12,83 +17,29 @@ import reactor.core.publisher.Mono;
  */
 @Controller
 public class RegisteredController {
+    @Autowired
+    private IRegisterService iRegisterService;
 
     @RequestMapping("/register")
-    public Mono<String> index(Model model) {
-
-
+    public Mono<String> register(){
         return Mono.create(indexMono->indexMono.success("registered"));
     }
 
-
-//    @GetMapping(value="/")
-//    public String index(){
-//        return "redirect:home";
-//    }
-//    @GetMapping(value="/home")
-//    public String home(){
-//        return "fore/home";
-//    }
-//    @GetMapping(value="/register")
-//    public String register(){
-//        return "fore/register";
-//    }
-//    @GetMapping(value="/alipay")
-//    public String alipay(){
-//        return "fore/alipay";
-//    }
-//    @GetMapping(value="/bought")
-//    public String bought(){
-//        return "fore/bought";
-//    }
-//    @GetMapping(value="/buy")
-//    public String buy(){
-//        return "fore/buy";
-//    }
-//    @GetMapping(value="/cart")
-//    public String cart(){
-//        return "fore/cart";
-//    }
-//    @GetMapping(value="/category")
-//    public String category(){
-//        return "fore/category";
-//    }
-//    @GetMapping(value="/confirmPay")
-//    public String confirmPay(){
-//        return "fore/confirmPay";
-//    }
-//    @GetMapping(value="/login")
-//    public String login(){
-//        return "fore/login";
-//    }
-//    @GetMapping(value="/orderConfirmed")
-//    public String orderConfirmed(){
-//        return "fore/orderConfirmed";
-//    }
-//    @GetMapping(value="/payed")
-//    public String payed(){
-//        return "fore/payed";
-//    }
-//    @GetMapping(value="/product")
-//    public String product(){
-//        return "fore/product";
-//    }
-//    @GetMapping(value="/registerSuccess")
-//    public String registerSuccess(){
-//        return "fore/registerSuccess";
-//    }
-//    @GetMapping(value="/review")
-//    public String review(){
-//        return "fore/review";
-//    }
-//    @GetMapping(value="/search")
-//    public String searchResult(){
-//        return "fore/search";
-//    }
-//    @GetMapping("/forelogout")
-//    public String logout( ) {
-//        return "redirect:home";
-//    }
-
-
+    @RequestMapping(value = "/registerCreate",method = RequestMethod.POST)
+    @ResponseBody
+    public String registerCreate(
+            Member member
+    ) throws IOException {
+        System.out.println("进来了");
+        System.out.println(member);
+        System.out.println("账号"+member.getAccount());
+        int valid = iRegisterService.findMemberByAccount(member.getAccount());
+        if (valid<1){
+            member.setStatus(1);
+            member.setLevelId(1);
+            int createMember = iRegisterService.registerMember(member);
+            return "账号创建成功";
+        }
+        return "账号已存在";
+    }
 }
