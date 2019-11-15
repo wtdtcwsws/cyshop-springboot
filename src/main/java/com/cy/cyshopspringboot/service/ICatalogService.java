@@ -31,4 +31,10 @@ public interface ICatalogService {
      * @return
      */
     List<Catalog1VO> getCatalog();
+
+    /**
+     * 通过三级分类id获得三级分类
+     * @return
+     */
+    List<Catalog3> getCatalog3ById(String c3Id);
 }

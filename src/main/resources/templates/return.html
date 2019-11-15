@@ -72,20 +72,20 @@
                                     <td class="text-left" width="350px">
                                         <!--商品图片-->
                                         <a href="product.html" id="tbody-tr-td-a">
-                                            <img width="70px" src="img/demo/shop/product/E3.jpg" alt="Aspire Ultrabook Laptop"
+                                            <img width="70px" th:src="img/demo/shop/product/${skuURL}" alt="Aspire Ultrabook Laptop"
                                                  title="Aspire Ultrabook Laptop" class="img-thumbnail"/>
                                         </a>
                                         <!--商品规格信息-->
                                         <div id="tbody-tr-td-div">
                                             <span id="tbody-tr-td-div-span">雏鹰精选</span>
-                                            <a href="product.html">苹果ipone13</a>
+                                            <a href="product.html" th:text="${skuMessage.name}">苹果ipone13</a>
                                             <br>
-                                            <a href="product.html">内存1：28G，颜色：太空银</a>
+                                            <a href="product.html" th:text="${skuMessage.description}">内存1：28G，颜色：太空银</a>
                                         </div>
                                     </td>
 
                                     <!--包装清单-->
-                                    <td class="text-center" id="tbody-tr-td-1">这里面写商品名称×几份</td>
+                                    <td class="text-center" id="tbody-tr-td-1" th:text="${skuMessage.name} + 'x1'">这里面写商品名称×几份</td>
 
                                     <!--赠送清单-->
                                     <td class="text-center" width="160px" id="tbody-tr-td-3">
@@ -93,7 +93,7 @@
                                     </td>
 
                                     <!--商品单价-->
-                                    <td class="text-center" id="tbody-tr-td-2">￥120.00</td>
+                                    <td class="text-center" id="tbody-tr-td-2" th:text="${skuMessage.price}">￥120.00</td>
 
                                     <!--购买数量-->
                                     <td class="text-center" id="tbody-tr-td-4">
@@ -147,45 +147,6 @@
                         </div>
                     </fieldset>
 
-                    <fieldset>
-                        <legend>
-                            会员信息
-                            <a id="a-1">[ 修改 ]</a>
-                        </legend>
-
-                        <div class="form-group required">
-                            <label for="inpunt-1" class="col-sm-2 control-label">取货地址：</label>
-                            <input class="form-control" id="inpunt-1" rows="3" placeholder="请填写详细的取货地址"/>
-                        </div>
-
-                        <div class="form-group required">
-                            <label for="date-time" class="col-sm-2 control-label">取货时间：</label>
-                            <div class="col-sm-3" style="padding: 0">
-                                <div class="input-group date">
-                                    <input type="text" class="form-control" id="date-time" data-date-format="YYYY-MM-DD" placeholder="取货时间" value="" name="date_ordered"><span class="input-group-btn">
-										<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-									</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label for="inpunt-3" class="col-sm-2 control-label">会员姓名：</label>
-                            <input class="form-control" id="inpunt-3" rows="3" placeholder="会员姓名"/>
-                        </div>
-
-                        <div class="form-group required">
-                            <label for="inpunt-1" class="col-sm-2 control-label">收货地址：</label>
-                            <input class="form-control" id="inpunt-2" rows="3" placeholder="请填写详细的收货地址"/>
-                        </div>
-
-                        <div class="form-group required">
-                            <label for="inpunt-4" class="col-sm-2 control-label">手机号码：</label>
-                            <input class="form-control" id="inpunt-4" rows="3" placeholder="联系方式"/>
-                        </div>
-
-
-                    </fieldset>
                     <div class="buttons clearfix">
                         <div class="pull-left"><a class="btn btn-default buttonGray" href="">返回</a>
                         </div>

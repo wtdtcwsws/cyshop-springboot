@@ -18,13 +18,15 @@
         s.`name` as goods_name,
         s.price,
         s.id as sid,
+		img.url,
         p.`name` as payway,
         s.description as des
         from
         `order` as o,
         order_item as oi,
         sku as s,
-        payment_method as p
+        payment_method as p,
+		sku_img as img
         where
         o.id = oi.order_id
         and
@@ -32,9 +34,28 @@
         and
         o.payment_way_id = p.id
         and
-        o.member_id = #{id}
+        o.member_id = #{arg0}
+		and
+		img.sku_id = s.id
         order by
         o.id
+        limit #{arg1},5
+    </select>
+
+
+    <select id="selectCount" resultType="Integer" parameterType="int">
+        select
+        count(o.id)
+        from
+        `order` as o,
+        order_item as oi,
+        sku as s
+        where
+        o.id = oi.order_id
+        and
+        oi.sku_id = s.id
+        and
+        o.member_id = #{arg0}
     </select>
 
 

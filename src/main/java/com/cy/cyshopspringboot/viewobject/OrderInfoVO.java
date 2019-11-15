@@ -86,6 +86,11 @@ public class OrderInfoVO {
     private Integer sid;
 
     /**
+     * 图片地址
+     */
+    private String url;
+
+    /**
      * 款式
      */
     private String des;
@@ -227,6 +232,14 @@ public class OrderInfoVO {
         this.payway = payway;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "OrderInfoVO{" +
@@ -246,6 +259,7 @@ public class OrderInfoVO {
                 ", price=" + price +
                 ", payway='" + payway + '\'' +
                 ", sid=" + sid +
+                ", src='" + url + '\'' +
                 ", des='" + des + '\'' +
                 '}';
     }

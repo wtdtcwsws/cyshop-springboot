@@ -5,7 +5,7 @@
 
     <!-- Basic page needs
     ============================================ -->
-    <title>Destino - Advanced & High Customizable eCommerce HTML5/CSS3 Theme</title>
+    <title>雏鹰商城</title>
     <meta charset="utf-8">
     <meta name="keywords"
           content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business"/>
@@ -19,10 +19,6 @@
     <!-- Favicon
 	============================================ -->
     <link rel="shortcut icon" href="ico/favicon.png">
-
-    <!-- Google web fonts
-	============================================ -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Libs CSS
     ============================================ -->
@@ -43,7 +39,6 @@
     <link href="css/header2.css" rel="stylesheet">
     <link id="color_scheme" href="css/home2.css" rel="stylesheet">
     <!-- <link href="css/responsive.css" rel="stylesheet"> -->
-
 
 </head>
 
@@ -111,7 +106,7 @@
                     <div class="row">
                         <!-- Logo -->
                         <div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
-                            <a href="index.html"><img src="img/demo/logo/logo.png" title="Your Store"
+                            <a href="/"><img style="width: 200px;height: 100px" src="/img/雏鹰商城图标最终版.png" title="最懂你的商城"
                                                       alt="Your Store"></a>
                         </div>
                         <!-- //end Logo -->
@@ -250,7 +245,7 @@
                                                 <span id="remove-verticalmenu" class="fa fa-times"></span>
                                                 <div class="megamenu-pattern">
                                                     <div class="container">
-                                                        <ul class="megamenu" th:each="catalog:${catalogs}">
+                                                        <ul class="megamenu" th:each="catalog:${#servletContext.getAttribute('catalogs')}">
                                                             <li class="item-vertical style1 with-sub-menu hover">
                                                                 <p class="close-menu"></p>
                                                                 <a href="javaScript:;" class="clearfix">
@@ -273,7 +268,7 @@
                                                                                                        class="main-menu" th:text="${c2.name}"></a>
                                                                                                     <ul  th:each="c3:${c2.children}">
                                                                                                         <li><a
-                                                                                                                href="/category" th:text="${c3.name}">
+                                                                                                                th:href="@{/category(c3=${c3.id})}" th:text="${c3.name}">
 
                                                                                                         </a>
                                                                                                         </li>

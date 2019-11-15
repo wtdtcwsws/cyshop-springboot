@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface OrderInfoVOMapper {
 
-    List<OrderInfoVO> sellectAllInfo(Integer id);
+    List<OrderInfoVO> sellectAllInfo(Integer id,Integer limit);
 
     OrderInfoVO selectByOrderId(Integer orderId,Integer sid);
+
+    Integer selectCount(Integer uid);
 }

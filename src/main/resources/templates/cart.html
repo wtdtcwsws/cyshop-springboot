@@ -97,26 +97,29 @@
                                 </div>
                             </td>
                             <!--商品单价-->
-                            <td data-price="price" class="text-center" id="tbody-tr-td-1" th:text="'￥' + ${cart.price}">￥100</td>
+                            <td data-price="price" th:data-prices="${cart.price}" class="text-center" id="tbody-tr-td-1" th:text="'￥' + ${cart.price}">￥100</td>
                             <!--商品数量-->
-                            <td class="text-center" width="200px" id="tbody-tr-td-3">
+                            <td class="text-center" width="200px" id="tbody-tr-td-3" data-td="number">
                                 <div class="btn-group" role="group">
+                                    <!--加数量-->
                                     <button type="button" class="btn btn-danger" data-js="minusNumber"
                                             onclick="minusNumber(this)"><i class="fa fa-minus"></i></button>
+                                    <!--数量显示-->
                                     <div class="btn-group disabled" role="group">
                                         <input type="text" class="btn btn-default" th:value="${cart.number}"
                                                style="width: 70px;" data-jss="number"/>
                                     </div>
+                                    <!--减数量-->
                                     <button type="button" class="btn btn-info" data-js="addNumber"
                                             onclick="addNumber(this)"><i class="fa fa-plus"></i></button>
                                 </div>
                             </td>
                             <!--商品小计-->
-                            <td class="text-center" id="tbody-tr-td-2">￥120.00</td>
+                            <td data-js="allPrice" class="text-center" id="tbody-tr-td-2" th:text="'￥' + ${cart.price} * ${cart.number}">￥120.00</td>
                             <!--商品操作-->
                             <td class="text-center" id="tbody-tr-td-4">
                                 <div class="input-group btn-block">
-                                    <button type="submit" data-toggle="tooltip" title="加入关注" class="btn btn-primary"><i
+                                    <button type="submit" data-toggle="tooltip" title="加入关注" class="btn btn-primary" onclick="attention(this)"><i
                                             class="fa fa-clone"></i></button>
                                     <button type="button" title="删除" class="btn btn-danger" data-toggle="modal"
                                             data-target="#shanchuModal" data-js="shanchu" data-jss="${cartDomains.id}">
@@ -185,6 +188,7 @@
 <script type="text/javascript" src="js/datetimepicker/moment.js"></script>
 <script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui/bootbox.all.js"></script>
 
 <!-- ============================模板js引入=========================================== -->
 <script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
@@ -192,7 +196,7 @@
 <script type="text/javascript" src="js/themejs/application.js"></script>
 
 <!-- ============================个人js引入=========================================== -->
-<script type="text/javascript" src="js/cart/cart.js" th:inline="javascript"></script>
+<script type="text/javascript" src="js/cart/cart.js"></script>
 
 </body>
 </html>

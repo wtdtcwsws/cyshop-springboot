@@ -12,13 +12,14 @@
 	// Cart add remove functions
 	var cart = {
 		'add': function(product_id, quantity) {
-			addProductNotice('Product added to Cart', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="goods.html">product</a> added to <a href="cart.html">shopping cart</a>!</h3>', 'success');
-		}
+            addProductNotice('商品已添加到购物车', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3><a href="javascript:;">商品</a> 已添加<a href="/cart">购物车</a>！</h3>', '成功');
+
+        }
 	}
 
 	var wishlist = {
 		'add': function(product_id) {
-			addProductNotice('Product added to Wishlist', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>You must <a href="login.html">login</a>  to save <a href="goods.html">Apple Cinema 30"</a> to your <a href="wishlist.html">wish list</a>!</h3>', 'success');
+			addProductNotice('商品已收藏', '<img src="img/demo/shop/product/e11.jpg" alt="">', '<h3>你必须 <a href="/login">登录</a>  来保存 <a href="goods.html">商品"</a> 到你的 <a href="wishlist.html">收藏</a>!</h3>', 'success');
 		}
 	}
 	var compare = {

@@ -99,4 +99,12 @@ public class CatalogServiceImpl implements ICatalogService {
 
         return catalog1VOs;
     }
+
+    @Override
+    public List<Catalog3> getCatalog3ById(String c3Id) {
+        Catalog3 catalog3 = new Catalog3();
+        catalog3.setId(Integer.parseInt(c3Id));
+
+        return catalog3Mapper.select(catalog3);
+    }
 }
