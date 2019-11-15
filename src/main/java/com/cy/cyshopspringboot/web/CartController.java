@@ -1,5 +1,6 @@
 package com.cy.cyshopspringboot.web;
 
+import com.cy.cyshopspringboot.domain.Member;
 import com.cy.cyshopspringboot.viewobject.CartVO;
 import com.cy.cyshopspringboot.service.CartService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,9 +34,11 @@ public class CartController {
     private CartService cartService;
 
     @RequestMapping("/cart")
-    public Mono<String> cart(Model model) {
+    public Mono<String> cart(Model model,HttpSession session) {
 
-        List<CartVO> cartMessages = cartService.cartMessageAll(2);
+        Member member = (Member)session.getAttribute("loginfo");
+
+        List<CartVO> cartMessages = cartService.cartMessageAll(member.getId());
 
         model.addAttribute("gouwuche", cartMessages);
 

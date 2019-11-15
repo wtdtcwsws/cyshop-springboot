@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cy.cyshopspringboot.mapper.RefundOrReturnOrderMapper">
   <resultMap id="BaseResultMap" type="com.cy.cyshopspringboot.domain.RefundOrReturnOrder">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="member_id" jdbcType="INTEGER" property="memberId" />
     <result column="spu_name" jdbcType="VARCHAR" property="spuName" />
@@ -14,5 +11,16 @@
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="deleteStatus" jdbcType="INTEGER" property="deletestatus" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
   </resultMap>
+
+  <update id="updateReturn">
+
+    insert into `refund_or_return_order`(`count`,`reason`,`describe`,`type`,`order_id`,`creat_time`)
+    values
+    (#{count},#{reason},#{describe},#{type},#{orderId},now())
+
+  </update>
+
 </mapper>

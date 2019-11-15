@@ -101,7 +101,7 @@
                             <!--商品数量-->
                             <td class="text-center" width="200px" id="tbody-tr-td-3" data-td="number">
                                 <div class="btn-group" role="group">
-                                    <!--加数量-->
+                                    <!--减数量-->
                                     <button type="button" class="btn btn-danger" data-js="minusNumber"
                                             onclick="minusNumber(this)"><i class="fa fa-minus"></i></button>
                                     <!--数量显示-->
@@ -109,7 +109,7 @@
                                         <input type="text" class="btn btn-default" th:value="${cart.number}"
                                                style="width: 70px;" data-jss="number"/>
                                     </div>
-                                    <!--减数量-->
+                                    <!--加数量-->
                                     <button type="button" class="btn btn-info" data-js="addNumber"
                                             onclick="addNumber(this)"><i class="fa fa-plus"></i></button>
                                 </div>
